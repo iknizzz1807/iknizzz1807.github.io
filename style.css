@@ -102,3 +102,56 @@ h1 {
 .about {
   justify-content: center !important;
 }
+
+@media screen and (max-width: 768px) {
+  body {
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  .container {
+    padding: 10px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  h1 {
+    font-size: 36px;
+    white-space: normal;
+    border-right: none;
+    animation: none;
+  }
+
+  .navigations {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navigations a {
+    font-size: 18px;
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+
+  .text {
+    font-size: 24px;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  h1 {
+    font-size: 28px;
+  }
+
+  .navigations a {
+    font-size: 16px;
+  }
+
+  .text {
+    font-size: 20px;
+  }
+}
