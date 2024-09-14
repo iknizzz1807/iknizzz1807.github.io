@@ -90,6 +90,11 @@
         transform: scaleX(1);
         transform-origin: bottom left;
       }
+      @media only screen and (max-width: 768px) {
+        .fp-arrow {
+          display: none;
+        }
+      }
     </style>
     <style>
       html,
@@ -226,14 +231,7 @@
     <script>
       new fullpage("#fullpage", {
         autoScrolling: true,
-        navigationTooltips: [
-          "Section 1",
-          "Section 2",
-          "Section 3",
-          "Section 4",
-        ],
         anchors: ["home", "about", "projects", "contact"],
-        showActiveTooltip: true,
         slidesNavigation: true,
       });
     </script>
