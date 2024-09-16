@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Welcome to my porfolio. I am Nguyen My Thong - ikniz. I am a CS student from Viet Nam"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -113,21 +117,33 @@
       .tech-stacks {
         margin-bottom: 40px;
       }
+      .smaller-mobile {
+        height: 120px;
+        width: 360px;
+      }
       @media only screen and (max-width: 768px) {
         .fp-arrow {
           display: none;
         }
         .project-detail {
-          margin-bottom: 20px;
+          margin-bottom: 10px;
+          font-size: 20px;
         }
         .img {
-          margin-bottom: 20px;
+          margin-bottom: 10px;
         }
         .title {
-          margin-bottom: 20px;
+          margin-bottom: 10px;
         }
         .tech-stacks {
-          margin-bottom: 20px;
+          margin-bottom: 10px;
+        }
+        .none-mobile {
+          display: none;
+        }
+        .smaller-mobile {
+          height: 60px;
+          width: 180px;
         }
       }
     </style>
@@ -198,7 +214,7 @@
             <img
               src="images/chatapp.png"
               alt="preview"
-              style="height: 120px; width: 360px"
+              class="smaller-mobile"
             />
           </div>
 
@@ -476,6 +492,7 @@
               src="images/game1.png"
               alt="preview"
               style="height: 200px; width: 240px"
+              class="none-mobile"
             />
           </div>
 
