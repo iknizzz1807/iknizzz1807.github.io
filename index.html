@@ -59,6 +59,26 @@
         justify-content: center;
         align-items: center;
       }
+
+      .container {
+        display: inline-block;
+        padding: 20px;
+        padding-top: 12px;
+        border: 2px solid black;
+        margin: 0 auto;
+      }
+      .line {
+        border: solid 1px gainsboro;
+      }
+      .contact-item {
+        display: flex;
+        align-items: center;
+        margin-top: 40px;
+        font-size: 24px;
+      }
+      .contact-item img {
+        margin-right: 10px;
+      }
       .content {
         padding: 20px;
         display: flex;
@@ -181,16 +201,6 @@
         background-color: #000;
       }
 
-      .container {
-        display: flex;
-        flex-direction: column;
-        border: solid 2px;
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 10px;
-        align-items: center;
-        justify-content: center;
-      }
       h3 {
         margin: 0;
         font-size: 1.5rem;
@@ -307,11 +317,14 @@
           font-size: 30px;
           margin: 5px;
         }
-        .container {
-          max-width: auto;
-        }
         .card {
           max-width: 80%;
+        }
+        .contact-item {
+          display: flex;
+          align-items: center;
+          margin-top: 20px;
+          font-size: 20px;
         }
       }
 
@@ -612,91 +625,79 @@
           </div>
         </div>
       </section>
-      <section class="section" style="text-align: left">
+      <section class="section">
         <div class="container">
-          <div>
-            <h3>Contact Information</h3>
+          <p style="font-size: 32px; font-weight: 800">CONTACT INFO</p>
+          <div class="line"></div>
+          <div class="contact-item">
+            <img src="/images/mail.png" alt="Mail" width="28px" height="28px" />
+            <a
+              href="https://mail.google.com/mail/u/0/?fs=1&to=mythonggg@gmail.com&tf=cm"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="text-decoration: none"
+              >mythonggg@gmail.com</a
+            >
           </div>
-          <div class="info-section">
-            <div class="info-item">
-              <dt class="info-label">Email</dt>
-              <dd class="info-value">
-                <a
-                  href="https://mail.google.com/mail/u/0/?fs=1&to=mythonggg@gmail.com&tf=cm"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style="text-decoration: none"
-                  >mythonggg@gmail.com</a
-                >
-              </dd>
-            </div>
-            <div class="info-item">
-              <dt class="info-label">Github</dt>
-              <dd class="info-value">
-                <a
-                  href="https://github.com/iknizzz1807"
-                  style="text-decoration: none"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >iknizzz1807</a
-                >
-              </dd>
-            </div>
-            <div class="info-item">
-              <dt class="info-label">Facebook</dt>
-              <dd class="info-value">
-                <a
-                  href="https://www.facebook.com/nmt18072005"
-                  style="text-decoration: none"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >Nguyễn Mỹ Thống</a
-                >
-              </dd>
-            </div>
-
-            <div class="info-item">
-              <dt class="info-label">Instagram</dt>
-              <dd class="info-value">
-                <a
-                  href="https://www.instagram.com/ikniz_180705/"
-                  style="text-decoration: none"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >@ikniz_180705
-                </a>
-              </dd>
-            </div>
-            <div class="info-item">
-              <dt class="info-label">Resume</dt>
-              <dd class="info-value attachments">
-                <ul class="attachment-list">
-                  <li class="attachment-item">
-                    <div class="attachment-details">
-                      <svg
-                        class="attachment-icon"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z"
-                          clip-rule="evenodd"
-                        />
-                      </svg>
-                      <span class="attachment-name"
-                        >resume_Nguyen_My_Thong.pdf</span
-                      >
-                      <span class="attachment-size">2.4mb</span>
-                    </div>
-                    <div>
-                      <a href="#" class="download-link">Download</a>
-                    </div>
-                  </li>
-                </ul>
-              </dd>
-            </div>
+          <div class="contact-item">
+            <img
+              src="/images/github.png"
+              alt="Github"
+              width="28px"
+              height="28px"
+            />
+            <a
+              href="https://github.com/iknizzz1807"
+              style="text-decoration: none"
+              target="_blank"
+              rel="noopener noreferrer"
+              >iknizzz1807</a
+            >
+          </div>
+          <div class="contact-item">
+            <img
+              src="/images/facebook.png"
+              alt="Facebook"
+              width="28px"
+              height="28px"
+            />
+            <a
+              href="https://www.facebook.com/nmt18072005"
+              style="text-decoration: none"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Nguyễn Mỹ Thống</a
+            >
+          </div>
+          <div class="contact-item">
+            <img
+              src="/images/instagram.png"
+              alt="Instagram"
+              width="28px"
+              height="28px"
+            />
+            <a
+              href="https://www.instagram.com/ikniz_180705/"
+              style="text-decoration: none"
+              target="_blank"
+              rel="noopener noreferrer"
+              >@ikniz_180705
+            </a>
+          </div>
+          <div class="contact-item">
+            <img
+              src="/images/resume.png"
+              alt="Resume"
+              width="28px"
+              height="28px"
+            />
+            <a
+              href="#"
+              style="text-decoration: none"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Resume
+            </a>
           </div>
         </div>
       </section>
