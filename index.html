@@ -220,6 +220,11 @@
         color: #374151;
       }
 
+      .about-title {
+        font-size: 56px;
+        font-weight: 800;
+      }
+
       .attachment-list {
         list-style-type: none;
         padding: 0;
@@ -309,6 +314,17 @@
           max-width: 80%;
         }
       }
+
+      @media only screen and (max-width: 335px) {
+        .about-title {
+          font-size: 32px;
+          margin: 0;
+        }
+        .about-text {
+          font-size: 24px;
+          margin: 0;
+        }
+      }
     </style>
     <style>
       html,
@@ -372,7 +388,7 @@
         </div>
       </section>
       <section class="section">
-        <h1 class="about-title">About me</h1>
+        <div class="about-title">About me</div>
         <p class="about-text">
           <strong>Name: </strong>Nguyen My Thong - <strong>Age: </strong>19 -
           <strong>Gender: </strong>Male
@@ -385,6 +401,18 @@
           I love <strong>Web</strong>, <strong>Apps</strong>,
           <strong>Games</strong> and <strong>AI - Machine Learning</strong>
         </p>
+        <p class="about-text">
+          <strong>Languages - Frameworks - Tools:</strong>
+        </p>
+        <div align="center">
+          <img
+            src="https://skillicons.dev/icons?i=svelte,python,flask,firebase,fastapi"
+          />
+          <br />
+          <img
+            src="https://skillicons.dev/icons?i=cpp,godot,ts,js,go,solidjs"
+          />
+        </div>
       </section>
       <section class="section">
         <div class="slide">
