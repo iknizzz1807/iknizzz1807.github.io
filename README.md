@@ -1,4 +1,4 @@
-# ikniz-site
+# ikniz
 
 My mini porfolio web page
 <br/>
