@@ -5,196 +5,401 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Nguyen My Thong - Creative Developer Portfolio"
+      content="Nguyen My Thong - Full Stack Developer Portfolio"
     />
     <meta property="og:image" content="https://ikniz.id.vn/favicon.jpg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <link rel="icon" type="image/x-icon" href="favicon.jpg" />
-    <title>Nguyen My Thong | Creative Developer</title>
+    <title>Nguyen My Thong | Full Stack Developer</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <nav class="navbar">
-      <div class="nav-logo">
-        <a href="#home" class="logo-text">ikniz</a>
-      </div>
-      <div class="nav-links">
-        <a href="#about" class="nav-link">About</a>
-        <a href="#projects" class="nav-link">Projects</a>
-        <a href="#contact" class="nav-link">Contact</a>
-      </div>
-      <div class="theme-toggle">
-        <div class="theme-toggle-circle"></div>
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="nav-container">
+        <a href="#home" class="nav-brand">ikniz</a>
+        <div class="nav-menu">
+          <a href="#about" class="nav-link">About</a>
+          <a href="#skills" class="nav-link">Skills</a>
+          <a href="#projects" class="nav-link">Projects</a>
+          <a href="#contact" class="nav-link">Contact</a>
+          <button class="theme-toggle" aria-label="Toggle theme">
+            <span class="theme-icon"></span>
+          </button>
+        </div>
+        <button class="nav-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </nav>
 
-    <main class="main">
-      <section id="home" class="hero">
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="container">
         <div class="hero-content">
-          <div class="eyes">
-            <div class="eye">
-              <div class="pupil"></div>
+          <h1 class="hero-title">
+            <span class="hero-greeting">Hello, I am</span>
+            <span class="hero-name">Nguyen My Thong</span>
+            <span class="hero-role">Full Stack Developer</span>
+          </h1>
+          <p class="hero-description">
+            Computer Science student at UIT University, passionate about
+            creating innovative digital solutions through modern web, software
+            technologies and AI/ML.
+          </p>
+          <div class="hero-stats">
+            <div class="stat">
+              <span class="stat-number">5+</span>
+              <span class="stat-label">Projects Completed</span>
             </div>
-            <div class="eye">
-              <div class="pupil"></div>
+            <div class="stat">
+              <span class="stat-number">8+</span>
+              <span class="stat-label">Technologies</span>
             </div>
-          </div>
-          <div class="hero-text-container">
-            <h1 class="glitch-text" data-text="Creative Developer">
-              Creative Developer
-            </h1>
-            <p class="hero-subtitle"></p>
           </div>
           <div class="hero-cta">
-            <a href="#projects" class="cta-button primary">View Projects</a>
-            <a href="#contact" class="cta-button secondary">Contact Me</a>
+            <a href="#projects" class="btn btn-primary">View My Work</a>
+            <a href="#contact" class="btn btn-outline">Get in Touch</a>
           </div>
         </div>
-        <div class="scroll-indicator">
-          <div class="scroll-arrow">↓</div>
+        <div class="hero-visual">
+          <div class="code-snippet">
+            <div class="code-header">
+              <div class="code-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <span class="code-title">portfolio.js</span>
+            </div>
+            <div class="code-content">
+              <pre id="typed-code"></pre>
+            </div>
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Rest of the sections remain exactly the same -->
-      <section id="about" class="about">
-        <h2 class="section-title">About Me</h2>
+    <!-- About Section -->
+    <section id="about" class="about">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">About Me</h2>
+          <p class="section-subtitle">The story behind the developer</p>
+        </div>
         <div class="about-content">
           <div class="about-text">
-            <p style="font-size: 24px">
-              Hi, I'm <strong>Nguyen My Thong</strong>, a Computer Science
-              student at UIT University in Vietnam. My passion lies in creating
-              innovative solutions through web development, app development,
-              game design, and AI/ML.
+            <h3>🚀 Background</h3>
+            <p>
+              I'm a passionate Computer Science student at UIT University in
+              Vietnam, where I've been diving deep into the world of technology
+              for the past 2 years. My journey started with curiosity about how
+              softwares work, and it has evolved into a full-blown passion for
+              creating digital experiences that matter.
             </p>
-            <div class="tech-stack">
-              <div class="tech-grid">
-                <div class="tech-item" data-tech="Svelte">
-                  <img
-                    src="https://skillicons.dev/icons?i=svelte"
-                    alt="Svelte"
-                  />
-                </div>
 
-                <div class="tech-item" data-tech="Python">
-                  <img
-                    src="https://skillicons.dev/icons?i=python"
-                    alt="Python"
-                  />
-                </div>
-                <div class="tech-item" data-tech="Java">
-                  <img src="https://skillicons.dev/icons?i=java" alt="Java" />
-                </div>
-                <div class="tech-item" data-tech="NodeJS">
-                  <img
-                    src="https://skillicons.dev/icons?i=nodejs"
-                    alt="NodeJS"
-                  />
-                </div>
-                <div class="tech-item" data-tech="FastAPI">
-                  <img
-                    src="https://skillicons.dev/icons?i=fastapi"
-                    alt="FastAPI"
-                  />
-                </div>
-                <div class="tech-item" data-tech="C++">
-                  <img src="https://skillicons.dev/icons?i=cpp" alt="C++" />
-                </div>
+            <h3>💡 What Drives Me</h3>
+            <p>
+              I believe in the power of technology to solve real-world problems.
+              Whether it's building responsive web applications, making insane
+              softwares, crafting engaging game experiences, or exploring the
+              frontiers of AI/ML, I'm always excited to turn ideas into reality.
+              I love the challenge of learning new technologies and pushing the
+              boundaries of what's possible.
+            </p>
 
-                <div class="tech-item" data-tech="Godot">
-                  <img src="https://skillicons.dev/icons?i=godot" alt="Godot" />
+            <div class="about-highlights">
+              <div class="highlight-item">
+                <div class="highlight-icon">🏆</div>
+                <div class="highlight-text">Game Jam Participant</div>
+              </div>
+              <div class="highlight-item">
+                <div class="highlight-icon">🌟</div>
+                <div class="highlight-text">Open Source Contributor</div>
+              </div>
+              <div class="highlight-item">
+                <div class="highlight-icon">📚</div>
+                <div class="highlight-text">Continuous Learner</div>
+              </div>
+              <div class="highlight-item">
+                <div class="highlight-icon">🤝</div>
+                <div class="highlight-text">Team Collaborator</div>
+              </div>
+            </div>
+          </div>
+          <div class="about-image">
+            <div class="profile-card">
+              <div class="profile-info">
+                <h4>Quick Facts</h4>
+                <ul>
+                  <li>
+                    <strong>Education:</strong> Computer Science, UIT University
+                  </li>
+                  <li><strong>Focus:</strong> Full Stack Dev with AI</li>
+                  <li><strong>Interests:</strong>Game Development</li>
+                  <li><strong>Languages:</strong> Vietnamese, English</li>
+                  <li><strong>Location:</strong> Ho Chi Minh City, Vietnam</li>
+                  <li><strong>Status:</strong>Learning so hard</li>
+                </ul>
+              </div>
+            </div>
+            <div class="journey-timeline">
+              <div class="timeline-item">
+                <div class="timeline-year">2025</div>
+                <div class="timeline-desc">
+                  Exploring AI/ML, advanced Technologies and frameworks
                 </div>
-                <div class="tech-item" data-tech="TypeScript">
-                  <img
-                    src="https://skillicons.dev/icons?i=ts"
-                    alt="TypeScript"
-                  />
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-year">2024</div>
+                <div class="timeline-desc">
+                  Learned Technologies like Sveltekit and React
                 </div>
-
-                <div class="tech-item" data-tech="NextJS">
-                  <img
-                    src="https://skillicons.dev/icons?i=nextjs"
-                    alt="NextJS"
-                  />
-                </div>
-                <div class="tech-item" data-tech="React">
-                  <img
-                    src="https://skillicons.dev/icons?i=react"
-                    alt="ReactJS"
-                  />
-                </div>
-                <div class="tech-item" data-tech="Docker">
-                  <img
-                    src="https://skillicons.dev/icons?i=docker"
-                    alt="Docker"
-                  />
-                </div>
-                <div class="tech-item" data-tech="Go">
-                  <img src="https://skillicons.dev/icons?i=go" alt="Go" />
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-year">2023</div>
+                <div class="timeline-desc">
+                  Started full-stack development journey
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="projects" class="projects">
-        <h2 class="section-title">Featured Projects</h2>
-        <div class="project-grid">
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Skills & Expertise</h2>
+          <p class="section-subtitle">Technologies I work with</p>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3>Frontend</h3>
+            <div class="skills-list">
+              <div class="skill-item">
+                <img src="https://skillicons.dev/icons?i=react" alt="React" />
+                <span>React</span>
+              </div>
+              <div class="skill-item">
+                <img
+                  src="https://skillicons.dev/icons?i=nextjs"
+                  alt="Next.js"
+                />
+                <span>Next.js</span>
+              </div>
+              <div class="skill-item">
+                <img src="https://skillicons.dev/icons?i=svelte" alt="Svelte" />
+                <span>Svelte</span>
+              </div>
+              <div class="skill-item">
+                <img src="https://skillicons.dev/icons?i=ts" alt="TypeScript" />
+                <span>TypeScript</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h3>Backend</h3>
+            <div class="skills-list">
+              <div class="skill-item">
+                <img
+                  src="https://skillicons.dev/icons?i=nodejs"
+                  alt="Node.js"
+                />
+                <span>Node.js</span>
+              </div>
+              <div class="skill-item">
+                <img src="https://skillicons.dev/icons?i=python" alt="Python" />
+                <span>Python</span>
+              </div>
+              <div class="skill-item">
+                <img
+                  src="https://skillicons.dev/icons?i=fastapi"
+                  alt="FastAPI"
+                />
+                <span>FastAPI</span>
+              </div>
+              <div class="skill-item">
+                <img src="https://skillicons.dev/icons?i=go" alt="Go" />
+                <span>Go</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h3>Other</h3>
+            <div class="skills-list">
+              <div class="skill-item">
+                <img src="https://skillicons.dev/icons?i=java" alt="Java" />
+                <span>Java</span>
+              </div>
+              <div class="skill-item">
+                <img src="https://skillicons.dev/icons?i=cpp" alt="C++" />
+                <span>C++</span>
+              </div>
+              <div class="skill-item">
+                <img src="https://skillicons.dev/icons?i=godot" alt="Godot" />
+                <span>Godot</span>
+              </div>
+              <div class="skill-item">
+                <img src="https://skillicons.dev/icons?i=docker" alt="Docker" />
+                <span>Docker</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Featured Projects</h2>
+          <p class="section-subtitle">A showcase of my recent work</p>
+        </div>
+        <div class="projects-grid">
           <article class="project-card">
             <div class="project-image">
-              <img src="images/chatapp.png" alt="Chat App" />
+              <img src="images/skillforge.png" alt="SkillForge" />
               <div class="project-overlay">
                 <div class="project-links">
                   <a
-                    href="https://github.com/iknizzz1807/chat-app-v2"
+                    href="https://github.com/iknizzz1807/SkillForge"
                     target="_blank"
-                    rel="noopener noreferrer"
                     class="project-link"
-                    >Source Code</a
                   >
+                    <span>View Code</span>
+                  </a>
                 </div>
               </div>
             </div>
-            <div class="project-info">
-              <h3>Realtime Chatroom</h3>
+            <div class="project-content">
+              <div class="project-header">
+                <h3>SkillForge</h3>
+                <span class="project-type">Web Application</span>
+              </div>
               <p>
-                A modern chat application with real-time messaging, user
-                authentication, and chat rooms.
+                A platform connects students and businesses together. My role
+                was a fullstack developer, architect designer.
               </p>
-              <div class="project-tags">
-                <span>Sveltekit</span>
-                <span>Pocketbase</span>
+              <div class="project-tech">
+                <span>SvelteKit</span>
+                <span>Go</span>
+                <span>Python</span>
+                <span>FastAPI</span>
+                <span>MongoDB</span>
               </div>
             </div>
           </article>
 
           <article class="project-card">
             <div class="project-image">
-              <img src="images/blog.png" alt="Blog Site" />
+              <img src="images/learn2aid.png" alt="learn2aid" />
+              <div class="project-overlay">
+                <div class="project-links">
+                  <a
+                    href="https://github.com/iknizzz1807/learn2aid"
+                    target="_blank"
+                    class="project-link"
+                  >
+                    <span>View Code</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="project-content">
+              <div class="project-header">
+                <h3>Learn2Aid</h3>
+                <span class="project-type">Mobile AI powered app</span>
+              </div>
+              <p>
+                A mobile app for users to learn aid lessons and pratice through
+                video record for AI judgements. My role was a backend developer
+                and frontend developer for the Admin UI.
+              </p>
+              <div class="project-tech">
+                <span>HTML, CSS, JS</span>
+                <span>Firebase</span>
+                <span>Go</span>
+                <span>Python</span>
+                <span>FastAPI</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-image">
+              <img src="images/chatapp.png" alt="Realtime Chatroom" />
+              <div class="project-overlay">
+                <div class="project-links">
+                  <a
+                    href="https://github.com/iknizzz1807/chat-app-v2"
+                    target="_blank"
+                    class="project-link"
+                  >
+                    <span>View Code</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="project-content">
+              <div class="project-header">
+                <h3>Realtime Chatroom</h3>
+                <span class="project-type">Web Application</span>
+              </div>
+              <p>
+                A modern chat application featuring real-time messaging, user
+                authentication, and multiple chat rooms. Built with SvelteKit
+                and Pocketbase for optimal performance and seamless user
+                experience.
+              </p>
+              <div class="project-tech">
+                <span>SvelteKit</span>
+                <span>Pocketbase</span>
+                <span>WebSocket</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-image">
+              <img src="images/blog.png" alt="Personal Blog" />
               <div class="project-overlay">
                 <div class="project-links">
                   <a
                     href="https://github.com/iknizzz1807/blog-site"
                     target="_blank"
-                    rel="noopener noreferrer"
                     class="project-link"
-                    >Source Code</a
                   >
+                    <span>View Code</span>
+                  </a>
                 </div>
               </div>
             </div>
-            <div class="project-info">
-              <h3>Personal Blog</h3>
+            <div class="project-content">
+              <div class="project-header">
+                <h3>Personal Blog Platform</h3>
+                <span class="project-type"
+                  >Content Management, Web Application</span
+                >
+              </div>
               <p>
-                A platform to share thoughts and insights about technology
-                trends and tools.
+                A clean and minimalist blog platform designed for sharing
+                insights about technology trends and development experiences.
+                Features markdown support and responsive design.
               </p>
-              <div class="project-tags">
+              <div class="project-tech">
                 <span>SvelteKit</span>
                 <span>Firebase</span>
               </div>
@@ -209,86 +414,136 @@
                   <a
                     href="https://kohrabi.itch.io/forward-thinking"
                     target="_blank"
-                    rel="noopener noreferrer"
                     class="project-link"
-                    >Play Game</a
                   >
+                    <span>Play Game</span>
+                  </a>
                 </div>
               </div>
             </div>
-            <div class="project-info">
-              <h3>Forward Thinking</h3>
+            <div class="project-content">
+              <div class="project-header">
+                <h3>Forward Thinking</h3>
+                <span class="project-type">Game Development</span>
+              </div>
               <p>
-                A game developed for GMTK Game Jam 2024 in collaboration with
-                friends.
+                An innovative puzzle game developed for GMTK Game Jam 2024,
+                showcasing creative problem-solving and game design skills.
+                Features unique mechanics and engaging gameplay.
               </p>
-              <div class="project-tags">
+              <div class="project-tech">
                 <span>Godot</span>
-                <span>Game Development</span>
+                <span>GDScript</span>
+                <span>Game Design</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-image">
+              <img src="images/shooter.png" alt="Shooter Game" />
+              <div class="project-overlay">
+                <div class="project-links">
+                  <a
+                    href="https://github.com/iknizzz1807/ShooterGame"
+                    target="_blank"
+                    class="project-link"
+                  >
+                    <span>View Code</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="project-content">
+              <div class="project-header">
+                <h3>Shooter Game</h3>
+                <span class="project-type">Game Development</span>
+              </div>
+              <p>
+                A simple browser game with two play modes: singleplayer and
+                multiplayer.
+              </p>
+              <div class="project-tech">
+                <span>TypeScript/JavaScript</span>
+                <span>Go</span>
+                <span>WebSocket</span>
               </div>
             </div>
           </article>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="contact" class="contact">
-        <h2 class="section-title">Get in Touch</h2>
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Let's Work Together</h2>
+          <p class="section-subtitle">Ready to bring your ideas to life</p>
+        </div>
         <div class="contact-content">
+          <div class="contact-info">
+            <h3>Get in Touch</h3>
+            <p>
+              I'm always interested in discussing new opportunities, creative
+              projects, or potential collaborations.
+            </p>
+            <div class="contact-methods">
+              <a href="mailto:mythonggg@gmail.com" class="contact-method">
+                <div class="contact-icon">
+                  <img src="images/mail.png" alt="Email" />
+                </div>
+                <div class="contact-details">
+                  <span class="contact-label">Email</span>
+                  <span class="contact-value">mythonggg@gmail.com</span>
+                </div>
+              </a>
+              <a
+                href="https://github.com/iknizzz1807"
+                target="_blank"
+                class="contact-method"
+              >
+                <div class="contact-icon">
+                  <img src="images/github.png" alt="GitHub" />
+                </div>
+                <div class="contact-details">
+                  <span class="contact-label">GitHub</span>
+                  <span class="contact-value">iknizzz1807</span>
+                </div>
+              </a>
+            </div>
+          </div>
           <div class="contact-links">
-            <a
-              href="https://mail.google.com/mail/u/0/?fs=1&to=mythonggg@gmail.com&tf=cm"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="contact-item"
+            <a href="/cv/resume.pdf" target="_blank" class="btn btn-primary"
+              >Download Resume</a
             >
-              <img src="/images/mail.png" alt="Email" />
-              <span>mythonggg@gmail.com</span>
-            </a>
-            <a
-              href="https://github.com/iknizzz1807"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="contact-item"
-            >
-              <img src="/images/github.png" alt="GitHub" />
-              <span>iknizzz1807</span>
-            </a>
-            <a
-              href="https://www.facebook.com/nmt18072005"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="contact-item"
-            >
-              <img src="/images/facebook.png" alt="Facebook" />
-              <span>Nguyễn Mỹ Thống</span>
-            </a>
-            <a
-              href="https://www.instagram.com/ikniz_180705/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="contact-item"
-            >
-              <img src="/images/instagram.png" alt="Instagram" />
-              <span>@ikniz_180705</span>
-            </a>
-            <a
-              href="/cv/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="contact-item"
-            >
-              <img src="/images/resume.png" alt="Resume" />
-              <span>Download Resume</span>
-            </a>
+            <div class="social-links">
+              <a
+                href="https://www.facebook.com/nmt18072005"
+                target="_blank"
+                aria-label="Facebook"
+                ><img src="images/facebook.png" alt="Facebook"
+              /></a>
+              <a
+                href="https://www.instagram.com/nguyenmythonggg/"
+                target="_blank"
+                aria-label="Instagram"
+                ><img src="images/instagram.png" alt="Instagram"
+              /></a>
+            </div>
           </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
 
-    <button class="scroll-top">↑</button>
-
+    <!-- Footer -->
     <footer class="footer">
-      <p>&copy; 2024 Nguyen My Thong. All rights reserved.</p>
+      <div class="container">
+        <p>
+          &copy; 2025 Nguyen My Thong. Built with passion and modern web
+          technologies.
+        </p>
+      </div>
     </footer>
 
     <script src="script.js"></script>
