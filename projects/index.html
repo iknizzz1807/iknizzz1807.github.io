@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="All Projects by Nguyen My Thong" />
+    <meta property="og:image" content="https://ikniz.id.vn/favicon.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/x-icon" href="favicon.jpg" />
+    <title>My Projects | Nguyen My Thong</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="../projects-data.js" defer></script>
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="header-container">
+        <a href="/" class="back-link">← Back to Home</a>
+        <button class="theme-toggle" aria-label="Toggle theme">
+          <span class="theme-icon"></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="projects-intro">
+        <h1 class="main-title">My Project Archive</h1>
+        <p class="main-subtitle">
+          A detailed showcase of my work, from web applications to game
+          development.
+        </p>
+      </section>
+
+      <section class="project-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="web">Web Application</button>
+        <button class="filter-btn" data-filter="ai">AI/ML</button>
+        <button class="filter-btn" data-filter="game">Game Development</button>
+      </section>
+
+      <section id="project-list" class="project-list"></section>
+    </main>
+
+    <footer class="footer">
+      <p>© 2025 Nguyen My Thong. All projects archived here.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -273,3 +273,59 @@ document.querySelectorAll(".timeline-item").forEach((item) => {
   item.style.transition = "opacity 0.6s ease, transform 0.6s ease";
   timelineObserver.observe(item);
 });
+
+// --- Render Featured Projects on Homepage ---
+function renderFeaturedProjects() {
+  const container = document.getElementById("featured-projects-grid");
+  if (!container || typeof allProjects === "undefined") return;
+
+  const featuredProjects = allProjects.filter((p) => p.isFeatured);
+
+  let html = "";
+  featuredProjects.forEach((project) => {
+    html += `
+      <article class="project-card">
+        <div class="project-image">
+          <img src="${project.image}" alt="${project.title}" />
+          <div class="project-overlay">
+            <div class="project-links">
+              ${
+                project.links.code
+                  ? `<a href="${project.links.code}" target="_blank" class="project-link"><span>View Code</span></a>`
+                  : ""
+              }
+              ${
+                project.links.play
+                  ? `<a href="${project.links.play}" target="_blank" class="project-link"><span>Play Game</span></a>`
+                  : ""
+              }
+            </div>
+          </div>
+        </div>
+        <div class="project-content">
+          <div class="project-header">
+            <h3>${project.title}</h3>
+            <span class="project-type">${project.type}</span>
+          </div>
+          <p>${project.description}</p>
+          <div class="project-tech">
+            ${project.tech.map((t) => `<span>${t}</span>`).join("")}
+          </div>
+        </div>
+      </article>
+    `;
+  });
+
+  container.innerHTML = html;
+
+  // Re-observe new project cards for animations
+  document.querySelectorAll(".project-card").forEach((el) => {
+    el.style.opacity = "0";
+    el.style.transform = "translateY(20px)";
+    el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+    observer.observe(el);
+  });
+}
+
+// Gọi hàm render khi DOM đã sẵn sàng
+document.addEventListener("DOMContentLoaded", renderFeaturedProjects);

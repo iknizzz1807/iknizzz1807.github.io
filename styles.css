@@ -950,3 +950,12 @@ h6 {
     grid-template-columns: 1fr;
   }
 }
+.all-projects-link {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.all-projects-link .btn {
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+}
