@@ -189,3 +189,118 @@ a { text-decoration: none; }
   .nav-links { display: none; }
   .contact-actions { flex-direction: column; }
 }
+
+/* Case Study Pages */
+.case-study-page {
+  background: var(--bg);
+}
+.case-study-page .nav {
+  background: transparent;
+  border-bottom: none;
+  padding-top: 1rem;
+}
+.cs-article {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 10rem 2rem 6rem;
+}
+.cs-hero {
+  margin-bottom: 4rem;
+}
+.cs-title {
+  font-size: 3rem;
+  line-height: 1.1;
+  margin: 1rem 0 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+.cs-subtitle {
+  font-size: 1.25rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-bottom: 3rem;
+}
+.cs-meta {
+  display: flex;
+  gap: 3rem;
+  padding: 2rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.cs-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.cs-meta-label {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.cs-meta-value {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.cs-content h2 {
+  font-size: 1.75rem;
+  margin: 4rem 0 1.5rem;
+  color: var(--text);
+}
+.cs-content p {
+  font-size: 1.1rem;
+  color: var(--text-dim);
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+.cs-content ul {
+  margin: 0 0 2rem 1.5rem;
+  color: var(--text-dim);
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+.cs-content li {
+  margin-bottom: 1rem;
+}
+.cs-content strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.cs-impact-box {
+  background: rgba(255,255,255,0.03);
+  border-left: 4px solid var(--text);
+  padding: 2rem;
+  border-radius: 0 12px 12px 0;
+  margin: 3rem 0;
+}
+.cs-impact-box p {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--text);
+}
+
+.cs-cta {
+  margin-top: 6rem;
+  padding: 4rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  text-align: center;
+}
+.cs-cta h3 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+.cs-cta p {
+  color: var(--text-dim);
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .cs-title { font-size: 2.25rem; }
+  .cs-meta { flex-direction: column; gap: 1.5rem; }
+  .cs-cta { padding: 2rem; }
+}

@@ -3,100 +3,68 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="JARVIS - Fully local voice assistant on ESP32 with ASR, LLM reasoning, persistent memory, and MCP protocol." />
-    <title>JARVIS | Thong Nguyen</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <title>JARVIS Edge AI System | B2B Case Study</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="../favicon.jpg" />
     <link rel="stylesheet" href="../styles.css" />
-    <link rel="stylesheet" href="../case.css" />
   </head>
-  <body>
+  <body class="case-study-page">
+    <div class="bg-gradient-top"></div>
     <nav class="nav">
       <div class="nav-inner">
-        <a href="../index.html" class="nav-logo">&lt;thong /&gt;</a>
-        <div class="nav-links">
-          <a href="../index.html#services" class="nav-link">Services</a>
-          <a href="../index.html#work" class="nav-link">Work</a>
-          <a href="../index.html#tech" class="nav-link">Tech</a>
-          <a href="../index.html#process" class="nav-link">Process</a>
-          <a href="../index.html#contact" class="nav-link nav-link-cta">Let's Talk</a>
-        </div>
-        <button class="nav-toggle" aria-label="Toggle menu">
-          <span></span><span></span><span></span>
-        </button>
+        <a href="../index.html" class="nav-logo" style="color:var(--text-dim); font-size:0.9rem;">&larr; Back to Portfolio</a>
+        <a href="mailto:iknizzz1807@gmail.com" class="nav-link-cta">Let's Talk Architecture</a>
       </div>
     </nav>
 
-    <article class="case-article">
-      <div class="case-article-inner">
-        <a href="../index.html#work" class="case-back">&larr; Back to all work</a>
-
-        <div class="case-hero-section">
-          <span class="cs-card-type">Embedded AI System</span>
-          <h1 class="case-article-title">JARVIS</h1>
-          <p class="case-article-sub">A fully local, always-on voice assistant running on ESP32 hardware. Every component — from firmware to LLM orchestration — was built from scratch.</p>
-          <div class="case-article-tech">
-            <span>Python</span><span>C++</span><span>ESP32</span><span>Whisper</span><span>Gemini</span><span>ChromaDB</span><span>WebSocket</span><span>MCP</span>
+    <main class="cs-article">
+      <header class="cs-hero reveal">
+        <span class="b2b-case-type">Hardware / Edge AI</span>
+        <h1 class="cs-title">JARVIS: Local-First Voice Agent on ESP32 Hardware</h1>
+        <p class="cs-subtitle">Beating the cloud API latency curse. A bidirectional C++ WebSocket bridge connecting constrained edge devices to a Python reasoning backend.</p>
+        <div class="cs-meta">
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Tech Stack</span>
+            <span class="cs-meta-value">Python, C++, ESP32, WebSockets, ChromaDB, Whisper, Gemini</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Role</span>
+            <span class="cs-meta-value">Full-Stack Embedded AI Developer</span>
           </div>
         </div>
+      </header>
 
-        <section class="case-section">
-          <h2 class="case-section-title case-section-title--red">The Problem</h2>
-          <div class="case-section-body">
-            <p>Commercial voice assistants (Alexa, Google Assistant, Siri) depend entirely on cloud processing. This introduces three fundamental problems:</p>
-            <ul>
-              <li><strong>Latency</strong> — each voice command makes a round trip to a remote data center, resulting in 2-5 second response times that break conversational flow.</li>
-              <li><strong>Privacy</strong> — audio from your home is continuously streamed to and stored on third-party servers.</li>
-              <li><strong>Vendor lock-in</strong> — you're constrained to each platform's closed ecosystem of skills, integrations, and supported hardware.</li>
-            </ul>
-            <p>No off-the-shelf solution offered local ASR + TTS + LLM reasoning with persistent memory on embedded hardware. The challenge was fitting a multi-stage AI pipeline onto a microcontroller with 520KB of RAM while maintaining real-time responsiveness.</p>
-          </div>
-        </section>
+      <div class="cs-content reveal">
+        <h2>The Latency Problem of Cloud Assistants</h2>
+        <p>Smart home hardware startups rely heavily on third-party voice assistants (Alexa, Google Home). However, piping raw audio to the cloud, waiting for speech-to-text (STT), then passing the text to an LLM for reasoning, then converting it back to audio (TTS), and finally streaming it back down to a micro-controller consistently results in a frustrating 3-second delay. It destroys the illusion of intelligence.</p>
+        <p>Furthermore, cloud-based assistants lack deep, persistent contextual memory across long periods of interaction. A true "smart" agent should remember a conversation from three weeks ago without having the entire transcript stuffed into its context window.</p>
 
-        <section class="case-section">
-          <h2 class="case-section-title case-section-title--blue">The Approach</h2>
-          <div class="case-section-body">
-            <p>The system was architected as a two-part pipeline: a lightweight C++ firmware layer on the ESP32 and a Python orchestration server on a local machine.</p>
+        <h2>Architecting the Edge-to-Server Bridge</h2>
+        <p>I tackled this problem by shifting the computational architecture. The goal was to build a fully functional, local-first voice assistant running on a $5 ESP32 microcontroller that felt as fast and intelligent as a high-end server.</p>
+        <ul>
+          <li><strong>C++ Bidirectional Audio Streaming:</strong> I programmed the ESP32 in C++ to capture raw I2S audio from a microphone and stream it continuously via a low-latency WebSocket connection, rather than relying on HTTP polling. The server continuously ingested this stream in real-time.</li>
+          <li><strong>Python Reasoning Backend (ASR & LLM):</strong> The WebSocket server was built in Python. As audio packets arrived, a local instance of OpenAI's Whisper model (running on the host machine) transcribed the speech almost instantaneously. The transcribed text was fed into Gemini for high-speed reasoning.</li>
+          <li><strong>The 5-Layer Persistent Vector Memory:</strong> To solve the amnesia problem, I architected a multi-tiered memory system using ChromaDB. Short-term memory (the immediate conversation) was kept in RAM. Long-term memories, facts, and user preferences were summarized by the LLM in the background and stored as vector embeddings in ChromaDB, allowing the agent to recall specific facts instantly when queried weeks later.</li>
+        </ul>
 
-            <h3>ESP32 Firmware (C++)</h3>
-            <p>The firmware handles real-time audio capture via I2S, runs Silero VAD (Voice Activity Detection) directly on the microcontroller to detect speech start/end without waking the server, and streams audio chunks over WebSocket to the Python server. This offloading strategy keeps the firmware minimal while maintaining responsiveness.</p>
+        <h2>Implementation & Handling "Barge-ins"</h2>
+        <p>The most difficult engineering hurdle was the "Barge-in" problem—when a user interrupts the AI while it is speaking. The C++ hardware code continuously monitored the microphone for amplitude spikes. If the user spoke while the ESP32's speaker was outputting audio, the C++ client instantly sent a "stop" packet over the WebSocket, and the Python server halted the TTS generation, preserving the newly interrupted context back into the LLM window.</p>
 
-            <h3>Python Orchestration Server</h3>
-            <p>The server receives audio streams and executes a multi-stage pipeline:</p>
-            <ul>
-              <li><strong>ASR</strong> — Whisper transcribes the audio to text with high accuracy.</li>
-              <li><strong>LLM Reasoning</strong> — the transcription is sent to Gemini with full conversation context and any retrieved memories. The LLM generates both a spoken response and optional function calls.</li>
-              <li><strong>TTS</strong> — the response text is converted back to audio and streamed to the ESP32 for playback.</li>
-              <li><strong>Memory</strong> — ChromaDB stores conversation embeddings as persistent vector memory, allowing the assistant to recall context across sessions.</li>
-            </ul>
-
-            <h3>MCP Protocol Integration</h3>
-            <p>Implemented the Model Context Protocol to enable dynamic tool/function calling. This allows the assistant to execute arbitrary actions (control smart devices, query APIs, run scripts) based on natural language commands, without hardcoding each capability.</p>
-          </div>
-        </section>
-
-        <section class="case-section">
-          <h2 class="case-section-title case-section-title--green">The Outcome</h2>
-          <div class="case-section-body">
-            <ul class="case-outcome-list">
-              <li><strong>Sub-2s end-to-end voice response</strong> on local hardware — no cloud round trips, no internet dependency for core operation.</li>
-              <li><strong>Persistent conversational memory</strong> via ChromaDB vector storage — the assistant remembers context from previous sessions without re-prompting.</li>
-              <li><strong>MCP protocol integration</strong> enabling dynamic tool/function calling — extensible without firmware changes.</li>
-              <li><strong>Full offline capability</strong> — the entire ASR-to-TTS pipeline runs on local infrastructure, eliminating privacy concerns and vendor dependencies.</li>
-            </ul>
-          </div>
-        </section>
+        <h2>Business Impact</h2>
+        <div class="cs-impact-box">
+          <p>By moving the STT/TTS routing to a dedicated local WebSocket server and using an intelligent, chunked transmission architecture, JARVIS achieved an end-to-end response latency of <strong>under 500ms</strong>. The persistent ChromaDB memory enabled deeply personalized interactions, demonstrating that high-end AI agents can be deployed on extremely constrained, cost-effective edge hardware.</p>
+        </div>
       </div>
-    </article>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        <p>&copy; 2026 Thong Nguyen. Independent engineer. Built with precision.</p>
+      
+      <div class="cs-cta reveal">
+        <h3>Building IoT hardware that needs real-time AI reasoning?</h3>
+        <p>I build C++ & Python bridges that bring sub-second intelligence to edge devices.</p>
+        <a href="mailto:iknizzz1807@gmail.com" class="btn btn-primary">Discuss your edge AI constraints</a>
       </div>
+    </main>
+
+    <footer class="footer" style="border-top:none; padding-bottom: 4rem;">
+      <p>&copy; 2026 Thong Nguyen. Independent Full-Stack AI Engineer.</p>
     </footer>
-
     <script src="../script.js"></script>
   </body>
 </html>

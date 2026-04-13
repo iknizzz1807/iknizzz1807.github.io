@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AIC Multimodal Search Engine | B2B Case Study</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body class="case-study-page">
+    <div class="bg-gradient-top"></div>
+    <nav class="nav">
+      <div class="nav-inner">
+        <a href="../index.html" class="nav-logo" style="color:var(--text-dim); font-size:0.9rem;">&larr; Back to Portfolio</a>
+        <a href="mailto:iknizzz1807@gmail.com" class="nav-link-cta">Let's Talk Architecture</a>
+      </div>
+    </nav>
+
+    <main class="cs-article">
+      <header class="cs-hero reveal">
+        <span class="b2b-case-type">Search Infrastructure</span>
+        <h1 class="cs-title">AIC Multimodal Search: A Hybrid Video, Audio & Image Engine</h1>
+        <p class="cs-subtitle">When text-based search engines fail: Architecting a sub-second retrieval pipeline blending vector embeddings (Milvus) and lexical search (Elasticsearch) for massive unstructured media archives.</p>
+        <div class="cs-meta">
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Tech Stack</span>
+            <span class="cs-meta-value">Python, FastAPI, Milvus, Elasticsearch, OpenCV, FFmpeg</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Role</span>
+            <span class="cs-meta-value">Backend Systems Architect</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="cs-content reveal">
+        <h2>The Chaos of Archiving Media Content</h2>
+        <p>A significant problem facing media agencies, production houses, and large content publishers is the inability to locate specific moments within petabytes of video footage. Tagging video and audio files manually is labor-intensive and prone to human error. Standard relational databases (SQL) or text-based search engines (Solr) are fundamentally incapable of searching for a "red sports car driving in the rain" unless a human has explicitly typed those words into the video's metadata.</p>
+        <p>The client needed a system capable of accepting natural language queries and returning the exact timestamp of a video where that action occurred—instantaneously.</p>
+
+        <h2>Architecting a Hybrid Retrieval System</h2>
+        <p>To solve this, I designed the AIC Multimodal Search Engine. A purely vector-based semantic search struggles with exact keyword matching (e.g., specific names, serial numbers), while a purely lexical search fails at semantic understanding. The solution required a "hybrid" retrieval pipeline:</p>
+        <ul>
+          <li><strong>Python (FastAPI) as the API Gateway:</strong> A high-throughput REST API server to receive raw media files, segment them, and manage the indexing queues asynchronously.</li>
+          <li><strong>Milvus (Vector Database):</strong> The core engine for semantic understanding. Milvus stored high-dimensional embeddings generated from video frames and audio transcripts, allowing the system to mathematically compare the visual and auditory content of a video clip to the user's text query.</li>
+          <li><strong>Elasticsearch (Lexical Search):</strong> Maintained an index of any extracted metadata, OCR text, and exact keywords to ensure that a search for a specific entity name didn't get lost in the vector space math.</li>
+        </ul>
+
+        <h2>The Ingestion Pipeline Implementation</h2>
+        <p>The ingestion process was the heaviest computational burden. I developed asynchronous background workers in Python. When a video file was uploaded, the pipeline employed <strong>FFmpeg</strong> to extract the audio track and segment the video into manageable chunks (e.g., 5-second intervals). Concurrently, <strong>OpenCV</strong> sampled keyframes from the video stream.</p>
+        <p>These frames were pushed through a Vision-Language Model (VLM, like CLIP or an equivalent multimodal model) to generate semantic vector embeddings. Simultaneously, the audio was passed through an Automatic Speech Recognition (ASR) model (Whisper) to generate text transcripts. The resulting vectors were pushed to Milvus, and the text was indexed in Elasticsearch. The system unified the scoring of both databases (Reciprocal Rank Fusion) before returning the top results.</p>
+
+        <h2>Business Impact</h2>
+        <div class="cs-impact-box">
+          <p>By automating the indexing of unstructured media through computer vision and NLP models, the system completely eliminated the need for human tagging. The hybrid architecture (Milvus + Elasticsearch) achieved <strong>sub-second query response times</strong> and unparalleled accuracy. Users could now instantly locate specific 5-second clips buried deep within thousands of hours of historical footage.</p>
+        </div>
+      </div>
+      
+      <div class="cs-cta reveal">
+        <h3>Struggling with unsearchable, unstructured media data?</h3>
+        <p>I build high-performance, hybrid retrieval pipelines for video, audio, and images.</p>
+        <a href="mailto:iknizzz1807@gmail.com" class="btn btn-primary">Let's discuss your search bottleneck</a>
+      </div>
+    </main>
+
+    <footer class="footer" style="border-top:none; padding-bottom: 4rem;">
+      <p>&copy; 2026 Thong Nguyen. Independent Full-Stack AI Engineer.</p>
+    </footer>
+    <script src="../script.js"></script>
+  </body>
+</html>

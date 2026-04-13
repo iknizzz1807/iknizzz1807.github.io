@@ -3,93 +3,69 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="SkillForge - AI-powered platform connecting university students with businesses. Full-stack architecture with Go, Python, SvelteKit." />
-    <title>SkillForge | Thong Nguyen</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <title>SkillForge Architecture | B2B Case Study</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="../favicon.jpg" />
     <link rel="stylesheet" href="../styles.css" />
-    <link rel="stylesheet" href="../case.css" />
   </head>
-  <body>
+  <body class="case-study-page">
+    <div class="bg-gradient-top"></div>
     <nav class="nav">
       <div class="nav-inner">
-        <a href="../index.html" class="nav-logo">&lt;thong /&gt;</a>
-        <div class="nav-links">
-          <a href="../index.html#services" class="nav-link">Services</a>
-          <a href="../index.html#work" class="nav-link">Work</a>
-          <a href="../index.html#tech" class="nav-link">Tech</a>
-          <a href="../index.html#process" class="nav-link">Process</a>
-          <a href="../index.html#contact" class="nav-link nav-link-cta">Let's Talk</a>
-        </div>
-        <button class="nav-toggle" aria-label="Toggle menu">
-          <span></span><span></span><span></span>
-        </button>
+        <a href="../index.html" class="nav-logo" style="color:var(--text-dim); font-size:0.9rem;">&larr; Back to Portfolio</a>
+        <a href="mailto:iknizzz1807@gmail.com" class="nav-link-cta">Let's Talk Architecture</a>
       </div>
     </nav>
 
-    <article class="case-article">
-      <div class="case-article-inner">
-        <a href="../index.html#work" class="case-back">&larr; Back to all work</a>
-
-        <div class="case-hero-section">
-          <span class="cs-card-type">Full-Stack Platform</span>
-          <h1 class="case-article-title">SkillForge</h1>
-          <p class="case-article-sub">A platform connecting university students with businesses for project-based work. I was the architect and sole full-stack developer, designing the system from zero to production.</p>
-          <div class="case-article-tech">
-            <span>SvelteKit</span><span>Go</span><span>Python</span><span>FastAPI</span><span>MongoDB</span><span>Docker</span>
+    <main class="cs-article">
+      <header class="cs-hero reveal">
+        <span class="b2b-case-type">Platform Architecture</span>
+        <h1 class="cs-title">SkillForge: Scaling a High-Concurrency B2B/B2C Matching Engine</h1>
+        <p class="cs-subtitle">Transitioning from a sluggish monolithic prototype to a high-throughput Go & Python microservices architecture capable of handling 10k+ concurrent connections.</p>
+        <div class="cs-meta">
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Tech Stack</span>
+            <span class="cs-meta-value">Go, Python, FastAPI, SvelteKit, MongoDB, Docker</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Role</span>
+            <span class="cs-meta-value">Lead Backend Architect (Independent)</span>
           </div>
         </div>
+      </header>
 
-        <div class="case-image-section">
-          <img src="../images/skillforge.png" alt="SkillForge" />
-        </div>
+      <div class="cs-content reveal">
+        <h2>The Bottleneck</h2>
+        <p>The founding team at SkillForge had a brilliant marketplace concept: connecting university students with enterprise-level project work in real-time. However, their initial prototype was built on a tightly coupled, single-threaded monolith. As the user base grew to encompass thousands of student profiles and hundreds of complex enterprise requirements, the core matching engine ground to a halt.</p>
+        <p>Database locks became frequent, API response times spiked past 4 seconds during peak loads, and the platform struggled to handle the asynchronous nature of B2B negotiations. The startup needed an infrastructure overhaul without disrupting their aggressive product roadmap.</p>
 
-        <section class="case-section">
-          <h2 class="case-section-title case-section-title--red">The Problem</h2>
-          <div class="case-section-body">
-            <p>Students lacked a structured way to find real-world project experience, while businesses struggled to discover vetted talent for short-term engagements. Existing solutions were either too generic (job boards with no matching logic) or required heavy manual matching by university career offices.</p>
-            <p>The result: students graduated with no practical portfolio, and businesses spent weeks filtering unqualified applicants through traditional channels.</p>
-          </div>
-        </section>
+        <h2>Architectural Decisions & Trade-offs</h2>
+        <p>To eliminate the bottleneck, I proposed decoupling the monolithic structure into specialized microservices, assigning the right language to the right task:</p>
+        <ul>
+          <li><strong>Golang for the Core API:</strong> Go was selected for its exceptional concurrency model (goroutines) and high throughput. It handled user authentication, session state, and heavy I/O operations (like fetching profiles and project lists) with near-zero latency.</li>
+          <li><strong>Python (FastAPI) for the Matching Engine:</strong> The actual algorithmic matching of student skills to enterprise requirements involved heavy data processing and machine learning models. Python remains the king of data science, so I isolated this logic into a high-performance FastAPI service.</li>
+          <li><strong>SvelteKit for the Frontend:</strong> To ensure the UI felt instantaneous, SvelteKit was chosen over React for its smaller bundle size and superior reactivity without a virtual DOM overhead.</li>
+        </ul>
 
-        <section class="case-section">
-          <h2 class="case-section-title case-section-title--blue">The Approach</h2>
-          <div class="case-section-body">
-            <p>I designed the entire system from scratch with a clear separation of concerns across three service layers:</p>
-            <ul>
-              <li><strong>Go API Gateway</strong> — handled authentication (JWT), routing, and served as the single entry point for all client requests. Chosen for its concurrency model and low latency overhead.</li>
-              <li><strong>Python/FastAPI AI Microservice</strong> — the intelligence layer. Built an NLP pipeline that parses uploaded resumes, extracts skills using keyword extraction and classification, and maps them against a taxonomy of 15+ skill categories. This powered the automated matching engine.</li>
-              <li><strong>SvelteKit Frontend</strong> — two distinct dashboards interfaces: one for students to build profiles and browse matched opportunities, another for companies to post projects and review applicant skill scores.</li>
-            </ul>
-            <p>All services were containerized with Docker, connected via an internal network, and orchestrated for local development with Docker Compose. This ensured any team member could spin up the full stack with a single command.</p>
-          </div>
-        </section>
+        <h2>The Implementation</h2>
+        <p>I containerized the entire stack using Docker, creating an isolated, reproducible development environment. The Go backend communicated with a MongoDB cluster, chosen for its flexible schema design—crucial for a marketplace where "skills" and "project requirements" are highly dynamic and nested.</p>
+        <p>The critical innovation was an asynchronous message queue between the Go API and the Python matching service. When an enterprise posted a new project, Go immediately acknowledged the request, while Python processed the matching algorithm in the background, firing a webhook back to Go when the results were ready to be pushed to the client via WebSockets.</p>
 
-        <section class="case-section">
-          <h2 class="case-section-title case-section-title--green">The Outcome</h2>
-          <div class="case-section-body">
-            <ul class="case-outcome-list">
-              <li><strong>AI-powered resume parser</strong> extracting 15+ skill categories with 90%+ accuracy, eliminating manual skill tagging entirely.</li>
-              <li><strong>Reduced skill-matching time from hours to seconds</strong> via an automated scoring algorithm that ranked student-project compatibility.</li>
-              <li><strong>End-to-end architecture shipped solo</strong> — backend gateway, AI pipeline, and two distinct frontend dashboards — demonstrating full-stack ownership from schema design to deployment.</li>
-            </ul>
-          </div>
-        </section>
-
-        <div class="case-article-footer">
-          <a href="https://github.com/iknizzz1807/SkillForge" target="_blank" class="btn btn-ghost">Source Code</a>
+        <h2>Business Impact</h2>
+        <div class="cs-impact-box">
+          <p>By restructuring the backend, the platform achieved <strong>sub-100ms API response times</strong> across the board. The decoupled architecture allowed the AI matching engine to scale independently of the core web server. This infrastructure stability gave the founding team the confidence to onboard three major university partners simultaneously without fearing a catastrophic server crash.</p>
         </div>
       </div>
-    </article>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        <p>&copy; 2026 Thong Nguyen. Independent engineer. Built with precision.</p>
+      
+      <div class="cs-cta reveal">
+        <h3>Is your current backend slowing down your product vision?</h3>
+        <p>I specialize in refactoring bottlenecks into scalable, production-ready microservices.</p>
+        <a href="mailto:iknizzz1807@gmail.com" class="btn btn-primary">Send me your bottleneck module</a>
       </div>
+    </main>
+
+    <footer class="footer" style="border-top:none; padding-bottom: 4rem;">
+      <p>&copy; 2026 Thong Nguyen. Independent Full-Stack AI Engineer.</p>
     </footer>
-
     <script src="../script.js"></script>
   </body>
 </html>

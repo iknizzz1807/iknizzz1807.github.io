@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enterprise Data Ingestion | B2B Case Study</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body class="case-study-page">
+    <div class="bg-gradient-top"></div>
+    <nav class="nav">
+      <div class="nav-inner">
+        <a href="../index.html" class="nav-logo" style="color:var(--text-dim); font-size:0.9rem;">&larr; Back to Portfolio</a>
+        <a href="mailto:iknizzz1807@gmail.com" class="nav-link-cta">Let's Talk Architecture</a>
+      </div>
+    </nav>
+
+    <main class="cs-article">
+      <header class="cs-hero reveal">
+        <span class="b2b-case-type">Data Infrastructure & RAG</span>
+        <h1 class="cs-title">Enterprise Data Ingestion: Eliminating AI Hallucinations for a UK Startup</h1>
+        <p class="cs-subtitle">Architecting an automated, multi-stage RAG (Retrieval-Augmented Generation) ingestion pipeline to process unstructured legal and financial documents safely.</p>
+        <div class="cs-meta">
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Tech Stack</span>
+            <span class="cs-meta-value">Next.js, Python, FastAPI, Qdrant, Prisma, Directus</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Role</span>
+            <span class="cs-meta-value">Independent AI & Data Engineer</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="cs-content reveal">
+        <h2>The Chaos of Unstructured Data</h2>
+        <p>A fast-growing UK startup (Visual Hive) recognized that their enterprise clients were drowning in PDFs, financial statements, and compliance reports. To build an intelligent assistant capable of querying these documents, they initially experimented with standard, off-the-shelf RAG wrappers.</p>
+        <p>The result was disastrous for a B2B setting: naive text splitters broke the context of complex legal tables, and the AI models consistently hallucinated critical financial figures because they retrieved the wrong chunks of text. In enterprise software, an AI hallucinating a liability clause is a dealbreaker.</p>
+
+        <h2>Architecting a Zero-Hallucination Pipeline</h2>
+        <p>They needed an engineer who could move past simple API calls and build a robust data ingestion infrastructure. I designed a multi-stage, asynchronous pipeline:</p>
+        <ul>
+          <li><strong>Intelligent Parsing (Python):</strong> Instead of blindly splitting text by character count, I implemented semantic chunking. The Python backend used computer vision libraries and layout-aware parsers to recognize headers, lists, and tables, ensuring that a single chunk contained a complete, coherent thought.</li>
+          <li><strong>Vector Database (Qdrant):</strong> The chunks were embedded and indexed in Qdrant. Crucially, I implemented a multi-tenant namespace strategy using strict metadata filtering. This mathematically guaranteed that Client A's data could never be retrieved by Client B's AI agent.</li>
+          <li><strong>The Control Plane (Next.js & Directus):</strong> To manage the ingestion jobs, I built a robust admin dashboard in Next.js, backed by Prisma and Directus. This allowed operations staff to monitor OCR status, vectorization progress, and ingestion errors in real-time.</li>
+        </ul>
+
+        <h2>The Implementation Details</h2>
+        <p>The Next.js frontend allowed users to upload batches of PDFs. The backend stored these in an S3-compatible bucket and triggered an asynchronous worker queue in Python via FastAPI. The worker parsed the PDF, generated embeddings using a specialized legal language model, and pushed the vectors to Qdrant.</p>
+        <p>To further reduce hallucinations during retrieval, I implemented <strong>Query Rewriting</strong>. When a user asked a vague question, a lightweight, fast LLM first rewrote the query into an optimized search string before querying Qdrant, boosting the retrieval hit rate by over 40%.</p>
+
+        <h2>Business Impact</h2>
+        <div class="cs-impact-box">
+          <p>By treating RAG as a rigorous data engineering problem rather than a simple prompt-engineering trick, the startup deployed a secure, multi-tenant AI search engine. Automation of document processing increased by 90%, and the system achieved <strong>zero hallucinations</strong> on ground-truth retrieval, allowing the founding team to confidently pitch their product to risk-averse enterprise clients.</p>
+        </div>
+      </div>
+      
+      <div class="cs-cta reveal">
+        <h3>Are your AI agents returning unreliable data?</h3>
+        <p>Let's fix your vector retrieval pipeline and build a RAG architecture that enterprise clients trust.</p>
+        <a href="mailto:iknizzz1807@gmail.com" class="btn btn-primary">Schedule an architecture review</a>
+      </div>
+    </main>
+
+    <footer class="footer" style="border-top:none; padding-bottom: 4rem;">
+      <p>&copy; 2026 Thong Nguyen. Independent Full-Stack AI Engineer.</p>
+    </footer>
+    <script src="../script.js"></script>
+  </body>
+</html>

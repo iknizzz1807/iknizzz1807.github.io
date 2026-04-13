@@ -19,47 +19,33 @@ function renderCaseStudies() {
   container.innerHTML = caseStudies
     .map(
       (cs) => `
-    <article class="b2b-case-card reveal">
+    <a href="cases/${cs.slug}.html" class="b2b-case-card reveal" style="display:block; text-decoration:none; color:inherit;">
       <div class="b2b-case-glow"></div>
-      <div class="b2b-case-content">
+      <div class="b2b-case-content" style="padding-bottom: 2rem;">
         <div class="b2b-case-header">
           <span class="b2b-case-type">${cs.type}</span>
-          <h3 class="b2b-case-title">${cs.title}</h3>
-          <p class="b2b-case-tagline">${cs.tagline}</p>
+          <h3 class="b2b-case-title" style="color:var(--text); margin-bottom: 1rem; transition: color 0.3s;">${cs.title}</h3>
+          <p class="b2b-case-tagline" style="color:var(--text-dim); font-size:1.05rem; margin-bottom: 2rem;">${cs.tagline}</p>
         </div>
         
-        <div class="b2b-case-metrics">
+        <div class="b2b-case-metrics" style="border-bottom:none; margin-bottom:0; padding-bottom:1rem;">
           ${cs.metrics.map(m => `
-            <div class="b2b-metric">
-              <span class="b2b-metric-val">${m.value}</span>
+            <div class="b2b-metric" style="flex:1;">
+              <span class="b2b-metric-val" style="font-size:1.5rem;">${m.value}</span>
               <span class="b2b-metric-lbl">${m.label}</span>
             </div>
           `).join("")}
         </div>
 
-        <div class="b2b-case-body">
-          <div class="b2b-body-section">
-            <h4>The Problem</h4>
-            <p>${cs.problem}</p>
-          </div>
-          <div class="b2b-body-section">
-            <h4>The Architecture</h4>
-            <p>${cs.solution}</p>
-          </div>
-          <div class="b2b-body-section b2b-outcome">
-            <h4>Business Outcome</h4>
-            <p>${cs.outcome}</p>
-          </div>
-        </div>
-
-        <div class="b2b-case-footer">
+        <div class="b2b-case-footer" style="margin-top: 1rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
           <div class="b2b-tech-stack">
-            ${cs.tech.map(t => `<span class="b2b-tech-badge">${t}</span>`).join("")}
+            ${cs.tech.slice(0, 4).map(t => `<span class="b2b-tech-badge">${t}</span>`).join("")}
+            ${cs.tech.length > 4 ? `<span class="b2b-tech-badge" style="background:transparent; border-color:transparent; padding-left:0;">+${cs.tech.length - 4}</span>` : ''}
           </div>
-          ${cs.links && cs.links.code ? `<a href="${cs.links.code}" target="_blank" class="b2b-link-btn">View Architecture &rarr;</a>` : ''}
+          <span class="b2b-link-btn" style="color:var(--accent-light); margin-top: 1rem; display:inline-block;">Read Engineering Deep-Dive &rarr;</span>
         </div>
       </div>
-    </article>
+    </a>
     `
     )
     .join("");
@@ -83,9 +69,8 @@ function initAnimations() {
 
   const revealElements = document.querySelectorAll(".reveal, .hero-title, .hero-sub, .hero-actions, .metric, .service-card, .process-step");
   
-  revealElements.forEach((el, index) => {
-    el.classList.add("reveal"); // Ensure they have the base class
-    // Reset any hardcoded style transitions if exist
+  revealElements.forEach((el) => {
+    el.classList.add("reveal");
     observer.observe(el);
   });
 }
