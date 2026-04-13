@@ -224,3 +224,48 @@ a { text-decoration: none; }
   .nav-links { display: none; }
   .cs-title { font-size: 2rem; }
 }
+
+/* Terms / Engagement Model Grid */
+.terms-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+.term-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2rem;
+  transition: transform 0.3s var(--ease), background 0.3s var(--ease);
+}
+.term-card:hover {
+  background: rgba(99, 102, 241, 0.05);
+  transform: translateY(-2px);
+}
+.term-card h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  color: var(--accent-light);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.term-card h4::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+.term-card p {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .terms-grid {
+    grid-template-columns: 1fr;
+  }
+}
