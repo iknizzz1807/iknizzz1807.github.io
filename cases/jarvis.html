@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="JARVIS - Fully local voice assistant on ESP32 with ASR, LLM reasoning, persistent memory, and MCP protocol." />
+    <title>JARVIS | Thong Nguyen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="../favicon.jpg" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../case.css" />
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="nav-inner">
+        <a href="../index.html" class="nav-logo">&lt;thong /&gt;</a>
+        <div class="nav-links">
+          <a href="../index.html#services" class="nav-link">Services</a>
+          <a href="../index.html#work" class="nav-link">Work</a>
+          <a href="../index.html#tech" class="nav-link">Tech</a>
+          <a href="../index.html#process" class="nav-link">Process</a>
+          <a href="../index.html#contact" class="nav-link nav-link-cta">Let's Talk</a>
+        </div>
+        <button class="nav-toggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <article class="case-article">
+      <div class="case-article-inner">
+        <a href="../index.html#work" class="case-back">&larr; Back to all work</a>
+
+        <div class="case-hero-section">
+          <span class="cs-card-type">Embedded AI System</span>
+          <h1 class="case-article-title">JARVIS</h1>
+          <p class="case-article-sub">A fully local, always-on voice assistant running on ESP32 hardware. Every component — from firmware to LLM orchestration — was built from scratch.</p>
+          <div class="case-article-tech">
+            <span>Python</span><span>C++</span><span>ESP32</span><span>Whisper</span><span>Gemini</span><span>ChromaDB</span><span>WebSocket</span><span>MCP</span>
+          </div>
+        </div>
+
+        <section class="case-section">
+          <h2 class="case-section-title case-section-title--red">The Problem</h2>
+          <div class="case-section-body">
+            <p>Commercial voice assistants (Alexa, Google Assistant, Siri) depend entirely on cloud processing. This introduces three fundamental problems:</p>
+            <ul>
+              <li><strong>Latency</strong> — each voice command makes a round trip to a remote data center, resulting in 2-5 second response times that break conversational flow.</li>
+              <li><strong>Privacy</strong> — audio from your home is continuously streamed to and stored on third-party servers.</li>
+              <li><strong>Vendor lock-in</strong> — you're constrained to each platform's closed ecosystem of skills, integrations, and supported hardware.</li>
+            </ul>
+            <p>No off-the-shelf solution offered local ASR + TTS + LLM reasoning with persistent memory on embedded hardware. The challenge was fitting a multi-stage AI pipeline onto a microcontroller with 520KB of RAM while maintaining real-time responsiveness.</p>
+          </div>
+        </section>
+
+        <section class="case-section">
+          <h2 class="case-section-title case-section-title--blue">The Approach</h2>
+          <div class="case-section-body">
+            <p>The system was architected as a two-part pipeline: a lightweight C++ firmware layer on the ESP32 and a Python orchestration server on a local machine.</p>
+
+            <h3>ESP32 Firmware (C++)</h3>
+            <p>The firmware handles real-time audio capture via I2S, runs Silero VAD (Voice Activity Detection) directly on the microcontroller to detect speech start/end without waking the server, and streams audio chunks over WebSocket to the Python server. This offloading strategy keeps the firmware minimal while maintaining responsiveness.</p>
+
+            <h3>Python Orchestration Server</h3>
+            <p>The server receives audio streams and executes a multi-stage pipeline:</p>
+            <ul>
+              <li><strong>ASR</strong> — Whisper transcribes the audio to text with high accuracy.</li>
+              <li><strong>LLM Reasoning</strong> — the transcription is sent to Gemini with full conversation context and any retrieved memories. The LLM generates both a spoken response and optional function calls.</li>
+              <li><strong>TTS</strong> — the response text is converted back to audio and streamed to the ESP32 for playback.</li>
+              <li><strong>Memory</strong> — ChromaDB stores conversation embeddings as persistent vector memory, allowing the assistant to recall context across sessions.</li>
+            </ul>
+
+            <h3>MCP Protocol Integration</h3>
+            <p>Implemented the Model Context Protocol to enable dynamic tool/function calling. This allows the assistant to execute arbitrary actions (control smart devices, query APIs, run scripts) based on natural language commands, without hardcoding each capability.</p>
+          </div>
+        </section>
+
+        <section class="case-section">
+          <h2 class="case-section-title case-section-title--green">The Outcome</h2>
+          <div class="case-section-body">
+            <ul class="case-outcome-list">
+              <li><strong>Sub-2s end-to-end voice response</strong> on local hardware — no cloud round trips, no internet dependency for core operation.</li>
+              <li><strong>Persistent conversational memory</strong> via ChromaDB vector storage — the assistant remembers context from previous sessions without re-prompting.</li>
+              <li><strong>MCP protocol integration</strong> enabling dynamic tool/function calling — extensible without firmware changes.</li>
+              <li><strong>Full offline capability</strong> — the entire ASR-to-TTS pipeline runs on local infrastructure, eliminating privacy concerns and vendor dependencies.</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </article>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <p>&copy; 2026 Thong Nguyen. Independent engineer. Built with precision.</p>
+      </div>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

@@ -1,355 +1,150 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Nguyen My Thong - Full Stack Developer Portfolio"
-    />
+    <meta name="description" content="Thong Nguyen - Independent Full-Stack AI Partner for Early-Stage Startups." />
     <meta property="og:image" content="https://ikniz.id.vn/favicon.jpg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="favicon.jpg" />
-    <title>Nguyen My Thong | Full Stack Developer</title>
+    <title>Thong Nguyen | B2B Full-Stack AI Engineer</title>
     <link rel="stylesheet" href="styles.css" />
-    <script src="projects-data.js" defer></script>
   </head>
   <body>
-    <!-- Navigation -->
+    <div class="bg-gradient-top"></div>
     <nav class="nav">
-      <div class="nav-container">
-        <a href="#home" class="nav-brand">ikniz</a>
-        <div class="nav-menu">
-          <a href="#about" class="nav-link">About</a>
-          <a href="#skills" class="nav-link">Skills</a>
-          <a href="#projects" class="nav-link">Projects</a>
-          <a href="#contact" class="nav-link">Contact</a>
-          <button class="theme-toggle" aria-label="Toggle theme">
-            <span class="theme-icon"></span>
-          </button>
+      <div class="nav-inner">
+        <a href="#home" class="nav-logo">&lt;thong /&gt;</a>
+        <div class="nav-links">
+          <a href="#services" class="nav-link">Solutions</a>
+          <a href="#work" class="nav-link">Case Studies</a>
+          <a href="#process" class="nav-link">Process</a>
+          <a href="#contact" class="nav-link nav-link-cta">Let's Talk</a>
         </div>
         <button class="nav-toggle" aria-label="Toggle menu">
-          <span></span>
-          <span></span>
-          <span></span>
+          <span></span><span></span><span></span>
         </button>
       </div>
     </nav>
 
-    <!-- Hero Section -->
     <section id="home" class="hero">
-      <div class="container">
-        <div class="hero-content">
-          <h1 class="hero-title">
-            <span class="hero-greeting">Hello, I am</span>
-            <span class="hero-name">Nguyen My Thong</span>
-            <span class="hero-role">Full Stack Developer</span>
-          </h1>
-          <p class="hero-description">
-            Computer Science student at UIT University, passionate about
-            creating innovative digital solutions through modern web, software
-            technologies and AI/ML.
-          </p>
-          <div class="hero-stats">
-            <div class="stat">
-              <span class="stat-number">5+</span>
-              <span class="stat-label">Projects Completed</span>
-            </div>
-            <div class="stat">
-              <span class="stat-number">8+</span>
-              <span class="stat-label">Technologies</span>
-            </div>
-          </div>
-          <div class="hero-cta">
-            <a href="#projects" class="btn btn-primary">View My Work</a>
-            <a href="#contact" class="btn btn-outline">Get in Touch</a>
-          </div>
-        </div>
-        <div class="hero-visual">
-          <div class="code-snippet">
-            <div class="code-header">
-              <div class="code-dots">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-              <span class="code-title">portfolio.js</span>
-            </div>
-            <div class="code-content">
-              <pre id="typed-code"></pre>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">About Me</h2>
-          <p class="section-subtitle">The story behind the developer</p>
-        </div>
-        <div class="about-content">
-          <div class="about-text">
-            <h3>🚀 Background</h3>
-            <p>
-              I'm a passionate Computer Science student at UIT University in
-              Vietnam, where I've been diving deep into the world of technology
-              for the past 2 years. My journey started with curiosity about how
-              softwares work, and it has evolved into a full-blown passion for
-              creating digital experiences that matter.
-            </p>
-
-            <h3>💡 What Drives Me</h3>
-            <p>
-              I believe in the power of technology to solve real-world problems.
-              Whether it's building responsive web applications, making insane
-              softwares, crafting engaging game experiences, or exploring the
-              frontiers of AI/ML, I'm always excited to turn ideas into reality.
-              I love the challenge of learning new technologies and pushing the
-              boundaries of what's possible.
-            </p>
-
-            <div class="about-highlights">
-              <div class="highlight-item">
-                <div class="highlight-icon">🏆</div>
-                <div class="highlight-text">Game Jam Participant</div>
-              </div>
-              <div class="highlight-item">
-                <div class="highlight-icon">🌟</div>
-                <div class="highlight-text">Open Source Contributor</div>
-              </div>
-              <div class="highlight-item">
-                <div class="highlight-icon">📚</div>
-                <div class="highlight-text">Continuous Learner</div>
-              </div>
-              <div class="highlight-item">
-                <div class="highlight-icon">🤝</div>
-                <div class="highlight-text">Team Collaborator</div>
-              </div>
-            </div>
-          </div>
-          <div class="about-image">
-            <div class="profile-card">
-              <div class="profile-info">
-                <h4>Quick Facts</h4>
-                <ul>
-                  <li>
-                    <strong>Education:</strong> Computer Science, UIT University
-                  </li>
-                  <li><strong>Focus:</strong> Full Stack Dev with AI</li>
-                  <li><strong>Interests:</strong>Game Development</li>
-                  <li><strong>Languages:</strong> Vietnamese, English</li>
-                  <li><strong>Location:</strong> Ho Chi Minh City, Vietnam</li>
-                  <li><strong>Status:</strong>Learning so hard</li>
-                </ul>
-              </div>
-            </div>
-            <div class="journey-timeline">
-              <div class="timeline-item">
-                <div class="timeline-year">2025</div>
-                <div class="timeline-desc">
-                  Exploring AI/ML, advanced Technologies and frameworks
-                </div>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-year">2024</div>
-                <div class="timeline-desc">
-                  Learned Technologies like Sveltekit and React
-                </div>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-year">2023</div>
-                <div class="timeline-desc">
-                  Started full-stack development journey
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Skills & Expertise</h2>
-          <p class="section-subtitle">Technologies I work with</p>
-        </div>
-        <div class="skills-grid">
-          <div class="skill-category">
-            <h3>Frontend</h3>
-            <div class="skills-list">
-              <div class="skill-item">
-                <img src="https://skillicons.dev/icons?i=react" alt="React" />
-                <span>React</span>
-              </div>
-              <div class="skill-item">
-                <img
-                  src="https://skillicons.dev/icons?i=nextjs"
-                  alt="Next.js"
-                />
-                <span>Next.js</span>
-              </div>
-              <div class="skill-item">
-                <img src="https://skillicons.dev/icons?i=svelte" alt="Svelte" />
-                <span>Svelte</span>
-              </div>
-              <div class="skill-item">
-                <img src="https://skillicons.dev/icons?i=ts" alt="TypeScript" />
-                <span>TypeScript</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="skill-category">
-            <h3>Backend</h3>
-            <div class="skills-list">
-              <div class="skill-item">
-                <img
-                  src="https://skillicons.dev/icons?i=nodejs"
-                  alt="Node.js"
-                />
-                <span>Node.js</span>
-              </div>
-              <div class="skill-item">
-                <img src="https://skillicons.dev/icons?i=python" alt="Python" />
-                <span>Python</span>
-              </div>
-              <div class="skill-item">
-                <img
-                  src="https://skillicons.dev/icons?i=fastapi"
-                  alt="FastAPI"
-                />
-                <span>FastAPI</span>
-              </div>
-              <div class="skill-item">
-                <img src="https://skillicons.dev/icons?i=go" alt="Go" />
-                <span>Go</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="skill-category">
-            <h3>Other</h3>
-            <div class="skills-list">
-              <div class="skill-item">
-                <img src="https://skillicons.dev/icons?i=java" alt="Java" />
-                <span>Java</span>
-              </div>
-              <div class="skill-item">
-                <img src="https://skillicons.dev/icons?i=cpp" alt="C++" />
-                <span>C++</span>
-              </div>
-              <div class="skill-item">
-                <img src="https://skillicons.dev/icons?i=godot" alt="Godot" />
-                <span>Godot</span>
-              </div>
-              <div class="skill-item">
-                <img src="https://skillicons.dev/icons?i=docker" alt="Docker" />
-                <span>Docker</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Featured Projects</h2>
-          <p class="section-subtitle">A showcase of my recent work</p>
-        </div>
-        <div id="featured-projects-grid" class="projects-grid"></div>
-
-        <!-- Thêm đoạn này ngay sau khi đóng </div> của "projects-grid" -->
-        <div class="all-projects-link">
-          <a href="/projects" class="btn btn-primary">View All My Projects</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Let's Work Together</h2>
-          <p class="section-subtitle">Ready to bring your ideas to life</p>
-        </div>
-        <div class="contact-content">
-          <div class="contact-info">
-            <h3>Get in Touch</h3>
-            <p>
-              I'm always interested in discussing new opportunities, creative
-              projects, or potential collaborations.
-            </p>
-            <div class="contact-methods">
-              <a href="mailto:mythonggg@gmail.com" class="contact-method">
-                <div class="contact-icon">
-                  <img src="images/mail.png" alt="Email" />
-                </div>
-                <div class="contact-details">
-                  <span class="contact-label">Email</span>
-                  <span class="contact-value">mythonggg@gmail.com</span>
-                </div>
-              </a>
-              <a
-                href="https://github.com/iknizzz1807"
-                target="_blank"
-                class="contact-method"
-              >
-                <div class="contact-icon">
-                  <img src="images/github.png" alt="GitHub" />
-                </div>
-                <div class="contact-details">
-                  <span class="contact-label">GitHub</span>
-                  <span class="contact-value">iknizzz1807</span>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="contact-links">
-            <a href="/cv/resume.pdf" target="_blank" class="btn btn-primary"
-              >Download Resume</a
-            >
-            <div class="social-links">
-              <a
-                href="https://www.facebook.com/nmt18072005"
-                target="_blank"
-                aria-label="Facebook"
-                ><img src="images/facebook.png" alt="Facebook"
-              /></a>
-              <a
-                href="https://www.instagram.com/nguyenmythonggg/"
-                target="_blank"
-                aria-label="Instagram"
-                ><img src="images/instagram.png" alt="Instagram"
-              /></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <p>
-          &copy; 2025 Nguyen My Thong. Built with passion and modern web
-          technologies.
+      <div class="hero-inner">
+        <div class="hero-badge reveal">Available for Q2 2026 B2B engagements</div>
+        <h1 class="hero-title reveal">
+          Independent Full-Stack AI Partner<br />
+          <span class="hero-highlight">for Early-Stage Startups.</span>
+        </h1>
+        <p class="hero-sub reveal">
+          You build the business. I build the infrastructure.
+          Production-grade Go, Python, and TypeScript. 
+          Zero HR overhead. Seamless global invoicing.
         </p>
+        <div class="hero-actions reveal">
+          <a href="#work" class="btn btn-primary">View B2B Case Studies</a>
+          <a href="#contact" class="btn btn-ghost">Send a Brief</a>
+        </div>
+        <div class="hero-metrics reveal">
+          <div class="metric">
+            <span class="metric-number">W-8BEN</span>
+            <span class="metric-label">Tax Compliant for US</span>
+          </div>
+          <div class="metric">
+            <span class="metric-number">100%</span>
+            <span class="metric-label">IP Transfer on Delivery</span>
+          </div>
+          <div class="metric">
+            <span class="metric-value">Wise</span>
+            <span class="metric-label">Global B2B Payments</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="services">
+      <div class="section-inner">
+        <div class="section-label reveal">Productized Solutions</div>
+        <h2 class="section-title reveal">How I accelerate your roadmap</h2>
+        <div class="services-grid">
+          <div class="service-card reveal">
+            <div class="service-icon">&#9881;</div>
+            <h3>Backend Architecture & Scaling</h3>
+            <p>Refactoring bottleneck modules into high-throughput Go or Node.js microservices. REST/WebSocket APIs, PostgreSQL, Redis caching, and rate limiting. Built for enterprise loads.</p>
+          </div>
+          <div class="service-card reveal">
+            <div class="service-icon">&#9889;</div>
+            <h3>AI Agent MVP in 4 Weeks</h3>
+            <p>From idea to a fully functional autonomous agent integrated with your SaaS. Secure sandboxing, prompt engineering, multi-agent orchestration via Python/LangGraph.</p>
+          </div>
+          <div class="service-card reveal">
+            <div class="service-icon">&#128218;</div>
+            <h3>RAG Pipeline Optimization</h3>
+            <p>Eliminate hallucinations and reduce API inference costs. Semantic chunking, dynamic routing, and vector database integration (Qdrant/Milvus) with absolute data isolation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="work">
+      <div class="section-inner">
+        <div class="section-label reveal">B2B Case Studies</div>
+        <h2 class="section-title reveal">Problems solved. Infrastructure shipped.</h2>
+        <div id="case-studies-container" class="case-grid"></div>
+      </div>
+    </section>
+
+    <section id="process" class="process">
+      <div class="section-inner">
+        <div class="section-label reveal">How I Work</div>
+        <h2 class="section-title reveal">From brief to invoice in days, not months</h2>
+        <div class="process-steps">
+          <div class="process-step reveal">
+            <div class="step-number">01</div>
+            <div class="step-content">
+              <h3>Task Scoping</h3>
+              <p>Send me the bottleneck module, deadline, and constraints. I break the work into a clear architectural plan and deliverables.</p>
+            </div>
+          </div>
+          <div class="process-step reveal">
+            <div class="step-number">02</div>
+            <div class="step-content">
+              <h3>End-to-End Delivery</h3>
+              <p>I write the code, implement the AI pipelines, and deliver a production-ready, containerized module you can immediately deploy.</p>
+            </div>
+          </div>
+          <div class="process-step reveal">
+            <div class="step-number">03</div>
+            <div class="step-content">
+              <h3>Seamless B2B Payment</h3>
+              <p>I send a commercial invoice. You wire via Wise Business. No HR platforms, no EOR overhead, no tax complications. Full IP transfer.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="section-inner">
+        <div class="contact-card reveal">
+          <h2>Ready to unblock your engineering team?</h2>
+          <p>Drop me a message on LinkedIn or email me your brief. I'll get back to you within 24 hours with an architectural proposal.</p>
+          <div class="contact-actions">
+            <a href="mailto:iknizzz1807@gmail.com" class="btn btn-primary">iknizzz1807@gmail.com</a>
+            <a href="https://github.com/iknizzz1807" target="_blank" class="btn btn-ghost">GitHub</a>
+            <a href="https://linkedin.com/in/thongnguyen1807" target="_blank" class="btn btn-ghost">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="section-inner">
+        <p>&copy; 2026 Thong Nguyen. Independent Full-Stack AI Engineer.</p>
       </div>
     </footer>
 
+    <script src="projects-data.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

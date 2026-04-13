@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Data Ingestion Pipeline for Visual Hive - Automated document ingestion, validation, and RAG-ready vector indexing for a UK startup." />
+    <title>Data Ingestion Pipeline | Thong Nguyen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="../favicon.jpg" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../case.css" />
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="nav-inner">
+        <a href="../index.html" class="nav-logo">&lt;thong /&gt;</a>
+        <div class="nav-links">
+          <a href="../index.html#services" class="nav-link">Services</a>
+          <a href="../index.html#work" class="nav-link">Work</a>
+          <a href="../index.html#tech" class="nav-link">Tech</a>
+          <a href="../index.html#process" class="nav-link">Process</a>
+          <a href="../index.html#contact" class="nav-link nav-link-cta">Let's Talk</a>
+        </div>
+        <button class="nav-toggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <article class="case-article">
+      <div class="case-article-inner">
+        <a href="../index.html#work" class="case-back">&larr; Back to all work</a>
+
+        <div class="case-hero-section">
+          <span class="cs-card-type">Enterprise Data Platform</span>
+          <h1 class="case-article-title">Data Ingestion Pipeline</h1>
+          <p class="case-article-sub">Contract work for Visual Hive, a UK-based startup. Built the core data ingestion system that processes, validates, and indexes unstructured business documents for their RAG pipeline. Paid via Wise Business under a B2B contract.</p>
+          <div class="case-article-tech">
+            <span>Next.js</span><span>Prisma</span><span>Qdrant</span><span>Directus</span><span>Python</span><span>FastAPI</span>
+          </div>
+        </div>
+
+        <section class="case-section">
+          <h2 class="case-section-title case-section-title--red">The Problem</h2>
+          <div class="case-section-body">
+            <p>Visual Hive's analytics product needed to answer questions across thousands of heterogeneous business documents — spreadsheets, reports, financial data in CSV and XLSX format, and unstructured text. The existing workflow was entirely manual: someone would open each file, extract relevant data, clean formatting inconsistencies, and manually enter it into the system.</p>
+            <p>At the scale of thousands of documents, this approach was unsustainable. Errors from manual data entry were compounding, and the time-to-insight for new data sets was measured in days rather than minutes. The client needed an automated pipeline that could handle the full lifecycle: ingest, parse, validate, clean, embed, and index — then make it all queryable through their existing RAG infrastructure.</p>
+          </div>
+        </section>
+
+        <section class="case-section">
+          <h2 class="case-section-title case-section-title--blue">The Approach</h2>
+          <div class="case-section-body">
+            <h3>Ingestion Platform (Next.js)</h3>
+            <p>Built a Next.js application serving as the primary ingestion interface. It provides upload workflows for multi-format documents (CSV, XLSX, PDF), tracks processing status for each file, and surfaces validation results to operators. Prisma handles the relational data model — document metadata, processing states, validation flags, and audit logs.</p>
+
+            <h3>Data Processing Pipeline</h3>
+            <p>The core extraction engine handles format-specific parsing (CSV/XLSX cell-level extraction, PDF text extraction), followed by a validation and cleanup stage that normalizes data types, detects anomalies (missing fields, type mismatches, duplicate rows), and flags issues for human review rather than silently discarding data.</p>
+
+            <h3>Vector Indexing & RAG Integration</h3>
+            <p>Cleaned and validated data is chunked, embedded using sentence-transformers, and stored in Qdrant for high-performance vector similarity search. This integrates directly with the client's RAG pipeline, enabling semantic queries across all indexed documents without additional configuration.</p>
+
+            <h3>CMS Integration</h3>
+            <p>Connected to Directus to give the client's content team a headless CMS interface for managing document templates, validation rules, and metadata schemas — without requiring engineering involvement for each new document type.</p>
+
+            <h3>Dual Codebase Strategy</h3>
+            <p>In parallel with the production Next.js system, I built a personal SvelteKit version of the ingestion engine. This served as a rapid prototyping environment where I could test new parsing strategies and validation logic before porting them to the production codebase — significantly accelerating the iteration cycle.</p>
+          </div>
+        </section>
+
+        <section class="case-section">
+          <h2 class="case-section-title case-section-title--green">The Outcome</h2>
+          <div class="case-section-body">
+            <ul class="case-outcome-list">
+              <li><strong>Automated ingestion of multi-format documents</strong> — replaced manual data entry with a self-service upload pipeline that handles CSV, XLSX, and PDF without operator intervention.</li>
+              <li><strong>RAG-ready vector pipeline</strong> — Qdrant-backed semantic search across all indexed documents, enabling the client's analytics product to query ingested data in real-time.</li>
+              <li><strong>Dual codebase strategy</strong> — production Next.js + prototype SvelteKit — accelerated iteration by allowing rapid testing of new extraction logic before production deployment.</li>
+              <li><strong>B2B contract delivered</strong> — scoped, built, and invoiced via Wise Business with full IP transfer, serving as a working reference for the engagement model I use with all clients.</li>
+            </ul>
+          </div>
+        </section>
+
+        <div class="case-article-footer">
+          <a href="https://github.com/iknizzz1807/data-ingestion" target="_blank" class="btn btn-ghost">Source Code</a>
+        </div>
+      </div>
+    </article>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <p>&copy; 2026 Thong Nguyen. Independent engineer. Built with precision.</p>
+      </div>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>
