@@ -18,46 +18,53 @@
 
     <main class="cs-article">
       <header class="cs-hero reveal">
-        <span class="b2b-case-type">Hardware / Edge AI</span>
-        <h1 class="cs-title">JARVIS: Local-First Voice Agent on ESP32 Hardware</h1>
-        <p class="cs-subtitle">Beating the cloud API latency curse. A bidirectional C++ WebSocket bridge connecting constrained edge devices to a Python reasoning backend.</p>
+        <span class="b2b-case-type">Embedded Hardware AI</span>
+        <h1 class="cs-title">JARVIS: Beating Cloud Latency with ESP32 and Local AI</h1>
+        <p class="cs-subtitle">Architecting a fully autonomous, local-first voice assistant running on an ESP32 microcontroller with ASR, LLM reasoning, a 5-layer persistent vector memory system, and MCP protocol integration.</p>
         <div class="cs-meta">
           <div class="cs-meta-item">
-            <span class="cs-meta-label">Tech Stack</span>
-            <span class="cs-meta-value">Python, C++, ESP32, WebSockets, ChromaDB, Whisper, Gemini</span>
+            <span class="cs-meta-label">Hardware Stack</span>
+            <span class="cs-meta-value">ESP32 (C++), I2S Microphones/Speakers</span>
           </div>
           <div class="cs-meta-item">
-            <span class="cs-meta-label">Role</span>
-            <span class="cs-meta-value">Full-Stack Embedded AI Developer</span>
+            <span class="cs-meta-label">Software Stack</span>
+            <span class="cs-meta-value">Python, Whisper, Gemini API, ChromaDB, WebSockets, Model Context Protocol (MCP)</span>
           </div>
         </div>
       </header>
 
       <div class="cs-content reveal">
-        <h2>The Latency Problem of Cloud Assistants</h2>
-        <p>Smart home hardware startups rely heavily on third-party voice assistants (Alexa, Google Home). However, piping raw audio to the cloud, waiting for speech-to-text (STT), then passing the text to an LLM for reasoning, then converting it back to audio (TTS), and finally streaming it back down to a micro-controller consistently results in a frustrating 3-second delay. It destroys the illusion of intelligence.</p>
-        <p>Furthermore, cloud-based assistants lack deep, persistent contextual memory across long periods of interaction. A true "smart" agent should remember a conversation from three weeks ago without having the entire transcript stuffed into its context window.</p>
+        <h2>The Latency Trap of the Smart Home</h2>
+        <p>IoT hardware startups rely heavily on third-party voice assistants (Alexa, Google Home) that pipe raw audio to the cloud. This creates an inherently flawed user experience. The round-trip sequence involves: capturing audio on the device &rarr; sending it to a cloud server &rarr; transcribing it (STT) &rarr; querying an LLM &rarr; generating speech (TTS) &rarr; streaming it back down to the microcontroller.</p>
+        <p>This process consistently introduces a 3- to 5-second delay, shattering the illusion of intelligence. Furthermore, these assistants suffer from severe "amnesia," lacking deep, persistent contextual memory across long periods of interaction.</p>
 
-        <h2>Architecting the Edge-to-Server Bridge</h2>
-        <p>I tackled this problem by shifting the computational architecture. The goal was to build a fully functional, local-first voice assistant running on a $5 ESP32 microcontroller that felt as fast and intelligent as a high-end server.</p>
+        <h2>The Goal: A "Savior" Architecture for Edge AI</h2>
+        <p>The objective for JARVIS was twofold: drop the latency to near-human conversational speeds (&lt;500ms) on a constrained $5 ESP32 chip, and equip the agent with a persistent memory architecture that remembers conversations from weeks ago.</p>
+
+        <h3>1. The Hardware-Software Bridge (C++ & WebSockets)</h3>
+        <p>Instead of relying on clunky HTTP polling, I programmed the ESP32 in C++ to capture raw I2S audio and stream it continuously via a highly optimized, low-latency WebSocket connection. A local Python server ingested this stream in real-time. By keeping the connection open and buffering the audio at the edge, the overhead of establishing TLS handshakes for every query was entirely eliminated.</p>
+        <p>A critical engineering hurdle was handling <strong>"Barge-ins" (interruptions)</strong>. When a user spoke while JARVIS was answering, the C++ client instantly detected the amplitude spike on the microphone, sent a "HALT" packet over the WebSocket, and the Python server immediately killed the TTS generation. This allowed the agent to ingest the new context naturally, without losing its train of thought.</p>
+
+        <h3>2. The Orchestration Backend (Python & Local AI)</h3>
+        <p>As audio packets hit the Python server, a local instance of OpenAI's <code>Whisper</code> model transcribed the speech almost instantaneously. This text was fed into the Gemini reasoning engine. To give the assistant real-world agency, I implemented the <strong>Model Context Protocol (MCP)</strong>, allowing the LLM to trigger physical hardware actions (like turning on lights or fetching local weather APIs) natively.</p>
+
+        <h3>3. The 5-Layer Persistent Memory (ChromaDB)</h3>
+        <p>To solve the amnesia problem without overflowing the LLM’s context window, I architected a multi-tiered memory system:</p>
         <ul>
-          <li><strong>C++ Bidirectional Audio Streaming:</strong> I programmed the ESP32 in C++ to capture raw I2S audio from a microphone and stream it continuously via a low-latency WebSocket connection, rather than relying on HTTP polling. The server continuously ingested this stream in real-time.</li>
-          <li><strong>Python Reasoning Backend (ASR & LLM):</strong> The WebSocket server was built in Python. As audio packets arrived, a local instance of OpenAI's Whisper model (running on the host machine) transcribed the speech almost instantaneously. The transcribed text was fed into Gemini for high-speed reasoning.</li>
-          <li><strong>The 5-Layer Persistent Vector Memory:</strong> To solve the amnesia problem, I architected a multi-tiered memory system using ChromaDB. Short-term memory (the immediate conversation) was kept in RAM. Long-term memories, facts, and user preferences were summarized by the LLM in the background and stored as vector embeddings in ChromaDB, allowing the agent to recall specific facts instantly when queried weeks later.</li>
+          <li><strong>Short-Term:</strong> The immediate conversation history kept in RAM.</li>
+          <li><strong>Working Memory:</strong> A rolling summary of the current session.</li>
+          <li><strong>Long-Term (ChromaDB):</strong> Background workers summarized completed sessions and embedded the facts, preferences, and key events into a local vector database. When a user asked, <em>"What was that book I mentioned last week?"</em>, the Python backend executed a semantic vector search before prompting the LLM, retrieving the exact context instantly.</li>
         </ul>
-
-        <h2>Implementation & Handling "Barge-ins"</h2>
-        <p>The most difficult engineering hurdle was the "Barge-in" problem—when a user interrupts the AI while it is speaking. The C++ hardware code continuously monitored the microphone for amplitude spikes. If the user spoke while the ESP32's speaker was outputting audio, the C++ client instantly sent a "stop" packet over the WebSocket, and the Python server halted the TTS generation, preserving the newly interrupted context back into the LLM window.</p>
 
         <h2>Business Impact</h2>
         <div class="cs-impact-box">
-          <p>By moving the STT/TTS routing to a dedicated local WebSocket server and using an intelligent, chunked transmission architecture, JARVIS achieved an end-to-end response latency of <strong>under 500ms</strong>. The persistent ChromaDB memory enabled deeply personalized interactions, demonstrating that high-end AI agents can be deployed on extremely constrained, cost-effective edge hardware.</p>
+          <p>This architecture proved that high-end, memory-persistent AI agents can be deployed on extremely constrained, cost-effective edge hardware. By shifting STT/TTS routing to a dedicated local server and maintaining a 5-layer vector memory, JARVIS achieved an end-to-end response latency of <strong>under 500ms</strong>, fundamentally outperforming standard cloud APIs.</p>
         </div>
       </div>
       
       <div class="cs-cta reveal">
         <h3>Building IoT hardware that needs real-time AI reasoning?</h3>
-        <p>I build C++ & Python bridges that bring sub-second intelligence to edge devices.</p>
+        <p>I build C++ & Python bridges that bring sub-second intelligence to edge devices without relying entirely on slow cloud APIs.</p>
         <a href="mailto:iknizzz1807@gmail.com" class="btn btn-primary">Discuss your edge AI constraints</a>
       </div>
     </main>

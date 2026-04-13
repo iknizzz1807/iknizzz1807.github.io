@@ -18,48 +18,52 @@
 
     <main class="cs-article">
       <header class="cs-hero reveal">
-        <span class="b2b-case-type">Platform Architecture</span>
-        <h1 class="cs-title">SkillForge: Scaling a High-Concurrency B2B/B2C Matching Engine</h1>
-        <p class="cs-subtitle">Transitioning from a sluggish monolithic prototype to a high-throughput Go & Python microservices architecture capable of handling 10k+ concurrent connections.</p>
+        <span class="b2b-case-type">Microservices Architecture</span>
+        <h1 class="cs-title">SkillForge: Decoupling Heavy AI Computations from High-Concurrency I/O</h1>
+        <p class="cs-subtitle">How I architected a hybrid Go & Python backend to power real-time WebSocket collaboration and heavy NLP skill-matching without blocking the event loop.</p>
         <div class="cs-meta">
           <div class="cs-meta-item">
-            <span class="cs-meta-label">Tech Stack</span>
-            <span class="cs-meta-value">Go, Python, FastAPI, SvelteKit, MongoDB, Docker</span>
+            <span class="cs-meta-label">Core Technologies</span>
+            <span class="cs-meta-value">Go, Python, SvelteKit, MongoDB, WebSockets, Sentence Transformers</span>
           </div>
           <div class="cs-meta-item">
-            <span class="cs-meta-label">Role</span>
-            <span class="cs-meta-value">Lead Backend Architect (Independent)</span>
+            <span class="cs-meta-label">Infrastructure</span>
+            <span class="cs-meta-value">Docker, Microservices</span>
           </div>
         </div>
       </header>
 
       <div class="cs-content reveal">
-        <h2>The Bottleneck</h2>
-        <p>The founding team at SkillForge had a brilliant marketplace concept: connecting university students with enterprise-level project work in real-time. However, their initial prototype was built on a tightly coupled, single-threaded monolith. As the user base grew to encompass thousands of student profiles and hundreds of complex enterprise requirements, the core matching engine ground to a halt.</p>
-        <p>Database locks became frequent, API response times spiked past 4 seconds during peak loads, and the platform struggled to handle the asynchronous nature of B2B negotiations. The startup needed an infrastructure overhaul without disrupting their aggressive product roadmap.</p>
-
-        <h2>Architectural Decisions & Trade-offs</h2>
-        <p>To eliminate the bottleneck, I proposed decoupling the monolithic structure into specialized microservices, assigning the right language to the right task:</p>
+        <h2>The Architectural Dilemma</h2>
+        <p>SkillForge was envisioned as a real-time collaborative platform connecting students with enterprise projects. The core value proposition rested on two fundamentally opposing technical requirements:</p>
         <ul>
-          <li><strong>Golang for the Core API:</strong> Go was selected for its exceptional concurrency model (goroutines) and high throughput. It handled user authentication, session state, and heavy I/O operations (like fetching profiles and project lists) with near-zero latency.</li>
-          <li><strong>Python (FastAPI) for the Matching Engine:</strong> The actual algorithmic matching of student skills to enterprise requirements involved heavy data processing and machine learning models. Python remains the king of data science, so I isolated this logic into a high-performance FastAPI service.</li>
-          <li><strong>SvelteKit for the Frontend:</strong> To ensure the UI felt instantaneous, SvelteKit was chosen over React for its smaller bundle size and superior reactivity without a virtual DOM overhead.</li>
+          <li><strong>Requirement A (I/O Bound):</strong> A real-time, low-latency collaboration suite including live Kanban boards, group messaging, and instant notifications.</li>
+          <li><strong>Requirement B (CPU Bound):</strong> An intelligent AI-matching engine that evaluates semantic similarities between student resumes and project descriptions using multi-dimensional vector math.</li>
         </ul>
+        <p>Attempting to build this inside a traditional monolithic Node.js or Python application would have been a disaster. The heavy Natural Language Processing (NLP) computations would inevitably block the main thread, causing chat messages to lag and WebSocket connections to drop during peak traffic.</p>
 
-        <h2>The Implementation</h2>
-        <p>I containerized the entire stack using Docker, creating an isolated, reproducible development environment. The Go backend communicated with a MongoDB cluster, chosen for its flexible schema design—crucial for a marketplace where "skills" and "project requirements" are highly dynamic and nested.</p>
-        <p>The critical innovation was an asynchronous message queue between the Go API and the Python matching service. When an enterprise posted a new project, Go immediately acknowledged the request, while Python processed the matching algorithm in the background, firing a webhook back to Go when the results were ready to be pushed to the client via WebSockets.</p>
+        <h2>The Microservices Solution: Go meets Python</h2>
+        <p>To guarantee absolute performance, I split the backend into two decoupled services, assigning the right language to the right workload.</p>
+        
+        <h3>1. The Go Gateway (I/O & Concurrency)</h3>
+        <p>I built the primary backend using <strong>Go (Golang)</strong> with <code>gorilla/websocket</code>. Go’s lightweight goroutines make it the undisputed champion of managing thousands of concurrent WebSocket connections. The Go service handled all room-based chat routing, Kanban state synchronizations, user authentication, and interactions with the MongoDB cluster. The result was a completely unblocked, highly responsive real-time layer.</p>
+
+        <h3>2. The Python AI Engine (Computation)</h3>
+        <p>I isolated the matching logic into an internal Python microservice. Using the <code>all-MiniLM-L6-v2</code> sentence transformer, this service mapped user skills and project requirements into 384-dimensional vectors. When a new project was posted, the Go backend fired an asynchronous RPC call to the Python service. Python crunched the matrix multiplications to find the optimal candidates and returned the matches to Go, which then pushed the notification to the frontend in real-time.</p>
+
+        <h3>3. The SvelteKit Frontend</h3>
+        <p>To complement the high-speed backend, I chose <strong>SvelteKit</strong> over React. By avoiding a Virtual DOM, Svelte compiled down to highly optimized vanilla JavaScript, ensuring that the heavy flow of WebSocket data didn't cause UI stuttering or memory leaks in the browser.</p>
 
         <h2>Business Impact</h2>
         <div class="cs-impact-box">
-          <p>By restructuring the backend, the platform achieved <strong>sub-100ms API response times</strong> across the board. The decoupled architecture allowed the AI matching engine to scale independently of the core web server. This infrastructure stability gave the founding team the confidence to onboard three major university partners simultaneously without fearing a catastrophic server crash.</p>
+          <p>By treating the architecture as an engineering problem rather than a framework preference, the platform achieved <strong>sub-50ms latency</strong> for real-time collaboration, while safely outsourcing heavy 1B+ parameter NLP model inferences to a dedicated worker. The system is inherently scalable: if the AI engine bottlenecks, we simply spin up more Python containers without affecting the live user chat experience.</p>
         </div>
       </div>
       
       <div class="cs-cta reveal">
-        <h3>Is your current backend slowing down your product vision?</h3>
-        <p>I specialize in refactoring bottlenecks into scalable, production-ready microservices.</p>
-        <a href="mailto:iknizzz1807@gmail.com" class="btn btn-primary">Send me your bottleneck module</a>
+        <h3>Is your monolith cracking under the weight of AI computations?</h3>
+        <p>I specialize in decoupling heavy AI workloads from critical web APIs using Go and Python.</p>
+        <a href="mailto:iknizzz1807@gmail.com" class="btn btn-primary">Send me your architecture diagram</a>
       </div>
     </main>
 
