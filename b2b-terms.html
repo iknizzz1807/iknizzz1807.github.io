@@ -44,6 +44,9 @@
         border-radius: 12px;
         padding: 2.5rem;
         transition: transform 0.3s ease, border-color 0.3s ease;
+        display: flex;
+        align-items: flex-start;
+        gap: 1.5rem;
       }
       .faq-item:hover {
         border-color: var(--primary-light);
@@ -58,11 +61,15 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 1.5rem;
+        flex-shrink: 0;
+      }
+      .faq-content {
+        flex: 1;
       }
       .faq-item h3 {
         font-size: 1.5rem;
         margin-bottom: 1rem;
+        margin-top: 0;
         color: var(--text-main);
       }
       .faq-item p {
@@ -107,13 +114,15 @@
           <div class="faq-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
           </div>
-          <h3>1. Tax Compliance & Worker Misclassification</h3>
-          <p>Hiring international talent often raises concerns about IRS compliance and worker misclassification penalties. I operate as a strictly independent B2B contractor (a business entity), not an employee.</p>
-          <ul>
-            <li><strong>W-8BEN / W-8BEN-E Provided:</strong> For US clients, I provide a signed W-8BEN (or W-8BEN-E for my corporate entity) upfront. This certifies my foreign status, completely exempting your company from the IRS 30% withholding tax on foreign-source services.</li>
-            <li><strong>Zero HR Overhead:</strong> Because this is a B2B vendor relationship, you do not need to pay payroll taxes, health insurance, or benefits.</li>
-            <li><strong>No EOR Required:</strong> You do not need to use expensive Employer of Record (EOR) platforms like Deel, Turing, or Remote to hire me.</li>
-          </ul>
+          <div class="faq-content">
+            <h3>1. Tax Compliance & Zero EOR Overhead</h3>
+            <p>Hiring international talent often raises concerns about IRS compliance and worker misclassification penalties. I operate as a strictly independent B2B contractor via a Single-Member LLC in Vietnam ("Software Production" business line), totally eliminating misclassification risks under the US DOL 2026 rules and EU Platform Work Directive.</p>
+            <ul>
+              <li><strong>W-8BEN-E Provided:</strong> As a foreign corporate entity, I provide a signed W-8BEN-E upfront. My MSA explicitly defines deliverables as "services for development" (per Treas. Reg. §1.861-18), completely shielding your startup from the 30% US royalty withholding tax.</li>
+              <li><strong>Zero HR Overhead:</strong> You do not need to use expensive Employer of Record (EOR) platforms like Deel, Turing, or Remote. You pay zero payroll taxes, health insurance, or benefits.</li>
+              <li><strong>Tax-Optimized:</strong> My LLC allows me to export software with a 0% VAT rating, keeping costs highly competitive while fully compliant with local tax laws.</li>
+            </ul>
+          </div>
         </div>
 
         <!-- 2. IP & Contracts -->
@@ -121,13 +130,15 @@
           <div class="faq-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
           </div>
-          <h3>2. Master Service Agreement & VC-Compliant IP Transfer</h3>
-          <p>Investors (VCs) will heavily scrutinize your cap table and IP ownership during due diligence. It is critical that your company owns 100% of its codebase without any "floating" IP liens.</p>
-          <ul>
-            <li><strong>Immediate IP Assignment:</strong> Unlike amateur freelancers who hold code hostage until payment, my Master Service Agreement (MSA) utilizes a <i>"Present Assignment with a Condition Subsequent"</i>. Intellectual property is assigned to you immediately upon creation, ensuring your VC chain-of-title is absolutely pristine.</li>
-            <li><strong>Springing Reversion for Non-Payment:</strong> To protect my business, I retain a springing reversionary right. If commercial invoices remain unpaid past 30 days, the commercial license to use the unpaid code is automatically suspended until clearance.</li>
-            <li><strong>NDAs:</strong> I am happy to sign your company's Non-Disclosure Agreement (NDA) before we discuss any proprietary architecture.</li>
-          </ul>
+          <div class="faq-content">
+            <h3>2. Master Service Agreement & VC-Compliant IP Transfer</h3>
+            <p>Investors (VCs) will heavily scrutinize your cap table and IP ownership during Series A/B due diligence. It is critical that your company owns 100% of its codebase without any "floating" IP liens.</p>
+            <ul>
+              <li><strong>Present Assignment with Condition Subsequent:</strong> Unlike amateur freelancers who hold code hostage until payment (destroying your chain-of-title), my MSA assigns intellectual property to you immediately upon creation. This passes VC scrutiny instantly.</li>
+              <li><strong>Springing Reversion:</strong> I protect my business through a "springing reversionary right." If commercial invoices remain unpaid past 30 days, the commercial license to use the unpaid code is automatically suspended.</li>
+              <li><strong>NDAs:</strong> I sign standard NDAs immediately before we dive into your proprietary architecture.</li>
+            </ul>
+          </div>
         </div>
 
         <!-- 3. Payments -->
@@ -135,42 +146,62 @@
           <div class="faq-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
           </div>
-          <h3>3. Payment Milestones via Wise</h3>
-          <p>To eliminate risk for both parties, all engagements are structured around clear, deliverable-based milestones. Invoicing is handled seamlessly via Wise Business.</p>
-          <ul>
-            <li><strong>30% Upfront Deposit:</strong> Secures my time in the schedule and initiates the architecture planning.</li>
-            <li><strong>Development & Staging:</strong> I build the module and deploy it to a staging server (or your test environment) for your team to review and test.</li>
-            <li><strong>70% Final Payment:</strong> Once you approve the staging deployment, the final commercial invoice is issued.</li>
-            <li><strong>Code Handover:</strong> Upon receipt of the final payment via Wise, the source code is pushed directly to your GitHub repository and IP is transferred.</li>
-          </ul>
-        </div>
-
-        <!-- 4. Communication -->
-        <div class="faq-item reveal">
-          <div class="faq-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect><line x1="2" y1="12" x2="22" y2="12"></line><line x1="12" y1="2" x2="12" y2="22"></line></svg>
+          <div class="faq-content">
+            <h3>3. Payment Milestones & AML Compliance (Wise)</h3>
+            <p>I operate on a task-based milestone model, which natively proves "opportunity for profit or loss" (a core factor in avoiding misclassification). Invoicing is handled via Wise Business directly to my corporate account.</p>
+            <ul>
+              <li><strong>SBV Circular 27/2025 Cleared:</strong> I maintain a pre-cleared, formal compliance dossier (MSA, SOWs, Invoices) with my local bank. This guarantees that your Wise transfers (even those >$1,000) clear instantly without getting frozen by State Bank of Vietnam AML checks.</li>
+              <li><strong>30% Upfront / 70% Delivery:</strong> Engagements begin with a 30% deposit. I build, deploy to staging, and you review. Upon approval, the final 70% invoice is issued and code is pushed.</li>
+            </ul>
           </div>
-          <h3>4. Async-First Workflow</h3>
-          <p>I operate as a plug-and-play extension of your engineering team. You don't need to micromanage me.</p>
-          <ul>
-            <li><strong>Direct Integration:</strong> I join your Slack/Discord workspace as a guest contractor.</li>
-            <li><strong>No Useless Meetings:</strong> We replace daily stand-ups with asynchronous updates. You get concise, written reports on what was built, what's blocking, and next steps.</li>
-            <li><strong>GitHub Commits:</strong> Progress is tracked via clean, atomic GitHub commits and documented Pull Requests.</li>
-          </ul>
         </div>
 
-        <!-- 5. Warranty -->
+        <!-- 4. Warranty & AI Liability -->
         <div class="faq-item reveal">
           <div class="faq-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
           </div>
-          <h3>5. AI Liability Caps & Dispute Resolution</h3>
-          <p>Building Artificial Intelligence and algorithmic infrastructure introduces asymmetric risks far beyond traditional software development.</p>
-          <ul>
-            <li><strong>AI-Specific Liability Carve-Outs:</strong> My standard MSA caps direct financial damages to 100% of the specific Statement of Work (SOW) value. All consequential and indirect damages are explicitly excluded.</li>
-            <li><strong>Third-Party Model Safe Harbors:</strong> The MSA contains a strict disclaimer regarding the probabilistic nature of machine learning and LLM hallucinations. Furthermore, clients are required to provide absolute indemnification against copyright/GDPR claims arising directly from the proprietary data they supply to fine-tune or prompt the models.</li>
-            <li><strong>Flexible Governing Law:</strong> I typically work with standard US (Delaware/California) or UK/EU jurisdictions using your company's boilerplate agreements. My goal is to use clean, standard contracts so we can bypass legal friction and start building immediately.</li>
-          </ul>
+          <div class="faq-content">
+            <h3>4. AI Liability Caps & Risk Allocation</h3>
+            <p>Building Artificial Intelligence infrastructure introduces asymmetric risks far beyond traditional CRUD apps. My MSA features enterprise-grade protections for both parties.</p>
+            <ul>
+              <li><strong>AI-Specific Carve-Outs:</strong> Direct damages are capped at 100% of the specific SOW. All consequential and indirect damages are explicitly excluded.</li>
+              <li><strong>Data Breach Super-Caps:</strong> A negotiated higher financial limit applies exclusively to catastrophic breaches involving confidentiality and data security.</li>
+              <li><strong>Hallucinations & Client Input:</strong> The MSA disclaims factual accuracy or IP non-infringement of outputs generated by third-party LLMs. Furthermore, clients must provide absolute indemnification against copyright/GDPR claims arising from the proprietary data they provide to prompt/fine-tune the models.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 5. Jurisdiction -->
+        <div class="faq-item reveal">
+          <div class="faq-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          </div>
+          <div class="faq-content">
+            <h3>5. Governing Law & Dispute Resolution</h3>
+            <p>US State court judgments (e.g., Delaware) are unenforceable in Vietnam. Local Vietnamese courts are unpalatable for Western startups. I use the global gold standard for cross-border engineering contracts.</p>
+            <ul>
+              <li><strong>English or Singapore Law:</strong> The MSA is governed by neutral, highly predictable commercial law.</li>
+              <li><strong>SIAC Arbitration:</strong> All disputes are subject to binding arbitration via the Singapore International Arbitration Centre (SIAC).</li>
+              <li><strong>Global Enforceability:</strong> Because Vietnam is a signatory to the 1958 New York Convention, a SIAC arbitral award provides profound legal security and direct enforceability for you, the client.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 6. Communication -->
+        <div class="faq-item reveal">
+          <div class="faq-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect><line x1="2" y1="12" x2="22" y2="12"></line><line x1="12" y1="2" x2="12" y2="22"></line></svg>
+          </div>
+          <div class="faq-content">
+            <h3>6. Async-First Workflow</h3>
+            <p>I operate as a plug-and-play extension of your engineering team. You don't need to micromanage me.</p>
+            <ul>
+              <li><strong>Direct Integration:</strong> I join your Slack/Discord workspace as an external guest contractor. I use my own hardware and software licenses (proving true contractor autonomy).</li>
+              <li><strong>No Useless Meetings:</strong> We replace daily stand-ups with asynchronous written reports: what was built, blockers, and next steps.</li>
+              <li><strong>Atomic Commits:</strong> Progress is tracked via clean, atomic GitHub commits and rigorously documented Pull Requests.</li>
+            </ul>
+          </div>
         </div>
 
       </div>
