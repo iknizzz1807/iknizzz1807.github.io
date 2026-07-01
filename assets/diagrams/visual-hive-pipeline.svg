@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">Visual Hive ingestion pipeline</title>
+  <desc id="desc">Upload files flow through parsing, schema mapping, cleaning, Directus synchronization, Qdrant indexing, RAG assistant, and analytics dashboard.</desc>
+  <rect width="1200" height="520" fill="#050713"/>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#818cf8"/></marker></defs>
+  <g font-family="Inter, Arial, sans-serif" font-size="17" fill="#f8fafc">
+    <g fill="#0f111a" stroke="#6366f1" stroke-opacity=".55">
+      <rect x="40" y="195" width="145" height="90" rx="16"/><rect x="230" y="195" width="145" height="90" rx="16"/><rect x="420" y="195" width="145" height="90" rx="16"/><rect x="610" y="195" width="145" height="90" rx="16"/>
+      <rect x="805" y="85" width="160" height="90" rx="16"/><rect x="805" y="305" width="160" height="90" rx="16"/><rect x="1010" y="85" width="155" height="90" rx="16"/><rect x="1010" y="305" width="155" height="90" rx="16"/>
+    </g>
+    <text x="112" y="232" text-anchor="middle" font-weight="700">Upload</text><text x="112" y="258" text-anchor="middle" fill="#94a3b8" font-size="13">CSV / XLSX</text>
+    <text x="302" y="232" text-anchor="middle" font-weight="700">Parse</text><text x="302" y="258" text-anchor="middle" fill="#94a3b8" font-size="13">cell-level extraction</text>
+    <text x="492" y="232" text-anchor="middle" font-weight="700">Map</text><text x="492" y="258" text-anchor="middle" fill="#94a3b8" font-size="13">fuzzy schema</text>
+    <text x="682" y="232" text-anchor="middle" font-weight="700">Clean</text><text x="682" y="258" text-anchor="middle" fill="#94a3b8" font-size="13">10+ stages</text>
+    <text x="885" y="122" text-anchor="middle" font-weight="700">Directus</text><text x="885" y="148" text-anchor="middle" fill="#94a3b8" font-size="13">source of truth</text>
+    <text x="885" y="342" text-anchor="middle" font-weight="700">Qdrant</text><text x="885" y="368" text-anchor="middle" fill="#94a3b8" font-size="13">vector index</text>
+    <text x="1088" y="122" text-anchor="middle" font-weight="700">Dashboard</text><text x="1088" y="148" text-anchor="middle" fill="#94a3b8" font-size="13">AI KPIs</text>
+    <text x="1088" y="342" text-anchor="middle" font-weight="700">RAG Agent</text><text x="1088" y="368" text-anchor="middle" fill="#94a3b8" font-size="13">assistant</text>
+  </g>
+  <g stroke="#818cf8" stroke-width="3" fill="none" marker-end="url(#arrow)"><path d="M185 240 H230"/><path d="M375 240 H420"/><path d="M565 240 H610"/><path d="M755 225 C790 180 795 130 805 130"/><path d="M755 255 C790 300 795 350 805 350"/><path d="M965 130 H1010"/><path d="M965 350 H1010"/></g>
+  <text x="600" y="470" text-anchor="middle" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="16">The hard part is not uploading files; it is preserving semantics while syncing relational and vector state.</text>
+</svg>

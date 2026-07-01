@@ -10,6 +10,12 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://ikniz.id.vn/videos/</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://ikniz.id.vn/b2b-terms.html</loc>
     <lastmod>2026-05-17</lastmod>
     <changefreq>monthly</changefreq>
@@ -17,7 +23,7 @@
   </url>
   <url>
     <loc>https://ikniz.id.vn/cases/skillforge.html</loc>
-    <lastmod>2026-05-17</lastmod>
+    <lastmod>2026-07-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

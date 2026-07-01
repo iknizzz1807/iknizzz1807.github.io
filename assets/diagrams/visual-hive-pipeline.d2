@@ -1,0 +1,19 @@
+direction: right
+
+upload: "Operator Upload\nCSV / XLSX / Docs"
+parser: "Parser Layer\nPapaParse + XLSX"
+mapper: "Schema Mapper\nFuzzy Matching"
+cleaner: "Cleaning Stages\nNormalize + Validate"
+directus: "Directus\nOperational CMS"
+qdrant: "Qdrant\nVector Index"
+assistant: "AI Conference Assistant\nRAG Retrieval"
+dashboard: "Analytics Dashboard\nLayerChart / D3"
+
+upload -> parser
+parser -> mapper
+mapper -> cleaner
+cleaner -> directus: relational mutations
+cleaner -> qdrant: embeddings + payloads
+qdrant -> assistant: semantic context
+directus -> dashboard: event/user/entity data
+assistant -> dashboard: KPI + pain points

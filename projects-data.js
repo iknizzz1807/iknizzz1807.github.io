@@ -15,7 +15,7 @@ const caseStudies = [
     links: { code: "https://github.com/iknizzz1807/SkillForge" }
   },
   {
-    slug: "data-ingestion",
+    slug: "data-ingestion-visual-hive",
     title: "Enterprise Data Ingestion (Visual Hive UK)",
     type: "AI / Data Pipeline Infrastructure",
     tagline: "Automated unstructured document ingestion and RAG-ready vector indexing.",

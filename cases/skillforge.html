@@ -3,108 +3,321 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Case Study: How I architected a hybrid Go & Python microservices backend to power real-time WebSocket collaboration and heavy NLP skill-matching for SkillForge without blocking the event loop." />
-    <meta name="keywords" content="microservices, Go, Python, WebSocket, NLP, sentence transformers, SvelteKit, MongoDB, AI matching, real-time collaboration" />
+    <meta name="description" content="SkillForge engineering deep-dive: a SvelteKit, Go, MongoDB, WebSocket, and Python AI matching platform connecting students with enterprise projects." />
+    <meta name="keywords" content="SkillForge, Go, SvelteKit, WebSocket, Python, FastAPI, SentenceTransformers, MongoDB, Clean Architecture, AI matching" />
     <meta name="author" content="Thong Nguyen" />
     <link rel="canonical" href="https://ikniz.id.vn/cases/skillforge.html" />
-    <meta property="og:title" content="SkillForge: Microservices Architecture Case Study | Thong Nguyen" />
-    <meta property="og:description" content="Decoupling heavy AI computations from high-concurrency I/O using Go and Python microservices for real-time WebSocket collaboration." />
+    <meta property="og:title" content="SkillForge Engineering Deep-Dive | Thong Nguyen" />
+    <meta property="og:description" content="How I separated realtime collaboration from CPU-heavy semantic matching using Go, SvelteKit, MongoDB, and a Python AI service." />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://ikniz.id.vn/cases/skillforge.html" />
     <meta property="og:image" content="https://ikniz.id.vn/favicon.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:site_name" content="Thong Nguyen Portfolio" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="SkillForge: Microservices Architecture Case Study" />
-    <meta name="twitter:description" content="Decoupling heavy AI computations from high-concurrency I/O using Go and Python microservices." />
-    <meta name="twitter:image" content="https://ikniz.id.vn/favicon.jpg" />
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "TechArticle",
-      "headline": "SkillForge: Decoupling Heavy AI Computations from High-Concurrency I/O",
-      "description": "How I architected a hybrid Go & Python backend to power real-time WebSocket collaboration and heavy NLP skill-matching without blocking the event loop.",
-      "author": {
-        "@type": "Person",
-        "name": "Thong Nguyen",
-        "url": "https://ikniz.id.vn"
-      },
-      "url": "https://ikniz.id.vn/cases/skillforge.html",
-      "keywords": "microservices, Go, Python, WebSocket, NLP, SvelteKit, MongoDB"
-    }
-    </script>
-    <title>SkillForge Architecture | B2B Case Study</title>
+    <title>SkillForge Engineering Deep-Dive | Thong Nguyen</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-    <link rel="dns-prefetch" href="https://calendly.com" />
     <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../case.css" />
   </head>
-  <body class="case-study-page">
+  <body>
     <div class="bg-gradient-top"></div>
     <nav class="nav">
       <div class="nav-inner">
-        <a href="../index.html" class="nav-logo" style="color:var(--text-dim); font-size:0.9rem;">&larr; Back to Portfolio</a>
-        <a href="https://calendly.com/mythonggg/10-min-sync-with-startups-1" target="_blank" class="nav-link-cta">Let's Talk Architecture</a>
+        <a href="../index.html" class="nav-logo">&larr; Portfolio</a>
+        <div class="nav-links">
+          <a href="../index.html#work" class="nav-link">Case Studies</a>
+          <a href="../videos/" class="nav-link">Videos</a>
+          <a href="https://calendly.com/mythonggg/10-min-sync-with-startups-1" target="_blank" rel="noopener noreferrer" class="nav-link nav-link-cta">Let's Talk Architecture</a>
+        </div>
       </div>
     </nav>
 
-    <main class="cs-article">
-      <header class="cs-hero reveal">
-        <span class="b2b-case-type">Microservices Architecture</span>
-        <h1 class="cs-title">SkillForge: Decoupling Heavy AI Computations from High-Concurrency I/O</h1>
-        <p class="cs-subtitle">How I architected a hybrid Go & Python backend to power real-time WebSocket collaboration and heavy NLP skill-matching without blocking the event loop.</p>
-        <div class="cs-meta">
-          <div class="cs-meta-item">
-            <span class="cs-meta-label">Core Technologies</span>
-            <span class="cs-meta-value">Go, Python, SvelteKit, MongoDB, WebSockets, Sentence Transformers</span>
-          </div>
-          <div class="cs-meta-item">
-            <span class="cs-meta-label">Infrastructure</span>
-            <span class="cs-meta-value">Docker, Microservices</span>
-          </div>
+    <main class="case-showcase">
+      <header class="case-showcase__hero reveal">
+        <div>
+          <span class="case-kicker">Engineering Case Study / AI Matching Platform</span>
+          <h1>SkillForge: realtime collaboration meets semantic project matching.</h1>
+          <p class="case-lead">SkillForge is a full-stack platform that connects students with enterprise projects. The interesting engineering problem was not simply building CRUD screens; it was keeping chat, Kanban updates, notifications, and user interaction responsive while a separate AI service evaluates high-dimensional semantic similarity between student profiles and project requirements.</p>
+          <nav class="case-toc" aria-label="Case study table of contents">
+            <a href="#problem">Problem</a><a href="#decisions">Decisions</a><a href="#architecture">Architecture</a><a href="#backend">Backend</a><a href="#matching">AI Matching</a><a href="#realtime">Realtime</a><a href="#security">Security</a><a href="#observability">Observability</a><a href="#demo">Demo</a>
+          </nav>
         </div>
+        <aside class="case-panel">
+          <h2>Project Facts</h2>
+          <div class="case-facts">
+            <div class="case-fact"><span>Role</span><strong>Full-stack architect, backend engineer, AI integration engineer</strong></div>
+            <div class="case-fact"><span>Timeline</span><strong>March 2025 - May 2025</strong></div>
+            <div class="case-fact"><span>Core Stack</span><strong>SvelteKit, Go Gin, MongoDB, Gorilla WebSocket, Python FastAPI, SentenceTransformers</strong></div>
+            <div class="case-fact"><span>Repository</span><strong><a class="b2b-link-btn" href="https://github.com/iknizzz1807/SkillForge" target="_blank" rel="noopener noreferrer">Open source code</a></strong></div>
+          </div>
+        </aside>
       </header>
 
-      <div class="cs-content reveal">
-        <h2>The Architectural Dilemma</h2>
-        <p>SkillForge was envisioned as a real-time collaborative platform connecting students with enterprise projects. The core value proposition rested on two fundamentally opposing technical requirements:</p>
-        <ul>
-          <li><strong>Requirement A (I/O Bound):</strong> A real-time, low-latency collaboration suite including live Kanban boards, group messaging, and instant notifications.</li>
-          <li><strong>Requirement B (CPU Bound):</strong> An intelligent AI-matching engine that evaluates semantic similarities between student resumes and project descriptions using multi-dimensional vector math.</li>
-        </ul>
-        <p>Attempting to build this inside a traditional monolithic Node.js or Python application would have been a disaster. The heavy Natural Language Processing (NLP) computations would inevitably block the main thread, causing chat messages to lag and WebSocket connections to drop during peak traffic.</p>
-
-        <h2>The Microservices Solution: Go meets Python</h2>
-        <p>To guarantee absolute performance, I split the backend into two decoupled services, assigning the right language to the right workload.</p>
-        
-        <h3>1. The Go Gateway (I/O & Concurrency)</h3>
-        <p>I built the primary backend using <strong>Go (Golang)</strong> with <code>gorilla/websocket</code>. Go’s lightweight goroutines make it the undisputed champion of managing thousands of concurrent WebSocket connections. The Go service handled all room-based chat routing, Kanban state synchronizations, user authentication, and interactions with the MongoDB cluster. The result was a completely unblocked, highly responsive real-time layer.</p>
-
-        <h3>2. The Python AI Engine (Computation)</h3>
-        <p>I isolated the matching logic into an internal Python microservice. Using the <code>all-MiniLM-L6-v2</code> sentence transformer, this service mapped user skills and project requirements into 384-dimensional vectors. When a new project was posted, the Go backend fired an asynchronous RPC call to the Python service. Python crunched the matrix multiplications to find the optimal candidates and returned the matches to Go, which then pushed the notification to the frontend in real-time.</p>
-
-        <h3>3. The SvelteKit Frontend</h3>
-        <p>To complement the high-speed backend, I chose <strong>SvelteKit</strong> over React. By avoiding a Virtual DOM, Svelte compiled down to highly optimized vanilla JavaScript, ensuring that the heavy flow of WebSocket data didn't cause UI stuttering or memory leaks in the browser.</p>
-
-        <h2>Business Impact</h2>
-        <div class="cs-impact-box">
-          <p>By treating the architecture as an engineering problem rather than a framework preference, the platform achieved <strong>sub-50ms latency</strong> for real-time collaboration, while safely outsourcing heavy 1B+ parameter NLP model inferences to a dedicated worker. The system is inherently scalable: if the AI engine bottlenecks, we simply spin up more Python containers without affecting the live user chat experience.</p>
+      <section id="problem" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">01 / Problem</span>
+          <div>
+            <h2>The platform had two workloads that should never block each other.</h2>
+            <p>Marketplaces look simple from the outside: users sign up, companies post projects, students apply, and both sides collaborate. Under the hood, SkillForge had two fundamentally different execution profiles living in the same product surface.</p>
+          </div>
         </div>
-      </div>
-      
-      <div class="cs-cta reveal">
-        <h3>Is your monolith cracking under the weight of AI computations?</h3>
-        <p>I specialize in decoupling heavy AI workloads from critical web APIs using Go and Python.</p>
-        <a href="https://calendly.com/mythonggg/10-min-sync-with-startups-1" target="_blank" class="btn btn-primary">Send me your architecture diagram</a>
+        <div class="case-grid-3">
+          <article class="case-card"><h3>Realtime Collaboration</h3><p>Chat messages, Kanban board movements, team notifications, and application status updates need low-latency fanout. If a student drags a card or sends a message, every connected collaborator should see it immediately.</p></article>
+          <article class="case-card"><h3>Semantic Matching</h3><p>AI matching requires profile normalization, project requirement extraction, embedding generation, cosine similarity, ranking, and notification generation. This is CPU-heavy and should not live in the same hot path as WebSocket traffic.</p></article>
+          <article class="case-card"><h3>Maintainability</h3><p>The system needed to stay understandable as features grew: authentication, projects, users, chat, badges, XP, matching, notifications, and collaboration. A messy monolith would make every new feature risky.</p></article>
+        </div>
+      </section>
+
+      <section id="decisions" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">02 / Decision Log</span>
+          <div>
+            <h2>Every major technical choice protected latency, model flexibility, or codebase boundaries.</h2>
+            <p>A strong engineering case study should not just list technologies. It should explain why each technology exists, what it replaces, and what trade-off it introduces.</p>
+          </div>
+        </div>
+        <table class="decision-table">
+          <thead><tr><th>Decision</th><th>Why</th><th>Rejected Alternative</th><th>Trade-off</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Go backend</strong></td><td>Long-lived WebSocket connections and concurrent API traffic benefit from goroutines and predictable runtime behavior.</td><td>Single Python backend for app + AI.</td><td>Go is less convenient for ML libraries, so model work moves to Python.</td></tr>
+            <tr><td><strong>Python AI service</strong></td><td>SentenceTransformers, embedding experiments, and ranking logic are faster to iterate in Python.</td><td>Embedding logic inside Go.</td><td>Requires a clear internal API contract.</td></tr>
+            <tr><td><strong>SvelteKit frontend</strong></td><td>Realtime UI updates stay simple with compiler-driven reactivity and less client runtime weight.</td><td>React SPA with heavy global state.</td><td>Smaller ecosystem, but lower complexity for this app.</td></tr>
+            <tr><td><strong>MongoDB documents</strong></td><td>Profiles, projects, messages, notifications, and gamification state evolve quickly in an MVP.</td><td>Rigid relational model first.</td><td>Requires discipline around indexes and document boundaries.</td></tr>
+            <tr><td><strong>WebSocket event model</strong></td><td>Collaboration should be pushed by the server, not rediscovered by polling.</td><td>Polling-based refresh loop.</td><td>Requires reconnect, room validation, and event idempotency.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">03 / Constraints</span>
+          <div><h2>The solution had to be fast enough for realtime UX and flexible enough for AI experiments.</h2></div>
+        </div>
+        <div class="case-grid-2">
+          <article class="case-card"><h3>Product Constraints</h3><ul><li>Students and companies needed a single interface for discovery, matching, chat, and project tracking.</li><li>The app needed a responsive SvelteKit UI that could react to WebSocket events without feeling like a slow dashboard.</li><li>Gamification logic had to be visible but not dominate the core marketplace workflow.</li></ul></article>
+          <article class="case-card"><h3>Engineering Constraints</h3><ul><li>Realtime connections must not be starved by AI inference or vector math.</li><li>Matching logic should be replaceable as the embedding model improves.</li><li>Domain logic should not be trapped inside HTTP handlers, database calls, or frontend components.</li></ul></article>
+        </div>
+      </section>
+
+      <section id="architecture" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">04 / Architecture</span>
+          <div>
+            <h2>I split the system by workload, not by hype.</h2>
+            <p>The Go service owns the realtime application core: HTTP APIs, authentication, project workflows, MongoDB repositories, chat routing, Kanban events, and notifications. The Python service owns semantic matching because the AI ecosystem, embedding libraries, and model iteration speed are better there.</p>
+          </div>
+        </div>
+        <figure class="case-diagram">
+          <img src="../assets/diagrams/skillforge-architecture.svg" alt="SkillForge architecture diagram showing SvelteKit clients, Go gateway, WebSocket hub, MongoDB, and Python AI service" loading="lazy" />
+          <figcaption>D2 source: assets/diagrams/skillforge-architecture.d2. The diagram separates I/O-bound realtime work from CPU-bound AI matching.</figcaption>
+        </figure>
+        <div class="diagram-grid" style="margin-top: 1rem;">
+          <figure class="case-diagram">
+            <img src="../assets/diagrams/skillforge-system-context.svg" alt="SkillForge system context diagram" loading="lazy" />
+            <figcaption>System context: students, companies, admins, and the AI worker cross different trust and workflow boundaries.</figcaption>
+          </figure>
+          <figure class="case-diagram">
+            <img src="../assets/diagrams/skillforge-runtime-deployment.svg" alt="SkillForge runtime deployment diagram" loading="lazy" />
+            <figcaption>Runtime deployment: frontend, Go backend, Python AI service, and MongoDB are separate units in the Docker network.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="backend" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">05 / Backend</span>
+          <div><h2>Go handled the hot path with Clean Architecture boundaries.</h2></div>
+        </div>
+        <div class="case-copy">
+          <p>The Go backend follows a Handler-Service-Repository shape. Handlers translate transport concerns into application calls. Services own business rules such as project publication, application transitions, XP awarding, and notification creation. Repositories isolate MongoDB persistence so feature logic does not leak query details everywhere.</p>
+          <p>This structure matters because SkillForge is not a single-flow app. A project update can affect the project document, emit a WebSocket event, create a notification, update gamification state, and trigger future matching behavior. Keeping these responsibilities explicit makes the code easier to test and safer to extend.</p>
+        </div>
+        <div class="diagram-grid" style="margin: 1.5rem 0;">
+          <figure class="case-diagram">
+            <img src="../assets/diagrams/skillforge-clean-architecture.svg" alt="SkillForge Go backend clean architecture diagram" loading="lazy" />
+            <figcaption>Clean Architecture boundary: HTTP/WebSocket handlers do not own domain rules; repositories do not leak storage concerns upward.</figcaption>
+          </figure>
+          <figure class="case-diagram">
+            <img src="../assets/diagrams/skillforge-data-model.svg" alt="SkillForge core data model diagram" loading="lazy" />
+            <figcaption>Core data model: marketplace state, collaboration state, and gamification state are related but not collapsed into one blob.</figcaption>
+          </figure>
+        </div>
+        <ol class="case-flow">
+          <li><strong>Company publishes a project.</strong> The HTTP handler validates input and calls the project service.</li>
+          <li><strong>Domain service persists the project.</strong> Repository code writes normalized project data to MongoDB.</li>
+          <li><strong>Matching request is prepared.</strong> Required skills, description, and metadata become an AI service payload.</li>
+          <li><strong>Python service ranks candidates.</strong> Student profiles and project requirements are embedded and compared semantically.</li>
+          <li><strong>Go fanouts the result.</strong> Matched students receive notifications through the existing realtime infrastructure.</li>
+        </ol>
+        <figure class="case-diagram" style="margin-top: 1.5rem;">
+          <img src="../assets/diagrams/skillforge-sequence-project-match.svg" alt="SkillForge sequence diagram from project creation to AI match notification" loading="lazy" />
+          <figcaption>Sequence diagram: the AI service participates in the workflow, but Go remains the system-of-record and notification coordinator.</figcaption>
+        </figure>
+      </section>
+
+      <section id="matching" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">06 / AI Matching</span>
+          <div><h2>The matching engine treats profiles and projects as semantic objects, not keyword bags.</h2></div>
+        </div>
+        <div class="case-grid-3">
+          <article class="case-card"><h3>Normalization</h3><p>Profiles and project descriptions are reduced into comparable skill and requirement representations. This avoids brittle string matching where “backend API”, “server-side development”, and “REST service” look unrelated.</p></article>
+          <article class="case-card"><h3>Embedding</h3><p>The Python service uses SentenceTransformers to map text into vector space. Each candidate can be compared against a project through cosine similarity instead of exact keyword overlap.</p></article>
+          <article class="case-card"><h3>Ranking</h3><p>Matching results are returned as ranked candidates. The Go layer decides when to notify, how to store the result, and how to expose it in the UI.</p></article>
+        </div>
+        <figure class="case-diagram" style="margin: 1.5rem 0;">
+          <img src="../assets/diagrams/skillforge-ai-matching-pipeline.svg" alt="SkillForge AI matching pipeline diagram" loading="lazy" />
+          <figcaption>AI pipeline: profile and project text are normalized, embedded, ranked, then converted back into product-facing notifications and explanations.</figcaption>
+        </figure>
+        <div class="case-grid-2" style="margin-bottom: 1.5rem;">
+          <article class="case-card"><h3>Why Not Keyword Matching?</h3><p>Keyword search fails when candidates and companies describe the same ability differently. “REST API”, “backend service”, “server-side integration”, and “distributed system” can point to overlapping competence but have weak token overlap.</p></article>
+          <article class="case-card"><h3>Why Not Let an LLM Decide Everything?</h3><p>An LLM-only matcher is slower, harder to evaluate, and less deterministic. Embeddings provide a measurable retrieval/ranking layer; an LLM can explain results later if needed.</p></article>
+        </div>
+        <code class="tech-equation">match_score = 0.55 * cosine(profile_embedding, project_embedding)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ 0.25 * required_skill_overlap<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ 0.10 * experience_level_fit<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ 0.10 * collaboration_signal</code>
+        <p class="case-note">The important trade-off: Python is slower for high-concurrency socket management, but much better for AI model iteration. Go is excellent for concurrent network services, but the ML ecosystem is less ergonomic. Splitting the two keeps both sides honest.</p>
+      </section>
+
+      <section id="realtime" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">07 / Realtime UX</span>
+          <div><h2>WebSockets turned collaboration into a live system instead of a refresh loop.</h2></div>
+        </div>
+        <div class="case-copy">
+          <p>The collaboration layer uses Gorilla WebSocket to keep rooms alive for chat, Kanban updates, and notifications. Instead of forcing the frontend to poll, the server becomes the source of event truth. A task movement becomes an event. A new message becomes an event. A match result becomes an event.</p>
+          <p>On the frontend, SvelteKit keeps the UI reactive without needing heavy client-side state machinery. The browser subscribes to socket events and updates the exact interface region affected by the event: chat list, board column, notification tray, or project status.</p>
+        </div>
+        <figure class="case-diagram" style="margin-top: 1.5rem;">
+          <img src="../assets/diagrams/skillforge-websocket-lifecycle.svg" alt="SkillForge WebSocket lifecycle diagram" loading="lazy" />
+          <figcaption>Realtime lifecycle: user intent becomes a validated, persisted, room-scoped event before the UI reconciles state.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">08 / Failure Modes</span>
+          <div><h2>The system is designed around failure isolation, not optimistic assumptions.</h2><p>Realtime products fail in boring ways: sockets disconnect, mobile tabs sleep, users retry actions, AI calls slow down, and duplicate events appear. The architecture is more convincing when it names those failures explicitly.</p></div>
+        </div>
+        <figure class="case-diagram">
+          <img src="../assets/diagrams/skillforge-failure-modes.svg" alt="SkillForge failure mode analysis diagram" loading="lazy" />
+          <figcaption>Failure mode analysis: AI slowness, socket disconnects, and duplicate events require different containment strategies.</figcaption>
+        </figure>
+      </section>
+
+      <section id="security" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">09 / Security</span>
+          <div><h2>Realtime systems have a different attack surface from normal CRUD apps.</h2><p>HTTP authorization is not enough. A collaborative product must validate who can join a room, who can emit an event, which entity the event mutates, and whether the event is replayed or spammed.</p></div>
+        </div>
+        <figure class="case-diagram">
+          <img src="../assets/diagrams/skillforge-threat-model.svg" alt="SkillForge threat model diagram" loading="lazy" />
+          <figcaption>Threat model: room membership, IDOR, prompt/profile abuse, and notification fanout require explicit validation boundaries.</figcaption>
+        </figure>
+        <div class="case-grid-3" style="margin-top: 1rem;">
+          <article class="case-card"><h3>Room Authorization</h3><p>A socket connection is not trusted just because it exists. Every room join should be checked against project membership or ownership.</p></article>
+          <article class="case-card"><h3>Payload Validation</h3><p>Realtime payloads should be schema-validated like HTTP bodies. Invalid event shapes should fail before reaching domain logic.</p></article>
+          <article class="case-card"><h3>Rate Limits</h3><p>Notification and chat fanout can become an abuse vector. Event frequency should be bounded per actor and per room.</p></article>
+        </div>
+      </section>
+
+      <section id="observability" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">10 / Observability</span>
+          <div><h2>Production readiness means knowing what to measure before users complain.</h2><p>If this were deployed for a serious customer, the dashboard should not only show CPU and memory. It should answer product-specific questions: are matches accepted, are socket events lost, are AI requests slow, and which workflow creates the most errors?</p></div>
+        </div>
+        <figure class="case-diagram">
+          <img src="../assets/diagrams/skillforge-observability.svg" alt="SkillForge observability plan diagram" loading="lazy" />
+          <figcaption>Observability plan: API latency, socket health, AI latency, match quality, DB pressure, event loss, and error budget.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">11 / API Contract</span>
+          <div><h2>The Go-to-Python boundary should be boring, typed, and easy to replace.</h2><p>The AI service is powerful, but the contract should stay small. Go sends normalized requirements and candidate summaries. Python returns ranked candidates and explanations. The core product never depends on Python owning marketplace state.</p></div>
+        </div>
+        <div class="code-card"><pre><code>POST /internal/match-project
+{
+  "project_id": "p_123",
+  "requirements_text": "Realtime dashboard with backend APIs and MongoDB experience",
+  "required_skills": ["Go", "WebSocket", "MongoDB", "SvelteKit"],
+  "candidates": [
+    {
+      "student_id": "u_456",
+      "profile_text": "Built chat apps, REST APIs, MongoDB dashboards",
+      "skills": ["Go", "MongoDB", "TypeScript"]
+    }
+  ]
+}
+
+200 OK
+{
+  "project_id": "p_123",
+  "matches": [
+    {
+      "student_id": "u_456",
+      "score": 0.87,
+      "reason": "Strong backend and realtime overlap; partial SvelteKit fit."
+    }
+  ]
+}</code></pre></div>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">12 / Quality</span>
+          <div><h2>Reliability came from isolating failure domains.</h2></div>
+        </div>
+        <div class="case-grid-3">
+          <article class="case-card"><h3>Realtime Reliability</h3><p>If AI matching is slow, chat and Kanban should still work. The Go service keeps user interaction responsive while AI work happens out-of-band.</p></article>
+          <article class="case-card"><h3>Model Replaceability</h3><p>The matching service can change embedding models or ranking logic without rewriting the core application backend.</p></article>
+          <article class="case-card"><h3>Operational Clarity</h3><p>Docker Compose defines frontend, backend, AI service, and MongoDB as separate runtime units, making the system easier to run and reason about.</p></article>
+        </div>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">13 / Demo Gallery</span>
+          <div><h2>Screenshots should prove the product flow, not just decorate the page.</h2><p>These placeholders are intentionally structured. Replace them with Playwright captures from the real SkillForge app: matching screen, realtime chat, Kanban board, and project dashboard.</p></div>
+        </div>
+        <div class="case-gallery">
+          <figure class="case-shot"><img src="../images/skillforge.png" alt="SkillForge screenshot" loading="lazy" /><figcaption>Existing SkillForge visual asset.</figcaption></figure>
+          <figure class="case-shot"><img src="../assets/screenshots/placeholder.svg" alt="Placeholder for AI matching result screenshot" loading="lazy" /><figcaption>TODO: AI matching result screen.</figcaption></figure>
+          <figure class="case-shot"><img src="../assets/screenshots/placeholder.svg" alt="Placeholder for realtime collaboration screenshot" loading="lazy" /><figcaption>TODO: chat + Kanban realtime demo.</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">14 / Video</span>
+          <div><h2>The ideal demo is a 90-second walkthrough from company post to student match.</h2></div>
+        </div>
+        <div class="video-shell">
+          <div class="video-placeholder"><strong>SkillForge demo video slot</strong><span>Record: create project → AI ranks candidates → student receives realtime notification → team chats and moves Kanban cards.</span></div>
+        </div>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">15 / Lessons</span>
+          <div><h2>The main lesson: architecture should follow pressure, not fashion.</h2></div>
+        </div>
+        <div class="case-grid-2">
+          <article class="case-card"><h3>What Worked</h3><p>Separating Go and Python made the system easier to reason about. Go kept networked collaboration responsive; Python kept AI matching flexible. SvelteKit made realtime UI updates straightforward without overcomplicating the frontend.</p></article>
+          <article class="case-card"><h3>What I Would Improve</h3><p>The next iteration should add richer observability around match quality, WebSocket room health, and notification delivery. I would also add an admin-facing evaluation panel to compare embedding/ranking versions over time.</p></article>
+        </div>
+      </section>
+
+      <section class="cs-cta reveal">
+        <h3>Need a marketplace, agent workflow, or realtime AI product designed from first principles?</h3>
+        <p>I build the architecture, backend, AI service boundary, and demoable product flow.</p>
+        <a href="https://calendly.com/mythonggg/10-min-sync-with-startups-1" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Send me your architecture problem</a>
         <a href="mailto:mythonggg@gmail.com?subject=Company%20Name%20%7C%20Thong%20intro%20-%20Fullstack%20AI%20Engineer" class="btn btn-ghost" style="margin-left: 1rem;">mythonggg@gmail.com</a>
-      </div>
+      </section>
     </main>
 
-    <footer class="footer" style="border-top:none; padding-bottom: 4rem;">
-      <p>&copy; 2026 Thong Nguyen. Independent Full-Stack AI Engineer.</p>
-    </footer>
+    <footer class="footer"><p>&copy; 2026 Thong Nguyen. Independent Full-Stack AI Engineer.</p></footer>
     <script src="../script.js"></script>
   </body>
 </html>

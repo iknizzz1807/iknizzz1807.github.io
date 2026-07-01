@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">SkillForge high-level architecture</title>
+  <desc id="desc">SvelteKit clients communicate with a Go gateway, WebSocket realtime hub, MongoDB, and a Python AI matching service.</desc>
+  <rect width="1200" height="680" fill="#050713"/>
+  <defs>
+    <filter id="glow"><feGaussianBlur stdDeviation="6" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#818cf8"/></marker>
+  </defs>
+  <g font-family="Inter, Arial, sans-serif" font-size="20" fill="#f8fafc">
+    <rect x="55" y="110" width="220" height="110" rx="18" fill="#0f111a" stroke="#6366f1" stroke-opacity=".5"/>
+    <text x="165" y="155" text-anchor="middle" font-weight="700">Student UI</text><text x="165" y="186" text-anchor="middle" fill="#94a3b8" font-size="15">SvelteKit</text>
+    <rect x="55" y="360" width="220" height="110" rx="18" fill="#0f111a" stroke="#6366f1" stroke-opacity=".5"/>
+    <text x="165" y="405" text-anchor="middle" font-weight="700">Company UI</text><text x="165" y="436" text-anchor="middle" fill="#94a3b8" font-size="15">SvelteKit</text>
+    <rect x="420" y="190" width="260" height="150" rx="22" fill="#111426" stroke="#818cf8" filter="url(#glow)"/>
+    <text x="550" y="245" text-anchor="middle" font-weight="800">Go Gateway</text><text x="550" y="278" text-anchor="middle" fill="#94a3b8" font-size="15">Gin + Clean Architecture</text>
+    <rect x="420" y="405" width="260" height="115" rx="18" fill="#0f111a" stroke="#6366f1" stroke-opacity=".45"/>
+    <text x="550" y="452" text-anchor="middle" font-weight="700">Realtime Hub</text><text x="550" y="483" text-anchor="middle" fill="#94a3b8" font-size="15">Gorilla WebSocket</text>
+    <rect x="850" y="105" width="260" height="115" rx="18" fill="#0f111a" stroke="#6366f1" stroke-opacity=".45"/>
+    <text x="980" y="152" text-anchor="middle" font-weight="700">MongoDB</text><text x="980" y="183" text-anchor="middle" fill="#94a3b8" font-size="15">users, projects, messages</text>
+    <rect x="850" y="330" width="260" height="145" rx="22" fill="#111426" stroke="#10b981" stroke-opacity=".8"/>
+    <text x="980" y="386" text-anchor="middle" font-weight="800">Python AI Service</text><text x="980" y="419" text-anchor="middle" fill="#94a3b8" font-size="15">FastAPI + embeddings</text>
+  </g>
+  <g stroke="#818cf8" stroke-width="3" fill="none" marker-end="url(#arrow)" opacity=".9">
+    <path d="M275 165 C330 165 360 245 420 245"/>
+    <path d="M275 415 C335 415 360 290 420 290"/>
+    <path d="M275 205 C330 285 355 430 420 455"/>
+    <path d="M680 245 C750 220 780 165 850 165"/>
+    <path d="M680 300 C755 330 775 402 850 402"/>
+    <path d="M850 430 C760 515 690 515 680 475"/>
+  </g>
+  <text x="600" y="620" text-anchor="middle" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="18">I/O-bound realtime work stays in Go; CPU-bound semantic matching is isolated in Python.</text>
+</svg>

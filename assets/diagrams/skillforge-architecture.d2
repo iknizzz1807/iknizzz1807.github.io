@@ -1,0 +1,21 @@
+direction: right
+
+student: "Student Browser\nSvelteKit UI"
+company: "Company Browser\nSvelteKit UI"
+gateway: "Go API Gateway\nGin + Clean Architecture"
+ws: "Realtime Hub\nGorilla WebSocket"
+mongo: "MongoDB\nUsers, Projects, Tasks, Messages"
+ai: "Python AI Service\nFastAPI + SentenceTransformers"
+queue: "Async Match Request"
+notify: "Notification Fanout"
+
+student -> gateway: REST auth, project browsing
+company -> gateway: publish project, manage team
+student <-> ws: chat, kanban updates, notifications
+company <-> ws: live collaboration
+gateway -> mongo: repository layer
+gateway -> queue: new project event
+queue -> ai: profile + requirement vectors
+ai -> gateway: ranked candidate matches
+gateway -> notify: push match result
+notify -> ws: realtime notification
