@@ -191,7 +191,7 @@
   counter-increment: step;
   list-style: none;
   display: grid;
-  grid-template-columns: 3rem minmax(0, 1fr);
+  grid-template-columns: 3.5rem minmax(0, 1fr);
   gap: 1rem;
   align-items: start;
   background: rgba(255, 255, 255, 0.025);
@@ -201,11 +201,27 @@
   color: var(--text-dim);
 }
 
+.case-flow li {
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.case-flow li > span {
+  min-width: 0;
+  color: var(--text-dim);
+  line-height: 1.65;
+}
+
+.case-flow li strong {
+  color: var(--text);
+}
+
 .case-flow li::before {
   content: counter(step, decimal-leading-zero);
   color: var(--accent-light);
   font-family: var(--mono);
   font-weight: 600;
+  grid-row: 1 / span 2;
 }
 
 .case-gallery {
