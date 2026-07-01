@@ -3,130 +3,275 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Data Ingestion Pipeline for Visual Hive - Automated document ingestion, validation, and RAG-ready vector indexing for a UK startup." />
-    <meta name="description" content="Data Ingestion Pipeline for Visual Hive - Automated document ingestion, validation, and RAG-ready vector indexing for a UK startup. CSV, XLSX, PDF processing with Qdrant and Directus." />
-    <meta name="keywords" content="data ingestion, RAG pipeline, Qdrant, Next.js, Prisma, Directus, Python, FastAPI, vector search, document parsing, Visual Hive" />
+    <meta name="description" content="Visual Hive Data Ingestion engineering deep-dive: SvelteKit pipeline for CSV/XLSX extraction, smart schema mapping, Directus mutation, and Qdrant vector synchronization." />
+    <meta name="keywords" content="Visual Hive, data ingestion, SvelteKit, Directus, Qdrant, CSV, XLSX, ETL, vector sync, schema mapping, data cleaning" />
     <meta name="author" content="Thong Nguyen" />
     <link rel="canonical" href="https://ikniz.id.vn/cases/data-ingestion-visual-hive.html" />
-    <meta property="og:title" content="Data Ingestion Pipeline for Visual Hive | Case Study | Thong Nguyen" />
-    <meta property="og:description" content="Built the core data ingestion system that processes, validates, and indexes unstructured business documents for their RAG pipeline." />
+    <meta property="og:title" content="Visual Hive Data Ingestion Engineering Deep-Dive | Thong Nguyen" />
+    <meta property="og:description" content="How I designed a fail-fast ingestion pipeline that turns messy event spreadsheets into trusted Directus data and Qdrant vectors." />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://ikniz.id.vn/cases/data-ingestion-visual-hive.html" />
     <meta property="og:image" content="https://ikniz.id.vn/favicon.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:site_name" content="Thong Nguyen Portfolio" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Data Ingestion Pipeline for Visual Hive | Case Study" />
-    <meta name="twitter:description" content="Automated document ingestion, validation, and RAG-ready vector indexing for a UK startup." />
-    <meta name="twitter:image" content="https://ikniz.id.vn/favicon.jpg" />
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "TechArticle",
-      "headline": "Data Ingestion Pipeline for Visual Hive",
-      "description": "Automated document ingestion, validation, and RAG-ready vector indexing for a UK-based startup handling CSV, XLSX, and PDF documents.",
-      "author": {
-        "@type": "Person",
-        "name": "Thong Nguyen",
-        "url": "https://ikniz.id.vn"
-      },
-      "url": "https://ikniz.id.vn/cases/data-ingestion-visual-hive.html",
-      "keywords": "data ingestion, RAG, Qdrant, Next.js, Prisma, Directus, FastAPI"
-    }
-    </script>
-    <title>Data Ingestion Pipeline | Thong Nguyen</title>
+    <title>Visual Hive Data Ingestion Deep-Dive | Thong Nguyen</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="../favicon.jpg" />
     <link rel="stylesheet" href="../styles.css" />
     <link rel="stylesheet" href="../case.css" />
   </head>
   <body>
+    <div class="bg-gradient-top"></div>
     <nav class="nav">
       <div class="nav-inner">
-        <a href="../index.html" class="nav-logo">&lt;thong /&gt;</a>
+        <a href="../index.html" class="nav-logo">&larr; Portfolio</a>
         <div class="nav-links">
-          <a href="../index.html#services" class="nav-link">Services</a>
-          <a href="../index.html#work" class="nav-link">Work</a>
-          <a href="../index.html#tech" class="nav-link">Tech</a>
-          <a href="../index.html#process" class="nav-link">Process</a>
-          <a href="../index.html#contact" class="nav-link nav-link-cta">Let's Talk</a>
+          <a href="../index.html#work" class="nav-link">Case Studies</a>
+          <a href="../videos/" class="nav-link">Videos</a>
+          <a href="https://calendly.com/mythonggg/10-min-sync-with-startups-1" target="_blank" rel="noopener noreferrer" class="nav-link nav-link-cta">Let's Talk Architecture</a>
         </div>
-        <button class="nav-toggle" aria-label="Toggle menu">
-          <span></span><span></span><span></span>
-        </button>
       </div>
     </nav>
 
-    <article class="case-article">
-      <div class="case-article-inner">
-        <a href="../index.html#work" class="case-back">&larr; Back to all work</a>
+    <main class="case-showcase">
+      <header class="case-showcase__hero reveal">
+        <div>
+          <span class="case-kicker">Engineering Case Study / Data Platform</span>
+          <h1>Visual Hive: turning messy event spreadsheets into trusted AI-ready data.</h1>
+          <p class="case-lead">Visual Hive needed a system that could ingest event data from CSV/XLSX files, map unpredictable client headers to a structured schema, clean and validate records, mutate Directus safely, and keep Qdrant synchronized for semantic search. The hard part was not uploading files. The hard part was preserving trust across every transformation.</p>
+          <nav class="case-toc" aria-label="Case study table of contents">
+            <a href="#problem">Problem</a><a href="#decisions">Decisions</a><a href="#pipeline">Pipeline</a><a href="#directus">Directus</a><a href="#mapping">Mapping</a><a href="#mutation">Mutation</a><a href="#vectors">Vectors</a><a href="#security">Security</a><a href="#demo">Demo</a>
+          </nav>
+        </div>
+        <aside class="case-panel">
+          <h2>Project Facts</h2>
+          <div class="case-facts">
+            <div class="case-fact"><span>Client</span><strong>Visual Hive, UK-based startup</strong></div>
+            <div class="case-fact"><span>Role</span><strong>Software Engineer, ingestion pipeline engineer, AI/data integration engineer</strong></div>
+            <div class="case-fact"><span>Core Stack</span><strong>SvelteKit, TypeScript, Directus, PostgreSQL, Qdrant, Docker, PapaParse, XLSX, Zod</strong></div>
+            <div class="case-fact"><span>Repository Source</span><strong>/home/ikniz/Work/Coding/SvelteKit/data-ingestion</strong></div>
+          </div>
+        </aside>
+      </header>
 
-        <div class="case-hero-section">
-          <span class="cs-card-type">Enterprise Data Platform</span>
-          <h1 class="case-article-title">Data Ingestion Pipeline</h1>
-          <p class="case-article-sub">Contract work for Visual Hive, a UK-based startup. Built the core data ingestion system that processes, validates, and indexes unstructured business documents for their RAG pipeline. Paid via Wise Business under a B2B contract.</p>
-          <div class="case-article-tech">
-            <span>Next.js</span><span>Prisma</span><span>Qdrant</span><span>Directus</span><span>Python</span><span>FastAPI</span>
+      <section id="problem" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">01 / Problem</span>
+          <div>
+            <h2>Enterprise event data is messy before it becomes “AI-ready”.</h2>
+            <p>Event platforms receive data from many operators, exhibitors, speakers, sponsors, and registration systems. The same concept can arrive as “Session Title”, “Event Name”, “Talk”, or “Title”. Dates can be strings, Excel serials, or inconsistent timezone formats. Speaker-session relationships may be embedded as comma-separated names instead of stable IDs.</p>
           </div>
         </div>
-
-        <section class="case-section">
-          <h2 class="case-section-title case-section-title--red">The Problem</h2>
-          <div class="case-section-body">
-            <p>Visual Hive's analytics product needed to answer questions across thousands of heterogeneous business documents — spreadsheets, reports, financial data in CSV and XLSX format, and unstructured text. The existing workflow was entirely manual: someone would open each file, extract relevant data, clean formatting inconsistencies, and manually enter it into the system.</p>
-            <p>At the scale of thousands of documents, this approach was unsustainable. Errors from manual data entry were compounding, and the time-to-insight for new data sets was measured in days rather than minutes. The client needed an automated pipeline that could handle the full lifecycle: ingest, parse, validate, clean, embed, and index — then make it all queryable through their existing RAG infrastructure.</p>
-          </div>
-        </section>
-
-        <section class="case-section">
-          <h2 class="case-section-title case-section-title--blue">The Approach</h2>
-          <div class="case-section-body">
-            <h3>Ingestion Platform (Next.js)</h3>
-            <p>Built a Next.js application serving as the primary ingestion interface. It provides upload workflows for multi-format documents (CSV, XLSX, PDF), tracks processing status for each file, and surfaces validation results to operators. Prisma handles the relational data model — document metadata, processing states, validation flags, and audit logs.</p>
-
-            <h3>Data Processing Pipeline</h3>
-            <p>The core extraction engine handles format-specific parsing (CSV/XLSX cell-level extraction, PDF text extraction), followed by a validation and cleanup stage that normalizes data types, detects anomalies (missing fields, type mismatches, duplicate rows), and flags issues for human review rather than silently discarding data.</p>
-
-            <h3>Vector Indexing & RAG Integration</h3>
-            <p>Cleaned and validated data is chunked, embedded using sentence-transformers, and stored in Qdrant for high-performance vector similarity search. This integrates directly with the client's RAG pipeline, enabling semantic queries across all indexed documents without additional configuration.</p>
-
-            <h3>CMS Integration</h3>
-            <p>Connected to Directus to give the client's content team a headless CMS interface for managing document templates, validation rules, and metadata schemas — without requiring engineering involvement for each new document type.</p>
-
-            <h3>Dual Codebase Strategy</h3>
-            <p>In parallel with the production Next.js system, I built a personal SvelteKit version of the ingestion engine. This served as a rapid prototyping environment where I could test new parsing strategies and validation logic before porting them to the production codebase — significantly accelerating the iteration cycle.</p>
-          </div>
-        </section>
-
-        <section class="case-section">
-          <h2 class="case-section-title case-section-title--green">The Outcome</h2>
-          <div class="case-section-body">
-            <ul class="case-outcome-list">
-              <li><strong>Automated ingestion of multi-format documents</strong> — replaced manual data entry with a self-service upload pipeline that handles CSV, XLSX, and PDF without operator intervention.</li>
-              <li><strong>RAG-ready vector pipeline</strong> — Qdrant-backed semantic search across all indexed documents, enabling the client's analytics product to query ingested data in real-time.</li>
-              <li><strong>Dual codebase strategy</strong> — production Next.js + prototype SvelteKit — accelerated iteration by allowing rapid testing of new extraction logic before production deployment.</li>
-              <li><strong>B2B contract delivered</strong> — scoped, built, and invoiced via Wise Business with immediate IP assignment, serving as a working reference for the engagement model I use with all clients.</li>
-            </ul>
-          </div>
-        </section>
-
-        <div class="case-article-footer">
-          <a href="https://github.com/iknizzz1807/data-ingestion" target="_blank" class="btn btn-ghost">Source Code</a>
+        <div class="case-grid-3">
+          <article class="case-card"><h3>Operational Problem</h3><p>Manual imports are slow and fragile. Operators need to upload hundreds or thousands of records without editing every row by hand.</p></article>
+          <article class="case-card"><h3>Data Problem</h3><p>CSV/XLSX files contain inconsistent headers, encodings, delimiters, empty rows, malformed quotes, missing required fields, and relationship fields that need lookup logic.</p></article>
+          <article class="case-card"><h3>AI Problem</h3><p>The AI assistant is only useful if Directus and Qdrant agree. If relational data and vector payloads drift, semantic retrieval becomes stale or misleading.</p></article>
         </div>
-      </div>
-    </article>
+      </section>
 
-    <footer class="footer">
-      <div class="footer-inner">
-        <p>&copy; 2026 Thong Nguyen. Independent engineer. Built with precision.</p>
-      </div>
-    </footer>
+      <section id="decisions" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">02 / Decision Log</span>
+          <div><h2>The architecture prioritizes correctness before automation.</h2><p>For ingestion systems, being fast is not enough. A fast bad import creates corrupted downstream analytics and hallucinated assistant answers.</p></div>
+        </div>
+        <table class="decision-table">
+          <thead><tr><th>Decision</th><th>Why</th><th>Rejected Alternative</th><th>Trade-off</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Explicit pipeline stages</strong></td><td>Extract, analyze, clean, validate, mutate, and sync are separately inspectable.</td><td>One large upload function.</td><td>More code, but much easier debugging.</td></tr>
+            <tr><td><strong>Fail-fast validation</strong></td><td>Bad CSV/XLSX should be rejected before it mutates Directus.</td><td>Best-effort silent cleanup.</td><td>Operators must fix bad files, but trust is preserved.</td></tr>
+            <tr><td><strong>Directus as source of truth</strong></td><td>Operators need CMS control, relational data, permissions, and auditability.</td><td>Qdrant-first or JSON-only storage.</td><td>Vector sync becomes a second responsibility.</td></tr>
+            <tr><td><strong>Qdrant as derived index</strong></td><td>Semantic search needs payload-filtered vectors, but vectors should be rebuildable from Directus.</td><td>Store only embeddings without relational backing.</td><td>Requires freshness tracking and sync observability.</td></tr>
+            <tr><td><strong>Multi-instance Directus</strong></td><td>Main instance owns users/events; event instances isolate event-specific operational data.</td><td>Single global schema for all events.</td><td>More deployment complexity, better event isolation.</td></tr>
+          </tbody>
+        </table>
+      </section>
 
+      <section id="pipeline" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">03 / Pipeline</span>
+          <div><h2>The ingestion flow is a state machine, not a black box.</h2><p>Each upload becomes an `ingestion_jobs` record with status, progress, current stage, error message, and JSON snapshots for each pipeline state. This makes a failed import diagnosable instead of mysterious.</p></div>
+        </div>
+        <figure class="case-diagram">
+          <img src="../assets/diagrams/visual-hive-pipeline-deep.svg" alt="Visual Hive ingestion pipeline diagram" loading="lazy" />
+          <figcaption>Pipeline: Extract → Analyze → Clean → Validate → Mutate → Sync. Stage state is persisted through ingestion_jobs.</figcaption>
+        </figure>
+        <div class="diagram-grid" style="margin-top: 1rem;">
+          <figure class="case-diagram"><img src="../assets/diagrams/visual-hive-system-context.svg" alt="Visual Hive system context" loading="lazy" /><figcaption>System context: operators upload event data; Directus stores canonical records; Qdrant stores searchable vectors.</figcaption></figure>
+          <figure class="case-diagram"><img src="../assets/diagrams/visual-hive-job-state-machine.svg" alt="Visual Hive ingestion job state machine" loading="lazy" /><figcaption>State machine: PENDING, EXTRACTING, ANALYZING, CLEANING, VALIDATING, MUTATING, SYNCING, COMPLETED, FAILED.</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">04 / File Parsing</span>
+          <div><h2>The parser handles real spreadsheet chaos, not only happy-path CSVs.</h2></div>
+        </div>
+        <div class="case-grid-3">
+          <article class="case-card"><h3>CSV Edge Cases</h3><p>LF/CRLF line endings, comma/semicolon/tab delimiters, UTF-8 files, whitespace-only rows, trailing newlines, and malformed quote rejection.</p></article>
+          <article class="case-card"><h3>XLSX Edge Cases</h3><p>First-sheet parsing, null cell normalization, formula results, header auto-detection, merged-cell behavior, and numeric values converted into strings for validation.</p></article>
+          <article class="case-card"><h3>Fail-Fast Rejection</h3><p>Unmatched quotes, inconsistent column counts, and structurally invalid files are rejected before cleanup or mutation begins.</p></article>
+        </div>
+      </section>
+
+      <section id="directus" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">05 / Directus Topology</span>
+          <div><h2>Main Directus manages control-plane state; event Directus manages event data.</h2><p>The app separates platform-level concerns from event-level content. Main Directus stores events, users, API keys, and owner/viewer relations. Event Directus stores sessions, speakers, exhibitors, attendees, general info, supports, conversations, messages, traces, top questions, and ingestion jobs.</p></div>
+        </div>
+        <figure class="case-diagram">
+          <img src="../assets/diagrams/visual-hive-directus-topology.svg" alt="Visual Hive multi-instance Directus topology" loading="lazy" />
+          <figcaption>Multi-instance Directus topology: event records point to event-specific Directus and Qdrant configuration.</figcaption>
+        </figure>
+      </section>
+
+      <section id="mapping" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">06 / Schema Mapping</span>
+          <div><h2>Smart column matching converts client language into system language.</h2><p>The ingestion system cannot require every client to use perfect internal field names. The analyzer maps headers to canonical fields through normalization, synonyms, and fuzzy matching. This is where automation creates leverage without giving up control.</p></div>
+        </div>
+        <figure class="case-diagram">
+          <img src="../assets/diagrams/visual-hive-column-matching.svg" alt="Visual Hive column matching diagram" loading="lazy" />
+          <figcaption>Column matching: incoming headers like “Presenter Name” or “Booth No.” map into canonical fields like speaker_ids or stand.</figcaption>
+        </figure>
+        <div class="case-grid-2" style="margin-top: 1rem;">
+          <article class="case-card"><h3>Why Not Manual Mapping Only?</h3><p>Manual mapping works for one import but collapses when operators repeat the same job across many events. Synonyms encode institutional memory so repeated imports get faster.</p></article>
+          <article class="case-card"><h3>Why Not Fully Automatic Mutation?</h3><p>Header confidence should influence workflow. Ambiguous mappings should be surfaced to operators instead of silently corrupting canonical fields.</p></article>
+        </div>
+      </section>
+
+      <section id="mutation" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">07 / Mutation Strategy</span>
+          <div><h2>Bulk writes must be explainable before they are executed.</h2><p>The mutation layer compares cleaned rows with existing Directus data, calculates creates/updates/skips/deletes, and then applies changes. This makes bulk import behavior visible and avoids accidental overwrites.</p></div>
+        </div>
+        <figure class="case-diagram">
+          <img src="../assets/diagrams/visual-hive-mutation-diff.svg" alt="Visual Hive mutation diff strategy" loading="lazy" />
+          <figcaption>Diff before mutate: imports become an explicit plan before Directus is changed.</figcaption>
+        </figure>
+        <ol class="case-flow">
+          <li><span><strong>Extract rows.</strong> CSV/XLSX data becomes normalized row objects with headers and values.</span></li>
+          <li><span><strong>Analyze headers.</strong> Columns are mapped to canonical collection fields using synonyms and fuzzy matching.</span></li>
+          <li><span><strong>Clean values.</strong> Whitespace, array-like fields, booleans, dates, durations, and URLs are normalized.</span></li>
+          <li><span><strong>Validate schema.</strong> Required fields, types, relationship fields, and invalid rows are caught before mutation.</span></li>
+          <li><span><strong>Apply diff.</strong> Directus receives only the required create/update/delete operations.</span></li>
+        </ol>
+      </section>
+
+      <section id="vectors" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">08 / Vector Sync</span>
+          <div><h2>Qdrant is a derived semantic index, not the source of truth.</h2><p>After Directus mutation, records are converted into semantic documents and upserted into Qdrant with payload metadata. This allows the assistant to retrieve event-specific knowledge while keeping Directus authoritative.</p></div>
+        </div>
+        <figure class="case-diagram">
+          <img src="../assets/diagrams/visual-hive-vector-sync.svg" alt="Visual Hive vector sync diagram" loading="lazy" />
+          <figcaption>Vector sync: Directus record → semantic text → embedding → payload → Qdrant upsert.</figcaption>
+        </figure>
+        <code class="tech-equation">semantic_document = collection_type + title + description + structured_fields<br />qdrant_payload = { event_id, collection, source_id, updated_at, directus_url }<br />vector_freshness = directus.updated_at &lt;= qdrant.payload.updated_at</code>
+      </section>
+
+      <section id="security" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">09 / Security</span>
+          <div><h2>The security model protects credentials, event boundaries, and ingestion inputs.</h2><p>This product handles external files, API keys, Directus tokens, Qdrant credentials, and event-level authorization. That means security is not a final layer; it shapes the data model.</p></div>
+        </div>
+        <figure class="case-diagram">
+          <img src="../assets/diagrams/visual-hive-security-model.svg" alt="Visual Hive security model" loading="lazy" />
+          <figcaption>Security model: hashed API keys, encrypted service credentials, owner/viewer access, tenant isolation, and audit state.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">10 / Observability</span>
+          <div><h2>Trustworthy ingestion needs stage-level observability.</h2><p>A generic uptime dashboard does not answer whether imports are reliable. The useful metrics are parse failures, mapping confidence, validation errors, mutation volume, vector lag, job duration, and operator review load.</p></div>
+        </div>
+        <figure class="case-diagram">
+          <img src="../assets/diagrams/visual-hive-observability.svg" alt="Visual Hive observability plan" loading="lazy" />
+          <figcaption>Observability plan: measure each transformation stage, not only server health.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">11 / API Contract</span>
+          <div><h2>The ingestion job contract exposes progress and failure without leaking implementation details.</h2></div>
+        </div>
+        <div class="code-card"><pre><code>POST /api/events/:eventId/ingestion/jobs
+Content-Type: multipart/form-data
+
+file: sessions.xlsx
+collection: sessions
+
+202 Accepted
+{
+  "job_id": "job_01J...",
+  "status": "PENDING",
+  "progress": 0,
+  "current_stage": "Queued for extraction"
+}
+
+GET /api/events/:eventId/ingestion/jobs/:jobId
+
+200 OK
+{
+  "status": "VALIDATING",
+  "progress": 62,
+  "current_stage": "Checking required fields and relationship references",
+  "validation_state": {
+    "valid_rows": 486,
+    "invalid_rows": 14,
+    "errors": ["row 52: missing duration"]
+  }
+}</code></pre></div>
+      </section>
+
+      <section id="demo" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">12 / Demo Gallery</span>
+          <div><h2>The demo should show data becoming safer at every step.</h2><p>Replace the placeholders with Playwright captures from `/home/ikniz/Work/Coding/SvelteKit/data-ingestion`: upload screen, mapping review, validation result, Directus diff, Qdrant sync, and dashboard analytics.</p></div>
+        </div>
+        <figure class="case-diagram" style="margin-bottom: 1rem;">
+          <img src="../assets/diagrams/visual-hive-demo-flow.svg" alt="Visual Hive demo flow" loading="lazy" />
+          <figcaption>Demo narrative: dirty file → mapped headers → reviewed diff → vector sync → semantic assistant query.</figcaption>
+        </figure>
+        <div class="case-gallery">
+          <figure class="case-shot"><img src="../assets/screenshots/placeholder.svg" alt="Placeholder for upload workflow" loading="lazy" /><figcaption>TODO: upload CSV/XLSX workflow.</figcaption></figure>
+          <figure class="case-shot"><img src="../assets/screenshots/placeholder.svg" alt="Placeholder for validation results" loading="lazy" /><figcaption>TODO: validation and diff review screen.</figcaption></figure>
+          <figure class="case-shot"><img src="../assets/screenshots/placeholder.svg" alt="Placeholder for analytics dashboard" loading="lazy" /><figcaption>TODO: analytics dashboard with LayerChart/D3.</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">13 / Video</span>
+          <div><h2>The best video is not a feature tour. It is a data trust story.</h2></div>
+        </div>
+        <div class="video-shell">
+          <div class="video-placeholder"><strong>Visual Hive demo video slot</strong><span>Record: upload messy XLSX → map headers → inspect validation → mutate Directus → sync Qdrant → ask semantic question → inspect analytics.</span></div>
+        </div>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">14 / Lessons</span>
+          <div><h2>The main lesson: ingestion is product engineering, not just ETL plumbing.</h2></div>
+        </div>
+        <div class="case-grid-2">
+          <article class="case-card"><h3>What Worked</h3><p>Separating pipeline stages made the system explainable. Directus stayed authoritative, Qdrant remained rebuildable, and operators could reason about import failures instead of guessing from logs.</p></article>
+          <article class="case-card"><h3>What I Would Improve</h3><p>The next iteration should add a richer mapping confidence UI, per-stage duration charts, import rollback snapshots, and vector freshness alerts for stale Qdrant payloads.</p></article>
+        </div>
+      </section>
+
+      <section class="cs-cta reveal">
+        <h3>Need to turn messy business data into a reliable AI-ready pipeline?</h3>
+        <p>I design ingestion systems that preserve correctness before they automate everything.</p>
+        <a href="https://calendly.com/mythonggg/10-min-sync-with-startups-1" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Send me your data bottleneck</a>
+        <a href="mailto:mythonggg@gmail.com?subject=Company%20Name%20%7C%20Thong%20intro%20-%20Fullstack%20AI%20Engineer" class="btn btn-ghost" style="margin-left: 1rem;">mythonggg@gmail.com</a>
+      </section>
+    </main>
+
+    <footer class="footer"><p>&copy; 2026 Thong Nguyen. Independent Full-Stack AI Engineer.</p></footer>
     <script src="../script.js"></script>
   </body>
 </html>
