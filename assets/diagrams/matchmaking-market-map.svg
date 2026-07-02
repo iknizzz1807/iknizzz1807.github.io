@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 900" role="img" aria-labelledby="title desc">
+  <title id="title">AI matchmaking market map</title>
+  <desc id="desc">A market map showing niches where the same AI matchmaking engine can be tuned.</desc>
+  <rect width="1500" height="900" fill="#050713"/>
+  <defs><filter id="glow"><feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <g font-family="Inter, Arial" fill="#f8fafc">
+    <text x="750" y="70" text-anchor="middle" font-size="40" font-weight="800">One Engine, Many Matchmaking Niches</text>
+    <text x="750" y="112" text-anchor="middle" fill="#94a3b8" font-size="18">The core architecture stays stable. The niche-specific scoring rules, intake questions, and handoff CTAs change.</text>
+    <circle cx="750" cy="460" r="145" fill="#111426" stroke="#818cf8" stroke-width="4" filter="url(#glow)"/>
+    <text x="750" y="430" text-anchor="middle" font-size="30" font-weight="800">AI Matching Core</text>
+    <text x="750" y="466" text-anchor="middle" fill="#94a3b8" font-size="16">intent → retrieval → ranking → handoff</text>
+    <text x="750" y="500" text-anchor="middle" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="14">tuned per vertical</text>
+    <g stroke="#24305f" stroke-width="2" fill="none"><circle cx="750" cy="460" r="300"/><circle cx="750" cy="460" r="405"/></g>
+    <g stroke="#818cf8" stroke-width="3" opacity=".75"><line x1="750" y1="315" x2="750" y2="180"/><line x1="890" y1="420" x2="1130" y2="280"/><line x1="880" y1="535" x2="1120" y2="665"/><line x1="620" y1="535" x2="380" y2="665"/><line x1="610" y1="420" x2="370" y2="280"/></g>
+    <g>
+      <circle cx="750" cy="165" r="88" fill="#0f111a" stroke="#10b981" stroke-width="3"/><text x="750" y="150" text-anchor="middle" font-size="21" font-weight="800">Marketplaces</text><text x="750" y="180" text-anchor="middle" fill="#94a3b8" font-size="14">buyer ↔ supplier</text>
+      <circle cx="1185" cy="245" r="88" fill="#0f111a" stroke="#6366f1" stroke-width="3"/><text x="1185" y="230" text-anchor="middle" font-size="21" font-weight="800">Directories</text><text x="1185" y="260" text-anchor="middle" fill="#94a3b8" font-size="14">visitor ↔ listing</text>
+      <circle cx="1185" cy="700" r="88" fill="#0f111a" stroke="#f59e0b" stroke-width="3"/><text x="1185" y="685" text-anchor="middle" font-size="21" font-weight="800">Events</text><text x="1185" y="715" text-anchor="middle" fill="#94a3b8" font-size="14">attendee ↔ exhibitor</text>
+      <circle cx="315" cy="700" r="88" fill="#0f111a" stroke="#ef4444" stroke-width="3"/><text x="315" y="685" text-anchor="middle" font-size="21" font-weight="800">Recruiting</text><text x="315" y="715" text-anchor="middle" fill="#94a3b8" font-size="14">candidate ↔ role</text>
+      <circle cx="315" cy="245" r="88" fill="#0f111a" stroke="#818cf8" stroke-width="3"/><text x="315" y="230" text-anchor="middle" font-size="21" font-weight="800">Knowledge</text><text x="315" y="260" text-anchor="middle" fill="#94a3b8" font-size="14">question ↔ passage</text>
+    </g>
+  </g>
+</svg>

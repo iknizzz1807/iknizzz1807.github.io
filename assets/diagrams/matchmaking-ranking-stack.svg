@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 900" role="img" aria-labelledby="title desc">
+  <title id="title">AI matchmaking ranking stack</title>
+  <desc id="desc">A layered ranking stack for AI matchmaking systems.</desc>
+  <rect width="1500" height="900" fill="#050713"/>
+  <g font-family="Inter, Arial" fill="#f8fafc">
+    <text x="750" y="70" text-anchor="middle" font-size="40" font-weight="800">Ranking Is Where the Business Model Enters the AI System</text>
+    <text x="750" y="112" text-anchor="middle" fill="#94a3b8" font-size="18">Good matching is not raw vector similarity. It is a stack of semantic fit, constraints, incentives, and explainability.</text>
+    <g>
+      <rect x="260" y="650" width="980" height="90" rx="18" fill="#0f111a" stroke="#334155"/><text x="750" y="704" text-anchor="middle" font-size="24" font-weight="800">Candidate Pool</text>
+      <rect x="315" y="540" width="870" height="90" rx="18" fill="#111426" stroke="#6366f1"/><text x="750" y="594" text-anchor="middle" font-size="24" font-weight="800">Semantic Retrieval</text>
+      <rect x="370" y="430" width="760" height="90" rx="18" fill="#111426" stroke="#10b981"/><text x="750" y="484" text-anchor="middle" font-size="24" font-weight="800">Hard Constraints</text>
+      <rect x="425" y="320" width="650" height="90" rx="18" fill="#111426" stroke="#f59e0b"/><text x="750" y="374" text-anchor="middle" font-size="24" font-weight="800">Business Re-Ranking</text>
+      <rect x="480" y="210" width="540" height="90" rx="18" fill="#111426" stroke="#ef4444"/><text x="750" y="264" text-anchor="middle" font-size="24" font-weight="800">Safety + Explainability</text>
+    </g>
+    <g fill="#94a3b8" font-size="15" font-family="JetBrains Mono, monospace">
+      <text x="1260" y="704">all listings / profiles / moments</text>
+      <text x="1205" y="594">embeddings, hybrid search, reranking</text>
+      <text x="1150" y="484">budget, location, availability, compliance</text>
+      <text x="1095" y="374">premium tier, ROI, freshness, quality</text>
+      <text x="1040" y="264">why this match, what to do next</text>
+    </g>
+  </g>
+</svg>

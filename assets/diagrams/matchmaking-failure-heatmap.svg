@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1450 900" role="img" aria-labelledby="title desc">
+  <title id="title">AI matchmaking failure heatmap</title>
+  <desc id="desc">Heatmap of common AI matchmaking failure modes and mitigations.</desc>
+  <rect width="1450" height="900" fill="#050713"/>
+  <g font-family="Inter, Arial" fill="#f8fafc">
+    <text x="725" y="70" text-anchor="middle" font-size="40" font-weight="800">Failure Modes I Design Around</text>
+    <text x="725" y="112" text-anchor="middle" fill="#94a3b8" font-size="18">Bad matching is worse than no AI: it wastes visitor intent and damages provider trust.</text>
+    <g font-family="JetBrains Mono, monospace" font-size="15" fill="#818cf8"><text x="340" y="190">Impact</text><text x="590" y="190">Likelihood</text><text x="880" y="190">Mitigation</text></g>
+    <g>
+      <rect x="90" y="230" width="1260" height="90" rx="16" fill="#1f1111" stroke="#ef4444"/><text x="130" y="285" font-size="20" font-weight="800">Wrong Match</text><text x="340" y="285" fill="#fca5a5">High</text><text x="590" y="285" fill="#fca5a5">Medium</text><text x="880" y="285" fill="#94a3b8">reranking evals, explanation, user feedback loop</text>
+      <rect x="90" y="350" width="1260" height="90" rx="16" fill="#201806" stroke="#f59e0b"/><text x="130" y="405" font-size="20" font-weight="800">Premium Overboost</text><text x="340" y="405" fill="#fcd34d">High</text><text x="590" y="405" fill="#fcd34d">Medium</text><text x="880" y="405" fill="#94a3b8">cap boosts, relevance floor, transparent reasons</text>
+      <rect x="90" y="470" width="1260" height="90" rx="16" fill="#111426" stroke="#6366f1"/><text x="130" y="525" font-size="20" font-weight="800">No Result</text><text x="340" y="525" fill="#c4b5fd">Medium</text><text x="590" y="525" fill="#c4b5fd">High</text><text x="880" y="525" fill="#94a3b8">clarifying questions, constraint relaxation, fallback categories</text>
+      <rect x="90" y="590" width="1260" height="90" rx="16" fill="#062018" stroke="#10b981"/><text x="130" y="645" font-size="20" font-weight="800">Stale Listing</text><text x="340" y="645" fill="#6ee7b7">Medium</text><text x="590" y="645" fill="#6ee7b7">Medium</text><text x="880" y="645" fill="#94a3b8">freshness score, provider verification, sync timestamps</text>
+      <rect x="90" y="710" width="1260" height="90" rx="16" fill="#111827" stroke="#64748b"/><text x="130" y="765" font-size="20" font-weight="800">Unsafe Handoff</text><text x="340" y="765" fill="#cbd5e1">High</text><text x="590" y="765" fill="#cbd5e1">Low</text><text x="880" y="765" fill="#94a3b8">risk filters, disclaimers, review gates, domain-specific rules</text>
+    </g>
+  </g>
+</svg>

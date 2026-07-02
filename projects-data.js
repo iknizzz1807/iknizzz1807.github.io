@@ -1,5 +1,20 @@
 const caseStudies = [
   {
+    slug: "ai-matchmaking-lead-routing",
+    title: "AI Matchmaking & Lead Routing Systems",
+    type: "Featured Capability Study / Revenue AI Infrastructure",
+    tagline: "How I build AI matching layers that turn messy user intent into ranked candidates, qualified handoffs, and measurable ROI.",
+    metrics: [
+      { value: "5 Systems", label: "Pattern Applied" },
+      { value: "ROI Layer", label: "Ranking + Handoff" }
+    ],
+    problem: "Many marketplaces and directories do not have a search problem; they have a routing problem. Users express nuanced intent, while the business needs qualified handoffs and measurable provider ROI.",
+    solution: "Designed a reusable matching architecture: conversational intake, semantic retrieval, hard constraints, business-aware reranking, explanations, handoff CTAs, and feedback analytics. Applied the pattern across SkillForge, Visual Hive, a niche directory prototype, AIC search, and RAG systems.",
+    outcome: "Packaged the capability as a 14-day AI matching prototype offer that can be tuned to a niche before a client commits to a full rebuild.",
+    tech: ["FastAPI", "ChromaDB", "Qdrant", "Reranking", "LLMs", "Analytics"],
+    links: null
+  },
+  {
     slug: "skillforge",
     title: "SkillForge Marketplace",
     type: "B2B / B2C Platform Architecture",

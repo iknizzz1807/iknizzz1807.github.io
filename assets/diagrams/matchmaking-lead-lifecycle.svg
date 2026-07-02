@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 860" role="img" aria-labelledby="title desc">
+  <title id="title">AI matchmaking lead lifecycle</title>
+  <desc id="desc">Lead lifecycle from visitor intent to qualified handoff and analytics.</desc>
+  <rect width="1500" height="860" fill="#050713"/>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#818cf8"/></marker></defs>
+  <g font-family="Inter, Arial" fill="#f8fafc">
+    <text x="750" y="70" text-anchor="middle" font-size="40" font-weight="800">Lead Routing Lifecycle</text>
+    <text x="750" y="112" text-anchor="middle" fill="#94a3b8" font-size="18">The product is not a chat response. The product is a qualified handoff the business can measure.</text>
+    <g fill="#0f111a" stroke="#6366f1" stroke-opacity=".65">
+      <rect x="90" y="310" width="190" height="115" rx="22"/><rect x="340" y="310" width="190" height="115" rx="22"/><rect x="590" y="310" width="190" height="115" rx="22"/><rect x="840" y="310" width="190" height="115" rx="22"/><rect x="1090" y="310" width="190" height="115" rx="22"/>
+    </g>
+    <text x="185" y="355" text-anchor="middle" font-size="20" font-weight="800">Visitor Intent</text><text x="185" y="386" text-anchor="middle" fill="#94a3b8" font-size="14">messy natural language</text>
+    <text x="435" y="355" text-anchor="middle" font-size="20" font-weight="800">Clarify</text><text x="435" y="386" text-anchor="middle" fill="#94a3b8" font-size="14">missing constraints</text>
+    <text x="685" y="355" text-anchor="middle" font-size="20" font-weight="800">Match</text><text x="685" y="386" text-anchor="middle" fill="#94a3b8" font-size="14">ranked candidates</text>
+    <text x="935" y="355" text-anchor="middle" font-size="20" font-weight="800">Handoff</text><text x="935" y="386" text-anchor="middle" fill="#94a3b8" font-size="14">booking / inquiry / apply</text>
+    <text x="1185" y="355" text-anchor="middle" font-size="20" font-weight="800">Measure</text><text x="1185" y="386" text-anchor="middle" fill="#94a3b8" font-size="14">ROI dashboard</text>
+    <g stroke="#818cf8" stroke-width="4" fill="none" marker-end="url(#a)"><path d="M280 368 H340"/><path d="M530 368 H590"/><path d="M780 368 H840"/><path d="M1030 368 H1090"/><path d="M1185 425 C1040 620 495 620 435 425"/></g>
+    <text x="805" y="635" text-anchor="middle" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="16">Feedback loop: accepted leads, ignored matches, follow-up questions, and conversions tune ranking weights.</text>
+  </g>
+</svg>

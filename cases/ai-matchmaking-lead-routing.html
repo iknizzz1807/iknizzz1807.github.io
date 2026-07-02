@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Capability study: AI Matchmaking & Lead Routing systems for marketplaces, directories, events, recruiting, knowledge search, and niche vertical matching engines." />
+    <meta name="keywords" content="AI matchmaking, lead routing, semantic search, marketplace AI, directory AI, reranking, vector search, lead qualification, business-aware ranking" />
+    <meta name="author" content="Thong Nguyen" />
+    <link rel="canonical" href="https://ikniz.id.vn/cases/ai-matchmaking-lead-routing.html" />
+    <meta property="og:title" content="AI Matchmaking & Lead Routing Systems | Thong Nguyen" />
+    <meta property="og:description" content="A reusable architecture pattern for matching ambiguous user intent to the right listings, profiles, projects, passages, or media moments." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://ikniz.id.vn/cases/ai-matchmaking-lead-routing.html" />
+    <meta property="og:image" content="https://ikniz.id.vn/favicon.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>AI Matchmaking & Lead Routing Systems | Thong Nguyen</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../case.css" />
+  </head>
+  <body>
+    <div class="bg-gradient-top"></div>
+    <nav class="nav">
+      <div class="nav-inner">
+        <a href="../index.html" class="nav-logo">&larr; Portfolio</a>
+        <div class="nav-links">
+          <a href="../index.html#services" class="nav-link">Services</a>
+          <a href="../index.html#work" class="nav-link">Case Studies</a>
+          <a href="../videos/" class="nav-link">Videos</a>
+          <a href="https://calendly.com/mythonggg/10-min-sync-with-startups-1" target="_blank" rel="noopener noreferrer" class="nav-link nav-link-cta">Let's Talk Architecture</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="case-showcase">
+      <header class="case-showcase__hero reveal">
+        <div>
+          <span class="case-kicker">Capability Study / Revenue AI Infrastructure</span>
+          <h1>AI Matchmaking & Lead Routing Systems.</h1>
+          <p class="case-lead">This is not a single monolithic project. It is a reusable architecture pattern I have applied across marketplaces, event platforms, niche directory prototypes, RAG systems, and multimodal search: capture ambiguous user intent, retrieve candidate entities, apply hard constraints, rerank with business logic, explain the match, and route the user into a measurable handoff.</p>
+          <nav class="case-toc" aria-label="Case study table of contents">
+            <a href="#problem">Problem</a><a href="#pattern">Pattern</a><a href="#evidence">Evidence</a><a href="#ranking">Ranking</a><a href="#handoff">Handoff</a><a href="#prototype">Prototype</a><a href="#failure">Failures</a><a href="#offer">Offer</a>
+          </nav>
+        </div>
+        <aside class="case-panel">
+          <h2>Capability Facts</h2>
+          <div class="case-facts">
+            <div class="case-fact"><span>Service</span><strong>AI Matchmaking & Lead Routing</strong></div>
+            <div class="case-fact"><span>Best For</span><strong>marketplaces, directories, B2B events, recruiting, vendor discovery, education, knowledge search</strong></div>
+            <div class="case-fact"><span>Core Pattern</span><strong>intent capture → retrieval → constraints → reranking → explanation → handoff → analytics</strong></div>
+            <div class="case-fact"><span>Proof Sources</span><strong>SkillForge, Visual Hive, niche matching demo, AIC Multimodal Search, RAG systems</strong></div>
+          </div>
+        </aside>
+      </header>
+
+      <section id="problem" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">01 / Problem</span>
+          <div>
+            <h2>Most platforms do not have a search problem. They have a routing problem.</h2>
+            <p>Visitors do not think in database filters. They describe needs, constraints, budgets, preferences, goals, risk tolerance, timing, and context. The business does not only need “results”. It needs qualified leads, better conversion, provider/member ROI, and proof that premium visibility is worth paying for.</p>
+          </div>
+        </div>
+        <div class="case-grid-3">
+          <article class="case-card"><h3>Search Returns Options</h3><p>Keyword search and filters can list candidates, but they rarely understand nuanced intent or guide users toward a decision.</p></article>
+          <article class="case-card"><h3>Matching Creates Decisions</h3><p>A matching engine ranks candidates by fit, constraints, business rules, and user context. It helps a user choose, not just browse.</p></article>
+          <article class="case-card"><h3>Lead Routing Creates ROI</h3><p>The final output should be a handoff: inquiry, booking, application, meeting, timestamp submission, or grounded answer that can be measured.</p></article>
+        </div>
+      </section>
+
+      <section id="pattern" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">02 / Market Pattern</span>
+          <div><h2>The same engine can be tuned for different verticals without pretending every niche is the same.</h2><p>The core architecture stays stable. What changes per niche is the language of the intake flow, the constraints that matter, the ranking weights, the risk rules, and the handoff CTA.</p></div>
+        </div>
+        <figure class="case-diagram"><img src="../assets/diagrams/matchmaking-market-map.svg" alt="AI matchmaking market map" loading="lazy" /><figcaption>Market map: the same matching core can be tuned for marketplaces, directories, events, recruiting, and knowledge systems.</figcaption></figure>
+      </section>
+
+      <section id="evidence" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">03 / Evidence</span>
+          <div><h2>I am not claiming this is one giant finished product. I am showing a repeated pattern across real systems.</h2><p>This is the honest and useful framing: the capability exists because I have already built the difficult sub-problems in multiple contexts.</p></div>
+        </div>
+        <figure class="case-diagram"><img src="../assets/diagrams/matchmaking-applied-systems-matrix.svg" alt="Applied systems matrix for AI matchmaking" loading="lazy" /><figcaption>Applied systems matrix: the entity types change, but the matching loop repeats.</figcaption></figure>
+      </section>
+
+      <section id="ranking" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">04 / Ranking Stack</span>
+          <div><h2>The LLM is not the product. The matching loop is the product.</h2><p>Raw vector similarity is only the first pass. A serious lead-routing system must combine semantic fit with hard constraints, business incentives, freshness, quality signals, safety filters, and explainability.</p></div>
+        </div>
+        <figure class="case-diagram"><img src="../assets/diagrams/matchmaking-ranking-stack.svg" alt="AI matchmaking ranking stack" loading="lazy" /><figcaption>Ranking stack: semantic retrieval narrows the candidate pool, but business-aware reranking decides what gets surfaced.</figcaption></figure>
+        <code class="tech-equation">final_score = semantic_fit<br />&nbsp;&nbsp;+ constraint_fit<br />&nbsp;&nbsp;+ business_priority_boost<br />&nbsp;&nbsp;+ freshness_quality_signal<br />&nbsp;&nbsp;- safety_or_compliance_penalty<br />&nbsp;&nbsp;- stale_or_unavailable_penalty</code>
+      </section>
+
+      <section id="handoff" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">05 / Lead Lifecycle</span>
+          <div><h2>The output should be measurable business movement, not a pretty chat answer.</h2><p>For a directory or marketplace, a good AI layer should move the visitor from vague intent to a qualified action. That means clarifying missing constraints, ranking candidates, explaining why they fit, and routing the user into a handoff the business can track.</p></div>
+        </div>
+        <figure class="case-diagram"><img src="../assets/diagrams/matchmaking-lead-lifecycle.svg" alt="AI matchmaking lead lifecycle" loading="lazy" /><figcaption>Lead lifecycle: intent becomes match, match becomes handoff, handoff becomes analytics, analytics improves ranking.</figcaption></figure>
+      </section>
+
+      <section id="prototype" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">06 / Niche Prototype</span>
+          <div><h2>The vertical demo is not the destination. It is the wedge.</h2><p>I built a niche-tuned demo in `psychable-intake-demo` to test the commercial packaging of this pattern: static directory data, conversational intake, ChromaDB semantic search, Gemini-compatible LLM, membership-tier reranking, follow-up context, and a dashboard that supports the sales story. The niche can change. The engine pattern is the asset.</p></div>
+        </div>
+        <div class="case-grid-3">
+          <article class="case-card"><h3>What Gets Tuned</h3><p>Intake questions, domain vocabulary, constraints, vertical-specific risk rules, ranking weights, and CTA language.</p></article>
+          <article class="case-card"><h3>What Stays Reusable</h3><p>Semantic retrieval, structured filters, reranking layer, follow-up memory, handoff tracking, analytics dashboard, and demo scripting.</p></article>
+          <article class="case-card"><h3>Why It Sells</h3><p>A prospect can see their own listings or profiles becoming a guided matching experience without committing to a full platform rebuild.</p></article>
+        </div>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">07 / Architecture</span>
+          <div><h2>The implementation can start lightweight, then harden into production infrastructure.</h2></div>
+        </div>
+        <div class="case-grid-2">
+          <article class="case-card"><h3>Prototype Stack</h3><p>FastAPI, SQLite/SQLAlchemy, ChromaDB, static HTML/CSS/JS, Gemini/OpenAI-compatible API, seeded listings, and dashboard metrics. Best for proving ROI quickly.</p></article>
+          <article class="case-card"><h3>Production Stack</h3><p>Postgres or Directus/Supabase, Qdrant/Milvus, hybrid search, rerankers, event analytics, lead tracking, admin controls, API keys, model routing, and observability.</p></article>
+        </div>
+      </section>
+
+      <section id="failure" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">08 / Failure Modes</span>
+          <div><h2>Bad matching can damage trust. The system needs guardrails before scale.</h2><p>The biggest risk is not that the AI fails to sound smart. The biggest risk is routing the wrong visitor to the wrong provider, overboosting paid listings, hiding good free matches, or creating unsafe handoffs in sensitive niches.</p></div>
+        </div>
+        <figure class="case-diagram"><img src="../assets/diagrams/matchmaking-failure-heatmap.svg" alt="AI matchmaking failure heatmap" loading="lazy" /><figcaption>Failure heatmap: wrong match, premium overboost, no-result handling, stale listings, and unsafe handoffs need explicit mitigation.</figcaption></figure>
+      </section>
+
+      <section id="offer" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">09 / Productized Offer</span>
+          <div><h2>The best first sale is a scoped prototype, not a huge rebuild.</h2><p>This is the offer I would lead with: take 30-100 public or exported listings, build a private AI matching prototype, show the client how their own users would be routed, and use the result to decide whether a full implementation is worth it.</p></div>
+        </div>
+        <div class="case-grid-3">
+          <article class="case-card"><h3>14-Day Prototype</h3><p>Conversational intake, vector search over sample data, business-aware reranking, handoff CTA, and a short demo video.</p></article>
+          <article class="case-card"><h3>What Client Gets</h3><p>A private test they can click through with their own listings, plus an architecture plan for production hardening.</p></article>
+          <article class="case-card"><h3>Business Outcome</h3><p>Prove whether AI matching can increase qualified leads, premium member value, or conversion before rebuilding the platform.</p></article>
+        </div>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">10 / Demo Gallery</span>
+          <div><h2>The demo should show the ranking logic changing as the user clarifies intent.</h2><p>Replace placeholders with captures from a tuned vertical demo: initial intake, match panel, follow-up query, ranking explanation, handoff CTA, and ROI dashboard.</p></div>
+        </div>
+        <div class="case-gallery">
+          <figure class="case-shot"><img src="../assets/screenshots/placeholder.svg" alt="Placeholder for AI matching intake" loading="lazy" /><figcaption>TODO: conversational intake.</figcaption></figure>
+          <figure class="case-shot"><img src="../assets/screenshots/placeholder.svg" alt="Placeholder for ranked match panel" loading="lazy" /><figcaption>TODO: ranked match panel with reasons.</figcaption></figure>
+          <figure class="case-shot"><img src="../assets/screenshots/placeholder.svg" alt="Placeholder for ROI dashboard" loading="lazy" /><figcaption>TODO: lead/visibility dashboard.</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">11 / Video</span>
+          <div><h2>The best outbound video is niche-specific, but the engine explanation is reusable.</h2></div>
+        </div>
+        <div class="video-shell"><div class="video-placeholder"><strong>AI Matchmaking demo video slot</strong><span>Record: audit a target directory → run their niche through the demo engine → show ranking changes after follow-up → explain lead ROI dashboard → offer a private prototype.</span></div></div>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">12 / Lessons</span>
+          <div><h2>The main lesson: AI matching is a business system disguised as a search feature.</h2></div>
+        </div>
+        <div class="case-grid-2">
+          <article class="case-card"><h3>What Makes It Valuable</h3><p>The value is not “chat with your directory”. The value is better routing: more qualified inquiries, stronger provider/member ROI, and a measurable reason to upgrade premium visibility.</p></article>
+          <article class="case-card"><h3>What I Would Build Next</h3><p>A reusable multi-tenant prototype kit: data importer, vertical config, ranking weight editor, lead tracking, analytics dashboard, and a Loom-ready demo mode for outbound sales.</p></article>
+        </div>
+      </section>
+
+      <section class="cs-cta reveal">
+        <h3>Have a directory, marketplace, or matching workflow that search cannot solve?</h3>
+        <p>I can build a scoped AI matching prototype using your real listings or profiles, then turn it into a production lead-routing system if the ROI is clear.</p>
+        <a href="https://calendly.com/mythonggg/10-min-sync-with-startups-1" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Discuss an AI matching prototype</a>
+        <a href="mailto:mythonggg@gmail.com?subject=Company%20Name%20%7C%20AI%20Matchmaking%20Prototype" class="btn btn-ghost" style="margin-left: 1rem;">mythonggg@gmail.com</a>
+      </section>
+    </main>
+
+    <footer class="footer"><p>&copy; 2026 Thong Nguyen. Independent Full-Stack AI Engineer.</p></footer>
+    <script src="../script.js"></script>
+  </body>
+</html>

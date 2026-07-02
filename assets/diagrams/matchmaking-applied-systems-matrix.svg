@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 980" role="img" aria-labelledby="title desc">
+  <title id="title">Applied systems matrix</title>
+  <desc id="desc">Matrix mapping projects to the reusable AI matchmaking pattern.</desc>
+  <rect width="1600" height="980" fill="#050713"/>
+  <g font-family="Inter, Arial" fill="#f8fafc">
+    <text x="800" y="70" text-anchor="middle" font-size="40" font-weight="800">Where I Have Applied the Pattern</text>
+    <text x="800" y="112" text-anchor="middle" fill="#94a3b8" font-size="18">This is a capability study, not a claim that all of this lives in one monolith.</text>
+    <g font-family="JetBrains Mono, monospace" font-size="15" fill="#818cf8">
+      <text x="350" y="190">Entity A</text><text x="570" y="190">Entity B</text><text x="810" y="190">Matching Signal</text><text x="1140" y="190">Business Handoff</text>
+    </g>
+    <g stroke="#24305f" stroke-width="1"><path d="M90 215 H1510"/><path d="M90 335 H1510"/><path d="M90 455 H1510"/><path d="M90 575 H1510"/><path d="M90 695 H1510"/><path d="M90 815 H1510"/><path d="M90 215 V815"/><path d="M300 215 V815"/><path d="M520 215 V815"/><path d="M760 215 V815"/><path d="M1100 215 V815"/><path d="M1510 215 V815"/></g>
+    <g font-size="17">
+      <text x="125" y="285" font-weight="800">SkillForge</text><text x="350" y="285">Student</text><text x="570" y="285">Project</text><text x="810" y="275">skills + semantic requirements</text><text x="1140" y="275">apply, notify, collaborate</text>
+      <text x="125" y="405" font-weight="800">Visual Hive</text><text x="350" y="405">Attendee / buyer</text><text x="570" y="405">Session / exhibitor</text><text x="810" y="395">event data + profiles + vectors</text><text x="1140" y="395">meeting / analytics / assistant context</text>
+      <text x="125" y="525" font-weight="800">Niche Demo</text><text x="350" y="525">Visitor intent</text><text x="570" y="525">Directory listing</text><text x="810" y="515">budget + needs + premium tier</text><text x="1140" y="515">qualified inquiry</text>
+      <text x="125" y="645" font-weight="800">AIC Search</text><text x="350" y="645">Search prompt</text><text x="570" y="645">Video moment</text><text x="810" y="635">visual + object + transcript</text><text x="1140" y="635">timestamp playback / submit</text>
+      <text x="125" y="765" font-weight="800">RAG Systems</text><text x="350" y="765">Question</text><text x="570" y="765">Document passage</text><text x="810" y="755">hybrid retrieval + reranking</text><text x="1140" y="755">grounded answer</text>
+    </g>
+  </g>
+</svg>
