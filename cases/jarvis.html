@@ -3,110 +3,281 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Case Study: JARVIS - Beating cloud latency with ESP32 and local AI. A fully autonomous, local-first voice assistant with ASR, LLM reasoning, 5-layer persistent vector memory, and MCP protocol integration." />
-    <meta name="keywords" content="edge AI, ESP32, local AI, voice assistant, Whisper, Gemini API, ChromaDB, MCP protocol, IoT, embedded AI, WebSocket, C++" />
+    <meta name="description" content="JARVIS engineering deep-dive: ESP32 hardware voice assistant with WebSocket/MQTT+UDP audio transport, MCP tools, Python orchestration, memory, VAD, ASR, LLM, and TTS." />
+    <meta name="keywords" content="JARVIS, ESP32, voice assistant, WebSocket, MQTT, UDP, Opus, MCP, JSON-RPC, Python, VAD, ASR, TTS, ChromaDB, Gemini" />
     <meta name="author" content="Thong Nguyen" />
     <link rel="canonical" href="https://ikniz.id.vn/cases/jarvis.html" />
-    <meta property="og:title" content="JARVIS Edge AI System | B2B Case Study | Thong Nguyen" />
-    <meta property="og:description" content="Architecting a fully autonomous, local-first voice assistant running on an ESP32 with sub-500ms latency and 5-layer persistent memory." />
+    <meta property="og:title" content="JARVIS Hardware AI Assistant Engineering Deep-Dive | Thong Nguyen" />
+    <meta property="og:description" content="How I designed a realtime hardware voice assistant around ESP32 audio streaming, MCP tool invocation, memory, and interruption-safe orchestration." />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://ikniz.id.vn/cases/jarvis.html" />
     <meta property="og:image" content="https://ikniz.id.vn/favicon.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:site_name" content="Thong Nguyen Portfolio" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="JARVIS Edge AI System | B2B Case Study" />
-    <meta name="twitter:description" content="Beating cloud latency with ESP32 and local AI. Sub-500ms voice assistant with persistent vector memory." />
-    <meta name="twitter:image" content="https://ikniz.id.vn/favicon.jpg" />
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "TechArticle",
-      "headline": "JARVIS: Beating Cloud Latency with ESP32 and Local AI",
-      "description": "Architecting a fully autonomous, local-first voice assistant running on an ESP32 microcontroller with ASR, LLM reasoning, a 5-layer persistent vector memory system, and MCP protocol integration.",
-      "author": {
-        "@type": "Person",
-        "name": "Thong Nguyen",
-        "url": "https://ikniz.id.vn"
-      },
-      "url": "https://ikniz.id.vn/cases/jarvis.html",
-      "keywords": "edge AI, ESP32, local AI, voice assistant, Whisper, Gemini, ChromaDB, MCP"
-    }
-    </script>
-    <title>JARVIS Edge AI System | B2B Case Study</title>
+    <title>JARVIS Engineering Deep-Dive | Thong Nguyen</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-    <link rel="dns-prefetch" href="https://calendly.com" />
     <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../case.css" />
   </head>
-  <body class="case-study-page">
+  <body>
     <div class="bg-gradient-top"></div>
     <nav class="nav">
       <div class="nav-inner">
-        <a href="../index.html" class="nav-logo" style="color:var(--text-dim); font-size:0.9rem;">&larr; Back to Portfolio</a>
-        <a href="https://calendly.com/mythonggg/10-min-sync-with-startups-1" target="_blank" class="nav-link-cta">Let's Talk Architecture</a>
+        <a href="../index.html" class="nav-logo">&larr; Portfolio</a>
+        <div class="nav-links">
+          <a href="../index.html#work" class="nav-link">Case Studies</a>
+          <a href="../videos/" class="nav-link">Videos</a>
+          <a href="https://calendly.com/mythonggg/10-min-sync-with-startups-1" target="_blank" rel="noopener noreferrer" class="nav-link nav-link-cta">Let's Talk Architecture</a>
+        </div>
       </div>
     </nav>
 
-    <main class="cs-article">
-      <header class="cs-hero reveal">
-        <span class="b2b-case-type">Embedded Hardware AI</span>
-        <h1 class="cs-title">JARVIS: Beating Cloud Latency with ESP32 and Local AI</h1>
-        <p class="cs-subtitle">Architecting a fully autonomous, local-first voice assistant running on an ESP32 microcontroller with ASR, LLM reasoning, a 5-layer persistent vector memory system, and MCP protocol integration.</p>
-        <div class="cs-meta">
-          <div class="cs-meta-item">
-            <span class="cs-meta-label">Hardware Stack</span>
-            <span class="cs-meta-value">ESP32 (C++), I2S Microphones/Speakers</span>
-          </div>
-          <div class="cs-meta-item">
-            <span class="cs-meta-label">Software Stack</span>
-            <span class="cs-meta-value">Python, Whisper, Gemini API, ChromaDB, WebSockets, Model Context Protocol (MCP)</span>
-          </div>
+    <main class="case-showcase">
+      <header class="case-showcase__hero reveal">
+        <div>
+          <span class="case-kicker">Engineering Case Study / Hardware AI Agent</span>
+          <h1>JARVIS: a realtime voice assistant that treats hardware, audio, tools, and memory as one system.</h1>
+          <p class="case-lead">JARVIS is an ESP32-integrated AI voice assistant with a Python orchestration server. The interesting part is the tension between human conversation and machine latency: the user expects interruption, memory, and physical action, while the system has to move audio packets, run models, call tools, and recover from failure without exposing the machinery.</p>
+          <nav class="case-toc" aria-label="Case study table of contents">
+            <a href="#problem">Problem</a><a href="#decisions">Decisions</a><a href="#audio">Audio</a><a href="#transport">Transport</a><a href="#mcp">MCP</a><a href="#memory">Memory</a><a href="#tools">Tools</a><a href="#security">Security</a><a href="#demo">Demo</a>
+          </nav>
         </div>
+        <aside class="case-panel">
+          <h2>Project Facts</h2>
+          <div class="case-facts">
+            <div class="case-fact"><span>Role</span><strong>Hardware/software integrator, Python backend engineer, AI agent engineer</strong></div>
+            <div class="case-fact"><span>Core Stack</span><strong>ESP32 C++/ESP-IDF, Python, WebSocket, MQTT+UDP, Opus, MCP, JSON-RPC, VAD, ASR, LLM, TTS, ChromaDB</strong></div>
+            <div class="case-fact"><span>Repo Source</span><strong>/home/ikniz/Work/Coding/AI_MachineLearning/jarvis</strong></div>
+            <div class="case-fact"><span>Key Constraint</span><strong>Realtime conversational latency with physical-device side effects</strong></div>
+          </div>
+        </aside>
       </header>
 
-      <div class="cs-content reveal">
-        <h2>The Latency Trap of the Smart Home</h2>
-        <p>IoT hardware startups rely heavily on third-party voice assistants (Alexa, Google Home) that pipe raw audio to the cloud. This creates an inherently flawed user experience. The round-trip sequence involves: capturing audio on the device &rarr; sending it to a cloud server &rarr; transcribing it (STT) &rarr; querying an LLM &rarr; generating speech (TTS) &rarr; streaming it back down to the microcontroller.</p>
-        <p>This process consistently introduces a 3- to 5-second delay, shattering the illusion of intelligence. Furthermore, these assistants suffer from severe "amnesia," lacking deep, persistent contextual memory across long periods of interaction.</p>
-
-        <h2>The Goal: A "Savior" Architecture for Edge AI</h2>
-        <p>The objective for JARVIS was twofold: drop the latency to near-human conversational speeds (&lt;500ms) on a constrained $5 ESP32 chip, and equip the agent with a persistent memory architecture that remembers conversations from weeks ago.</p>
-
-        <h3>1. The Hardware-Software Bridge (C++ & WebSockets)</h3>
-        <p>Instead of relying on clunky HTTP polling, I programmed the ESP32 in C++ to capture raw I2S audio and stream it continuously via a highly optimized, low-latency WebSocket connection. A local Python server ingested this stream in real-time. By keeping the connection open and buffering the audio at the edge, the overhead of establishing TLS handshakes for every query was entirely eliminated.</p>
-        <p>A critical engineering hurdle was handling <strong>"Barge-ins" (interruptions)</strong>. When a user spoke while JARVIS was answering, the C++ client instantly detected the amplitude spike on the microphone, sent a "HALT" packet over the WebSocket, and the Python server immediately killed the TTS generation. This allowed the agent to ingest the new context naturally, without losing its train of thought.</p>
-
-        <h3>2. The Orchestration Backend (Python & Local AI)</h3>
-        <p>As audio packets hit the Python server, a local instance of OpenAI's <code>Whisper</code> model transcribed the speech almost instantaneously. This text was fed into the Gemini reasoning engine. To give the assistant real-world agency, I implemented the <strong>Model Context Protocol (MCP)</strong>, allowing the LLM to trigger physical hardware actions (like turning on lights or fetching local weather APIs) natively.</p>
-
-        <h3>3. The 5-Layer Persistent Memory (ChromaDB)</h3>
-        <p>To solve the amnesia problem without overflowing the LLM’s context window, I architected a multi-tiered memory system:</p>
-        <ul>
-          <li><strong>Short-Term:</strong> The immediate conversation history kept in RAM.</li>
-          <li><strong>Working Memory:</strong> A rolling summary of the current session.</li>
-          <li><strong>Long-Term (ChromaDB):</strong> Background workers summarized completed sessions and embedded the facts, preferences, and key events into a local vector database. When a user asked, <em>"What was that book I mentioned last week?"</em>, the Python backend executed a semantic vector search before prompting the LLM, retrieving the exact context instantly.</li>
-        </ul>
-
-        <h2>Business Impact</h2>
-        <div class="cs-impact-box">
-          <p>This architecture proved that high-end, memory-persistent AI agents can be deployed on extremely constrained, cost-effective edge hardware. By shifting STT/TTS routing to a dedicated local server and maintaining a 5-layer vector memory, JARVIS achieved an end-to-end response latency of <strong>under 500ms</strong>, fundamentally outperforming standard cloud APIs.</p>
+      <section id="problem" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">01 / Problem</span>
+          <div>
+            <h2>A hardware voice assistant fails when the conversation loop feels slow or unsafe.</h2>
+            <p>Most AI assistants are evaluated like chatbots, but hardware voice agents have a different failure profile. The user speaks into a constrained embedded device. Audio must be captured, encoded, transported, transcribed, reasoned over, synthesized, streamed back, and interrupted naturally if the user talks again.</p>
+          </div>
         </div>
-      </div>
-      
-      <div class="cs-cta reveal">
-        <h3>Building IoT hardware that needs real-time AI reasoning?</h3>
-        <p>I build C++ & Python bridges that bring sub-second intelligence to edge devices without relying entirely on slow cloud APIs.</p>
-        <a href="https://calendly.com/mythonggg/10-min-sync-with-startups-1" target="_blank" class="btn btn-primary">Discuss your edge AI constraints</a>
+        <div class="case-grid-3">
+          <article class="case-card"><h3>Silence Feels Like Failure</h3><p>In text chat, a user can tolerate waiting. In voice, silence is interpreted as confusion or broken hardware. The architecture must overlap stages instead of waiting for complete ASR, complete LLM output, and complete TTS.</p></article>
+          <article class="case-card"><h3>Interruption Is Normal</h3><p>Humans interrupt. If the assistant cannot stop speaking and re-listen, it feels like a toy. Barge-in support is therefore a core state-machine problem, not a UI enhancement.</p></article>
+          <article class="case-card"><h3>Physical Actions Raise the Stakes</h3><p>When the model can set volume, control GPIO, create reminders, or update personal records, tool execution needs explicit gates. The LLM proposes; the runtime authorizes.</p></article>
+        </div>
+      </section>
+
+      <section id="decisions" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">02 / Decision Log</span>
+          <div><h2>The design separates the hot audio path from reasoning, tools, and memory.</h2></div>
+        </div>
+        <table class="decision-table">
+          <thead><tr><th>Decision</th><th>Why</th><th>Rejected Alternative</th><th>Trade-off</th></tr></thead>
+          <tbody>
+            <tr><td><strong>ESP32 firmware for device loop</strong></td><td>Wake word, mic/speaker, display, GPIO, and power behavior need local control.</td><td>Browser/mobile-only assistant.</td><td>Embedded debugging and flashing are harder.</td></tr>
+            <tr><td><strong>Opus audio frames</strong></td><td>Compressed realtime audio reduces bandwidth while preserving voice quality.</td><td>Raw PCM over network.</td><td>Requires codec handling and frame timing discipline.</td></tr>
+            <tr><td><strong>WebSocket transport</strong></td><td>Simple bidirectional channel for JSON events and binary Opus frames.</td><td>HTTP polling / request-response audio.</td><td>Requires session lifecycle and reconnect handling.</td></tr>
+            <tr><td><strong>MQTT+UDP option</strong></td><td>Control and audio have different transport needs; UDP can reduce audio overhead.</td><td>Single channel for everything.</td><td>More protocol complexity and packet protection.</td></tr>
+            <tr><td><strong>MCP / JSON-RPC tools</strong></td><td>Tool discovery and invocation become structured instead of prompt-only side effects.</td><td>Hardcoded natural-language commands.</td><td>Requires schema discipline and error paths.</td></tr>
+            <tr><td><strong>Layered memory</strong></td><td>Long-term recall should be retrieved when relevant, not stuffed into every prompt.</td><td>One giant conversation history.</td><td>Requires retrieval quality and stale-memory controls.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">03 / System Context</span>
+          <div><h2>The ESP32 is not a dumb microphone. It is a protocol-speaking edge client.</h2></div>
+        </div>
+        <figure class="case-diagram">
+          <img src="../assets/diagrams/jarvis-system-context.svg" alt="JARVIS system context diagram" loading="lazy" />
+          <figcaption>System context: ESP32 device, Python server, AI models, tools, and long-term memory.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">04 / Latency Budget</span>
+          <div><h2>The real enemy is not a slow model. It is accumulated waiting.</h2><p>A naive implementation serializes everything: record full utterance, upload audio, wait for ASR, wait for LLM, wait for TTS, then play. That feels dead. JARVIS is framed around a latency budget where capture, transport, recognition, reasoning, and speech should stream or overlap wherever possible.</p></div>
+        </div>
+        <figure class="case-diagram">
+          <img src="../assets/diagrams/jarvis-latency-budget.svg" alt="JARVIS latency budget diagram" loading="lazy" />
+          <figcaption>Latency budget: the user experiences the whole chain as one pause, so every stage has to earn its place.</figcaption>
+        </figure>
+      </section>
+
+      <section id="audio" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">05 / Realtime Audio</span>
+          <div><h2>The audio loop is the product experience.</h2><p>JARVIS captures speech, encodes Opus frames, streams audio to the server, runs ASR/LLM/tool orchestration, and streams TTS back. The key design choice is to treat voice as a continuous channel with state transitions, not as a sequence of isolated files.</p></div>
+        </div>
+        <figure class="case-diagram">
+          <img src="../assets/diagrams/jarvis-audio-pipeline.svg" alt="JARVIS realtime audio pipeline" loading="lazy" />
+          <figcaption>Audio pipeline: wake/VAD → Opus frames → transport → ASR → LLM/tools → TTS stream, with barge-in abort path.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">06 / State Machine</span>
+          <div><h2>Barge-in is a state transition, not a boolean flag.</h2><p>The assistant must leave Speaking state when new speech is detected, abort playback, preserve enough context to understand the interruption, and return to Listening without corrupting the session. This is why I model the conversation as states instead of scattered callbacks.</p></div>
+        </div>
+        <figure class="case-diagram">
+          <img src="../assets/diagrams/jarvis-state-machine.svg" alt="JARVIS conversation state machine" loading="lazy" />
+          <figcaption>Conversation state machine: Idle, Listening, Thinking, Tool Call, Speaking, Abort, and recovery loops.</figcaption>
+        </figure>
+      </section>
+
+      <section id="transport" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">07 / Protocols</span>
+          <div><h2>Transport is a design decision, not plumbing.</h2><p>The repo supports WebSocket and MQTT+UDP. WebSocket is easier to reason about: headers identify device/client, hello negotiates transport and audio parameters, binary frames carry Opus, and JSON frames carry listen/TTS/STT/MCP/system events. MQTT+UDP separates control from low-latency encrypted audio.</p></div>
+        </div>
+        <div class="diagram-grid">
+          <figure class="case-diagram"><img src="../assets/diagrams/jarvis-websocket-handshake.svg" alt="JARVIS WebSocket handshake" loading="lazy" /><figcaption>WebSocket protocol: authorization/device headers, hello exchange, Opus binary frames, JSON control, abort events.</figcaption></figure>
+          <figure class="case-diagram"><img src="../assets/diagrams/jarvis-mqtt-udp-transport.svg" alt="JARVIS MQTT UDP transport" loading="lazy" /><figcaption>MQTT+UDP mode: MQTT handles control; UDP handles Opus audio with AES-CTR and sequence protection.</figcaption></figure>
+        </div>
+        <code class="tech-equation">hello = { type: "hello", transport: "websocket", features: { mcp: true }, audio_params: { format: "opus", sample_rate: 16000, channels: 1, frame_duration: 60 } }<br />binary_frame = opus_payload<br />json_frame = listen | abort | stt | tts | mcp | system</code>
+      </section>
+
+      <section id="mcp" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">08 / MCP Tools</span>
+          <div><h2>MCP turns the assistant from a talker into an actuator.</h2><p>MCP messages are carried inside the base transport as JSON-RPC 2.0. The server can initialize a tool session, list device tools, call a tool, and receive structured results or errors. This is safer and more maintainable than letting the model invent side effects in free text.</p></div>
+        </div>
+        <figure class="case-diagram">
+          <img src="../assets/diagrams/jarvis-mcp-sequence.svg" alt="JARVIS MCP sequence diagram" loading="lazy" />
+          <figcaption>MCP flow: hello capability advertisement → initialize → tools/list → LLM selects action → tools/call → result/error.</figcaption>
+        </figure>
+        <div class="code-card" style="margin-top: 1rem;"><pre><code>{
+  "session_id": "...",
+  "type": "mcp",
+  "payload": {
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+      "name": "self.audio_speaker.set_volume",
+      "arguments": { "volume": 50 }
+    },
+    "id": 3
+  }
+}</code></pre></div>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">09 / Tool Safety</span>
+          <div><h2>The model suggests actions. The runtime decides whether they happen.</h2><p>This is the difference between a demo and a system. A voice instruction like “turn it off”, “save this”, or “remind me every day” can have real side effects. The execution path therefore needs allowlists, typed schemas, risk classification, and confirmation gates.</p></div>
+        </div>
+        <figure class="case-diagram">
+          <img src="../assets/diagrams/jarvis-tool-safety-gate.svg" alt="JARVIS tool safety gate" loading="lazy" />
+          <figcaption>Tool safety gate: LLM intent must pass allowlist, schema validation, risk classification, and optional confirmation before execution.</figcaption>
+        </figure>
+      </section>
+
+      <section id="memory" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">10 / Memory</span>
+          <div><h2>Memory must be useful without making every turn heavy.</h2><p>A proactive assistant needs to remember preferences, goals, reminders, health context, finance context, and prior facts. But pushing every historical detail into the prompt increases latency and degrades reasoning. Memory retrieval should be conditional, scoped, and explainable.</p></div>
+        </div>
+        <figure class="case-diagram">
+          <img src="../assets/diagrams/jarvis-memory-layers.svg" alt="JARVIS memory layers" loading="lazy" />
+          <figcaption>Memory architecture: retrieve relevant long-term facts instead of stuffing the entire past into the prompt.</figcaption>
+        </figure>
+        <figure class="case-diagram" style="margin-top: 1rem;">
+          <img src="../assets/diagrams/jarvis-memory-retrieval-flow.svg" alt="JARVIS memory retrieval flow" loading="lazy" />
+          <figcaption>Memory retrieval flow: classify whether memory is needed, search ChromaDB, inject only relevant facts, then summarize after the turn.</figcaption>
+        </figure>
+      </section>
+
+      <section id="tools" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">11 / Tool Domains</span>
+          <div><h2>The assistant becomes valuable when it commits actions into typed domains.</h2><p>The Python server includes plugin functions for reminders, finance, health, routines, goals, todos, weather/search, memory, activity, and utility handling. This structure keeps each capability isolated and testable.</p></div>
+        </div>
+        <figure class="case-diagram">
+          <img src="../assets/diagrams/jarvis-tool-plugin-map.svg" alt="JARVIS tool plugin map" loading="lazy" />
+          <figcaption>Tool map: user intents route into domain-specific plugins instead of one giant assistant function.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">12 / Failure Modes</span>
+          <div><h2>Voice agents must handle interruption and partial failure gracefully.</h2><p>Network drops, barge-ins, tool failures, and memory drift are expected. The architecture should return to a sane state instead of trapping the user inside a broken conversation.</p></div>
+        </div>
+        <figure class="case-diagram">
+          <img src="../assets/diagrams/jarvis-failure-modes.svg" alt="JARVIS failure mode analysis" loading="lazy" />
+          <figcaption>Failure mode analysis: reconnect on network drop, abort/replan on barge-in, JSON-RPC error path for tool failure, scoped retrieval for memory drift.</figcaption>
+        </figure>
+      </section>
+
+      <section id="security" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">13 / Security</span>
+          <div><h2>A voice assistant hears private context and can execute actions.</h2><p>That makes security more important than in a normal chatbot. JARVIS needs device identity, transport authentication, tool allowlists, confirmation for sensitive actions, and privacy boundaries around memory retrieval.</p></div>
+        </div>
+        <figure class="case-diagram">
+          <img src="../assets/diagrams/jarvis-security-model.svg" alt="JARVIS security model" loading="lazy" />
+          <figcaption>Security model: device identity, transport security, MCP tool allowlisting, action confirmation, memory privacy, and prompt-injection containment.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">14 / Observability</span>
+          <div><h2>Voice UX quality should be measured per turn, not only per server request.</h2><p>Useful metrics include wake accuracy, capture-to-first-audio latency, barge-in handling rate, tool success/error rate, memory hit usefulness, packet jitter/loss, and successful turn completion.</p></div>
+        </div>
+        <figure class="case-diagram">
+          <img src="../assets/diagrams/jarvis-observability.svg" alt="JARVIS observability plan" loading="lazy" />
+          <figcaption>Observability plan: voice systems need audio, tool, memory, and turn-level metrics.</figcaption>
+        </figure>
+      </section>
+
+      <section id="demo" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">15 / Demo Gallery</span>
+          <div><h2>The demo should prove physical agency, not just conversation.</h2><p>Replace placeholders with real hardware photos and Playwright/server screenshots: ESP32 device, WebSocket logs, MCP tool list, memory retrieval, reminder creation, and barge-in behavior.</p></div>
+        </div>
+        <div class="case-gallery">
+          <figure class="case-shot"><img src="../assets/screenshots/placeholder.svg" alt="Placeholder for ESP32 hardware photo" loading="lazy" /><figcaption>TODO: ESP32 hardware setup.</figcaption></figure>
+          <figure class="case-shot"><img src="../assets/screenshots/placeholder.svg" alt="Placeholder for WebSocket server log" loading="lazy" /><figcaption>TODO: WebSocket/MCP protocol log.</figcaption></figure>
+          <figure class="case-shot"><img src="../assets/screenshots/placeholder.svg" alt="Placeholder for memory/tool demo" loading="lazy" /><figcaption>TODO: memory recall + tool execution demo.</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">16 / Video</span>
+          <div><h2>The ideal video shows wake word, voice request, tool call, memory recall, and interruption.</h2></div>
+        </div>
+        <div class="video-shell"><div class="video-placeholder"><strong>JARVIS demo video slot</strong><span>Record: wake device → ask for a reminder → MCP/tool execution → ask memory-based follow-up → interrupt TTS mid-response → recover cleanly.</span></div></div>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">17 / Lessons</span>
+          <div><h2>The main lesson: hardware AI is a latency, protocol, and safety problem before it is an LLM problem.</h2></div>
+        </div>
+        <div class="case-grid-2">
+          <article class="case-card"><h3>What Worked</h3><p>Separating the device protocol, audio transport, AI orchestration, MCP tools, and memory made the system explainable. Each failure domain has a different recovery path.</p></article>
+          <article class="case-card"><h3>What I Would Improve</h3><p>The next iteration should add richer turn tracing, automated latency benchmarks per stage, tool-level permission prompts, and a memory evaluation harness to detect stale or irrelevant retrievals.</p></article>
+        </div>
+      </section>
+
+      <section class="cs-cta reveal">
+        <h3>Building a realtime AI product that touches hardware, tools, or voice?</h3>
+        <p>I design the protocol boundaries, backend orchestration, and failure paths that make it reliable.</p>
+        <a href="https://calendly.com/mythonggg/10-min-sync-with-startups-1" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Discuss your realtime AI system</a>
         <a href="mailto:mythonggg@gmail.com?subject=Company%20Name%20%7C%20Thong%20intro%20-%20Fullstack%20AI%20Engineer" class="btn btn-ghost" style="margin-left: 1rem;">mythonggg@gmail.com</a>
-      </div>
+      </section>
     </main>
 
-    <footer class="footer" style="border-top:none; padding-bottom: 4rem;">
-      <p>&copy; 2026 Thong Nguyen. Independent Full-Stack AI Engineer.</p>
-    </footer>
+    <footer class="footer"><p>&copy; 2026 Thong Nguyen. Independent Full-Stack AI Engineer.</p></footer>
     <script src="../script.js"></script>
   </body>
 </html>
