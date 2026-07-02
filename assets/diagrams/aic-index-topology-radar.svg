@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc">
+  <title id="title">AIC index topology radar</title>
+  <desc id="desc">A radial topology showing indexes around the timeline anchor.</desc>
+  <rect width="1400" height="900" fill="#050713"/>
+  <defs><filter id="glow"><feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <g font-family="Inter, Arial" fill="#f8fafc">
+    <text x="700" y="70" text-anchor="middle" font-size="38" font-weight="800">Index Topology: One Timeline, Many Evidence Surfaces</text>
+    <text x="700" y="112" text-anchor="middle" fill="#94a3b8" font-size="18">Every index is useful only because it can resolve back to the same video_id + keyframe_index anchor.</text>
+    <circle cx="700" cy="465" r="118" fill="#111426" stroke="#818cf8" stroke-width="3" filter="url(#glow)"/>
+    <text x="700" y="448" text-anchor="middle" font-size="28" font-weight="800">Timeline Anchor</text>
+    <text x="700" y="482" text-anchor="middle" fill="#94a3b8" font-size="16">video_id + keyframe_index</text>
+    <text x="700" y="512" text-anchor="middle" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="14">the contract between indexes</text>
+    <g stroke="#24305f" stroke-width="2" fill="none"><circle cx="700" cy="465" r="240"/><circle cx="700" cy="465" r="330"/></g>
+    <g stroke="#818cf8" stroke-width="3" opacity=".85"><line x1="700" y1="347" x2="700" y2="185"/><line x1="810" y1="420" x2="1030" y2="275"/><line x1="808" y1="515" x2="1035" y2="655"/><line x1="592" y1="515" x2="365" y2="655"/><line x1="590" y1="420" x2="365" y2="275"/></g>
+    <g>
+      <circle cx="700" cy="165" r="82" fill="#0f111a" stroke="#6366f1" stroke-width="3"/><text x="700" y="154" text-anchor="middle" font-size="22" font-weight="800">Milvus</text><text x="700" y="184" text-anchor="middle" fill="#94a3b8" font-size="14">CLIP / BEIT3 vectors</text>
+      <circle cx="1090" cy="245" r="82" fill="#0f111a" stroke="#f59e0b" stroke-width="3"/><text x="1090" y="234" text-anchor="middle" font-size="22" font-weight="800">MongoDB</text><text x="1090" y="264" text-anchor="middle" fill="#94a3b8" font-size="14">object detections</text>
+      <circle cx="1090" cy="685" r="82" fill="#0f111a" stroke="#10b981" stroke-width="3"/><text x="1090" y="674" text-anchor="middle" font-size="22" font-weight="800">Elastic</text><text x="1090" y="704" text-anchor="middle" fill="#94a3b8" font-size="14">transcripts</text>
+      <circle cx="310" cy="685" r="82" fill="#0f111a" stroke="#ef4444" stroke-width="3"/><text x="310" y="674" text-anchor="middle" font-size="22" font-weight="800">Audio DB</text><text x="310" y="704" text-anchor="middle" fill="#94a3b8" font-size="14">fingerprints</text>
+      <circle cx="310" cy="245" r="82" fill="#0f111a" stroke="#818cf8" stroke-width="3"/><text x="310" y="234" text-anchor="middle" font-size="22" font-weight="800">Metadata</text><text x="310" y="264" text-anchor="middle" fill="#94a3b8" font-size="14">shots + FPS</text>
+    </g>
+  </g>
+</svg>

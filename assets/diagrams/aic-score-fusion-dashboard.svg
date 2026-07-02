@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 860" role="img" aria-labelledby="title desc">
+  <title id="title">AIC score fusion dashboard</title>
+  <desc id="desc">Dashboard-like visual explaining score fusion and modality contribution.</desc>
+  <rect width="1400" height="860" fill="#050713"/>
+  <g font-family="Inter, Arial" fill="#f8fafc">
+    <text x="700" y="70" text-anchor="middle" font-size="38" font-weight="800">Score Fusion Should Be Inspectable</text>
+    <text x="700" y="112" text-anchor="middle" fill="#94a3b8" font-size="18">A strong search UI should reveal why a moment ranked highly, not just show a thumbnail.</text>
+    <rect x="90" y="180" width="1220" height="560" rx="28" fill="#0b0e1a" stroke="#24305f"/>
+    <g>
+      <rect x="145" y="245" width="300" height="190" rx="18" fill="#111426" stroke="#6366f1"/><text x="295" y="330" text-anchor="middle" font-size="28" font-weight="800">Frame A</text><text x="295" y="368" text-anchor="middle" fill="#94a3b8" font-size="15">video L01_V003 / kf 812</text>
+      <rect x="145" y="485" width="300" height="190" rx="18" fill="#111426" stroke="#334155"/><text x="295" y="570" text-anchor="middle" font-size="28" font-weight="800">Frame B</text><text x="295" y="608" text-anchor="middle" fill="#94a3b8" font-size="15">video L05_V012 / kf 204</text>
+    </g>
+    <g font-family="JetBrains Mono, monospace" font-size="15">
+      <text x="530" y="240" fill="#818cf8">CLIP</text><text x="690" y="240" fill="#818cf8">BEIT3</text><text x="850" y="240" fill="#818cf8">Transcript</text><text x="1050" y="240" fill="#818cf8">Objects</text><text x="1210" y="240" fill="#818cf8">Final</text>
+    </g>
+    <g>
+      <rect x="520" y="295" width="120" height="26" rx="13" fill="#6366f1"/><rect x="680" y="295" width="104" height="26" rx="13" fill="#10b981"/><rect x="850" y="295" width="80" height="26" rx="13" fill="#334155"/><rect x="1050" y="295" width="96" height="26" rx="13" fill="#f59e0b"/><text x="1220" y="318" text-anchor="middle" font-size="24" font-weight="800">0.84</text>
+      <rect x="520" y="535" width="78" height="26" rx="13" fill="#6366f1"/><rect x="680" y="535" width="110" height="26" rx="13" fill="#10b981"/><rect x="850" y="535" width="120" height="26" rx="13" fill="#334155"/><rect x="1050" y="535" width="22" height="26" rx="13" fill="#f59e0b"/><text x="1220" y="558" text-anchor="middle" font-size="24" font-weight="800">0.66</text>
+    </g>
+    <g fill="#94a3b8" font-size="15"><text x="530" y="355">visual scene strong</text><text x="530" y="595">speech match helps, object weak</text></g>
+  </g>
+</svg>

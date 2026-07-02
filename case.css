@@ -44,6 +44,8 @@
   border-radius: 18px;
   padding: 1.5rem;
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+  min-width: 0;
+  overflow: hidden;
 }
 
 .case-panel h2,
@@ -64,11 +66,17 @@
 .case-fact {
   border-bottom: 1px solid var(--border);
   padding-bottom: 1rem;
+  min-width: 0;
 }
 
 .case-fact:last-child { border-bottom: 0; padding-bottom: 0; }
 .case-fact span { display: block; color: var(--text-muted); font-size: 0.78rem; font-family: var(--mono); margin-bottom: 0.25rem; }
-.case-fact strong { color: var(--text); font-weight: 500; }
+.case-fact strong {
+  color: var(--text);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
 
 .case-section-block {
   margin: 5rem 0;

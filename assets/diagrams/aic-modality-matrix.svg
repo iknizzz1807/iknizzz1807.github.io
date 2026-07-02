@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc">
+  <title id="title">AIC modality decision matrix</title>
+  <desc id="desc">A matrix showing which retrieval modality answers which user intent.</desc>
+  <rect width="1400" height="900" fill="#050713"/>
+  <defs>
+    <linearGradient id="hot" x1="0" x2="1"><stop stop-color="#111426"/><stop offset="1" stop-color="#6366f1"/></linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <g font-family="Inter, Arial" fill="#f8fafc">
+    <text x="700" y="70" text-anchor="middle" font-size="38" font-weight="800">Modality Decision Matrix</text>
+    <text x="700" y="112" text-anchor="middle" fill="#94a3b8" font-size="18">The system does not use every index blindly. Each modality answers a different kind of intent.</text>
+    <g font-size="17" font-weight="700" fill="#818cf8">
+      <text x="395" y="190" text-anchor="middle">Visual Semantics</text>
+      <text x="595" y="190" text-anchor="middle">Objects</text>
+      <text x="795" y="190" text-anchor="middle">Transcript</text>
+      <text x="995" y="190" text-anchor="middle">Audio</text>
+      <text x="1195" y="190" text-anchor="middle">Temporal</text>
+    </g>
+    <g font-size="17" fill="#f8fafc">
+      <text x="105" y="265">“red car in rain”</text>
+      <text x="105" y="365">“three people at table”</text>
+      <text x="105" y="465">“speaker says climate”</text>
+      <text x="105" y="565">“same background music”</text>
+      <text x="105" y="665">“dog runs then door opens”</text>
+    </g>
+    <g stroke="#24305f" stroke-width="1">
+      <path d="M300 215 H1300"/><path d="M300 315 H1300"/><path d="M300 415 H1300"/><path d="M300 515 H1300"/><path d="M300 615 H1300"/><path d="M300 715 H1300"/>
+      <path d="M300 215 V715"/><path d="M500 215 V715"/><path d="M700 215 V715"/><path d="M900 215 V715"/><path d="M1100 215 V715"/><path d="M1300 215 V715"/>
+    </g>
+    <g filter="url(#glow)">
+      <circle cx="395" cy="255" r="34" fill="#6366f1"/><circle cx="595" cy="255" r="18" fill="#334155"/>
+      <circle cx="395" cy="355" r="20" fill="#334155"/><circle cx="595" cy="355" r="34" fill="#f59e0b"/>
+      <circle cx="795" cy="455" r="34" fill="#10b981"/><circle cx="395" cy="455" r="16" fill="#334155"/>
+      <circle cx="995" cy="555" r="34" fill="#ef4444"/><circle cx="795" cy="555" r="16" fill="#334155"/>
+      <circle cx="1195" cy="655" r="34" fill="#818cf8"/><circle cx="395" cy="655" r="26" fill="#6366f1"/>
+    </g>
+    <g font-family="JetBrains Mono, monospace" fill="#94a3b8" font-size="15">
+      <text x="700" y="790" text-anchor="middle">Large dot = primary signal. Small dot = supporting evidence. Empty cell = do not force that modality.</text>
+    </g>
+  </g>
+</svg>

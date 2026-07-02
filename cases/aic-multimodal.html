@@ -3,107 +3,209 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Case Study: AIC Multimodal Search Engine - Unifying video, audio & image retrieval with a hybrid Milvus + Elasticsearch pipeline for sub-second unstructured media search." />
-    <meta name="keywords" content="multimodal search, Milvus, Elasticsearch, vector embeddings, FFmpeg, OpenCV, video retrieval, hybrid search, FastAPI, RRF, CLIP, Whisper" />
+    <meta name="description" content="AIC Multimodal Search engineering deep-dive: hybrid video retrieval over CLIP/BEIT3 visual vectors, MongoDB object detections, Elasticsearch transcripts, temporal search, and audio fingerprints." />
+    <meta name="keywords" content="multimodal search, video retrieval, Milvus, Elasticsearch, MongoDB, CLIP, BEIT3, OpenCV, FFmpeg, audio fingerprint, temporal search" />
     <meta name="author" content="Thong Nguyen" />
     <link rel="canonical" href="https://ikniz.id.vn/cases/aic-multimodal.html" />
-    <meta property="og:title" content="AIC Multimodal Search Engine | B2B Case Study | Thong Nguyen" />
-    <meta property="og:description" content="Architecting a sub-second retrieval pipeline blending vector embeddings (Milvus) and lexical search (Elasticsearch) for massive unstructured media archives." />
+    <meta property="og:title" content="AIC Multimodal Search Engineering Deep-Dive | Thong Nguyen" />
+    <meta property="og:description" content="How I designed a hybrid retrieval system that unifies video, audio, transcript, and object signals to find timestamped moments in media archives." />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://ikniz.id.vn/cases/aic-multimodal.html" />
     <meta property="og:image" content="https://ikniz.id.vn/favicon.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:site_name" content="Thong Nguyen Portfolio" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="AIC Multimodal Search Engine | B2B Case Study" />
-    <meta name="twitter:description" content="Unifying video, audio & image retrieval with a hybrid Milvus + Elasticsearch pipeline for sub-second search." />
-    <meta name="twitter:image" content="https://ikniz.id.vn/favicon.jpg" />
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "TechArticle",
-      "headline": "AIC Multimodal Search Engine: Unifying Video, Audio & Image Retrieval",
-      "description": "Architecting a sub-second retrieval pipeline blending vector embeddings (Milvus) and lexical search (Elasticsearch) for massive unstructured media archives.",
-      "author": {
-        "@type": "Person",
-        "name": "Thong Nguyen",
-        "url": "https://ikniz.id.vn"
-      },
-      "url": "https://ikniz.id.vn/cases/aic-multimodal.html",
-      "keywords": "multimodal search, Milvus, Elasticsearch, vector embeddings, FFmpeg, OpenCV, FastAPI"
-    }
-    </script>
-    <title>AIC Multimodal Search | B2B Case Study</title>
+    <title>AIC Multimodal Search Deep-Dive | Thong Nguyen</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-    <link rel="dns-prefetch" href="https://calendly.com" />
     <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../case.css" />
   </head>
-  <body class="case-study-page">
+  <body>
     <div class="bg-gradient-top"></div>
     <nav class="nav">
       <div class="nav-inner">
-        <a href="../index.html" class="nav-logo" style="color:var(--text-dim); font-size:0.9rem;">&larr; Back to Portfolio</a>
-        <a href="https://calendly.com/mythonggg/10-min-sync-with-startups-1" target="_blank" class="nav-link-cta">Let's Talk Architecture</a>
+        <a href="../index.html" class="nav-logo">&larr; Portfolio</a>
+        <div class="nav-links">
+          <a href="../index.html#work" class="nav-link">Case Studies</a>
+          <a href="../videos/" class="nav-link">Videos</a>
+          <a href="https://calendly.com/mythonggg/10-min-sync-with-startups-1" target="_blank" rel="noopener noreferrer" class="nav-link nav-link-cta">Let's Talk Architecture</a>
+        </div>
       </div>
     </nav>
 
-    <main class="cs-article">
-      <header class="cs-hero reveal">
-        <span class="b2b-case-type">High-Performance Search Infrastructure</span>
-        <h1 class="cs-title">AIC Multimodal Search Engine: Unifying Video, Audio & Image Retrieval</h1>
-        <p class="cs-subtitle">When text-based search engines fail: Architecting a sub-second retrieval pipeline blending vector embeddings (Milvus) and lexical search (Elasticsearch) for massive unstructured media archives.</p>
-        <div class="cs-meta">
-          <div class="cs-meta-item">
-            <span class="cs-meta-label">Core Technologies</span>
-            <span class="cs-meta-value">Python, FastAPI, OpenCV, FFmpeg, Milvus, Elasticsearch</span>
-          </div>
-          <div class="cs-meta-item">
-            <span class="cs-meta-label">Infrastructure</span>
-            <span class="cs-meta-value">Docker Compose, Async Data Processing Pipelines</span>
-          </div>
+    <main class="case-showcase">
+      <header class="case-showcase__hero reveal">
+        <div>
+          <span class="case-kicker">Engineering Case Study / Multimodal Search</span>
+          <h1>AIC Multimodal Search: finding moments, not files.</h1>
+          <p class="case-lead">A media search system is only useful when it returns the exact timestamp where something happens. Text search alone misses visual concepts. Vector search alone misses exact speech and object constraints. AIC combines visual embeddings, object detections, transcripts, audio fingerprints, temporal logic, and shot metadata into a single retrieval workflow.</p>
+          <nav class="case-toc" aria-label="Case study table of contents">
+            <a href="#problem">Problem</a><a href="#decisions">Decisions</a><a href="#ingestion">Ingestion</a><a href="#hybrid">Hybrid</a><a href="#temporal">Temporal</a><a href="#objects">Objects</a><a href="#transcripts">Transcripts</a><a href="#audio">Audio</a><a href="#demo">Demo</a>
+          </nav>
         </div>
+        <aside class="case-panel">
+          <h2>Project Facts</h2>
+          <div class="case-facts">
+            <div class="case-fact"><span>Role</span><strong>Search engineer, multimodal retrieval engineer, backend integrator</strong></div>
+            <div class="case-fact"><span>Core Stack</span><strong>Flask, Python, Milvus, MongoDB, Elasticsearch, CLIP, BEIT3, FFmpeg, HLS, audio fingerprints</strong></div>
+            <div class="case-fact"><span>Repo Source</span><strong>AI_MachineLearning/Video-Retrieval-System</strong></div>
+            <div class="case-fact"><span>Output</span><strong>video_id, keyframe_index, shot boundary, HLS playback segment, evaluation timestamp</strong></div>
+          </div>
+        </aside>
       </header>
 
-      <div class="cs-content reveal">
-        <h2>The Chaos of Archiving Media Content</h2>
-        <p>A significant problem facing media agencies, production houses, and large content publishers is the inability to locate specific moments within petabytes of video footage. Tagging video and audio files manually is labor-intensive and prone to human error. Standard relational databases (SQL) or text-based search engines (Solr) are fundamentally incapable of searching for a "red sports car driving in the rain" unless a human has explicitly typed those words into the video's metadata.</p>
-        <p>The system required a pipeline capable of accepting natural language queries and returning the exact timestamp of a video where that action occurred—instantaneously, without relying on human data entry.</p>
-
-        <h2>Architecting a Hybrid Retrieval Engine</h2>
-        <p>To solve this, I designed the AIC Multimodal Search Engine. A purely vector-based semantic search struggles with exact keyword matching (e.g., specific names, serial numbers), while a purely lexical search fails at semantic understanding. The solution required a "hybrid" retrieval architecture.</p>
-
-        <h3>1. The Asynchronous Media Ingestion Pipeline (Python + Docker)</h3>
-        <p>The heaviest computational burden in this architecture is the ingestion process. Uploading a 2-hour 4K video requires processing pipelines that do not crash the primary API gateway. I developed asynchronous background workers using Python.</p>
-        <p>When a media file hit the <code>data/</code> volume mounted in Docker, the processing script (<code>process.py</code>) engaged. It employed <strong>FFmpeg</strong> to extract the audio track and segment the video into granular temporal chunks (e.g., 5-second intervals). Concurrently, <strong>OpenCV</strong> sampled keyframes from the video stream to avoid processing redundant, identical frames.</p>
-
-        <h3>2. Vectorizing Unstructured Reality (Milvus)</h3>
-        <p>These sampled frames were pushed through a Vision-Language Model (VLM, like CLIP or an equivalent multimodal model) to generate semantic vector embeddings. Simultaneously, the audio track was passed through an Automatic Speech Recognition (ASR) model (Whisper) to generate text transcripts.</p>
-        <p>The resulting 512-dimensional vectors (visual representations) and transcripts were pushed to a highly-scalable, containerized instance of <strong>Milvus</strong>, running inside the <code>docker-compose</code> cluster.</p>
-
-        <h3>3. Hybrid Retrieval & Reciprocal Rank Fusion</h3>
-        <p>I integrated <strong>Elasticsearch</strong> to handle the lexical side (metadata, exact keywords, OCR text extracted from the video frames). When a user fired a query to the <strong>FastAPI server</strong> (<code>main.py</code>), the backend embedded the user's text query. It then executed a semantic search against Milvus to find conceptually similar video frames, while simultaneously running a BM25 keyword search against Elasticsearch.</p>
-        <p>The results were unified and ranked using Reciprocal Rank Fusion (RRF), ensuring that a search for a specific entity name didn't get lost in the vector space math.</p>
-
-        <h2>Business Impact</h2>
-        <div class="cs-impact-box">
-          <p>By automating the indexing of unstructured media through computer vision and NLP models, the system <strong>eliminated the need for human tagging</strong>. The hybrid architecture (Milvus + Elasticsearch) achieved <strong>sub-second query response times</strong> across the entire media dataset. Users could instantly locate specific 5-second clips buried deep within thousands of hours of unlabelled historical footage.</p>
+      <section id="problem" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">01 / Problem</span>
+          <div><h2>The user is not searching for a video. They are searching for a moment inside a video.</h2><p>Media archives are hard because intent can be visual, spoken, object-based, temporal, or auditory. “A man opens a red door after a dog runs past” is not just a text query. It is a sequence of visual events. “Someone says climate policy” is transcript search. “Find the same audio clip” is fingerprint search. A useful system must handle all of them.</p></div>
         </div>
-      </div>
-      
-      <div class="cs-cta reveal">
-        <h3>Struggling with unsearchable, unstructured media data?</h3>
-        <p>I build high-performance, hybrid retrieval pipelines for video, audio, and images using production-grade open-source tools.</p>
-        <a href="https://calendly.com/mythonggg/10-min-sync-with-startups-1" target="_blank" class="btn btn-primary">Let's discuss your search bottleneck</a>
+        <div class="case-grid-3">
+          <article class="case-card"><h3>Visual Semantics</h3><p>Users describe scenes in natural language. The system needs embeddings that can map text queries to keyframes.</p></article>
+          <article class="case-card"><h3>Concrete Constraints</h3><p>Some queries require exact object filters: class labels, confidence thresholds, and instance counts.</p></article>
+          <article class="case-card"><h3>Timeline Precision</h3><p>The result must map back to FPS, shot boundaries, HLS playback, and evaluation timestamps.</p></article>
+        </div>
+      </section>
+
+      <section id="decisions" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">02 / Decision Log</span>
+          <div><h2>The system uses different indexes because each modality fails differently.</h2></div>
+        </div>
+        <table class="decision-table">
+          <thead><tr><th>Decision</th><th>Why</th><th>Rejected Alternative</th><th>Trade-off</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Milvus for visual vectors</strong></td><td>CLIP/BEIT3 keyframe vectors need fast approximate nearest-neighbor search.</td><td>Store vectors in MongoDB.</td><td>Requires vector index lifecycle and model/version discipline.</td></tr>
+            <tr><td><strong>CLIP + BEIT3 fusion</strong></td><td>Different vision-language models catch different semantics; fusion reduces single-model brittleness.</td><td>Use one embedding model only.</td><td>More memory and ingestion complexity.</td></tr>
+            <tr><td><strong>MongoDB for objects</strong></td><td>Object detections are structured arrays with labels, confidence, and bounding boxes.</td><td>Flatten object labels into text.</td><td>Requires aggregation logic for count/confidence constraints.</td></tr>
+            <tr><td><strong>Elasticsearch for transcripts</strong></td><td>Speech queries benefit from fuzzy and phrase matching, not vector semantics alone.</td><td>Only semantic video search.</td><td>Requires timestamp-to-keyframe alignment.</td></tr>
+            <tr><td><strong>Temporal search</strong></td><td>Some answers are event sequences, not isolated frames.</td><td>Return independent top-k hits.</td><td>Requires anchor query and max-frame-gap logic.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">03 / System Context</span>
+          <div><h2>AIC is a retrieval core sitting between media archives and timestamped answers.</h2></div>
+        </div>
+        <figure class="case-diagram"><img src="../assets/diagrams/aic-index-topology-radar.svg" alt="AIC index topology radar" loading="lazy" /><figcaption>Topology view: every modality is useful only because it resolves back to the same timeline anchor.</figcaption></figure>
+      </section>
+
+      <section id="ingestion" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">04 / Ingestion</span>
+          <div><h2>One video becomes several synchronized search surfaces.</h2><p>The ingestion process loads keyframe embeddings into Milvus, object detections into MongoDB, transcripts into Elasticsearch, and audio fingerprints from HLS segments via FFmpeg. The key engineering concern is alignment: every signal must map back to the same video/keyframe timeline.</p></div>
+        </div>
+        <figure class="case-diagram"><img src="../assets/diagrams/aic-ingestion-pipeline.svg" alt="AIC ingestion pipeline" loading="lazy" /><figcaption>Ingestion pipeline: visual vectors, object detections, transcripts, and audio fingerprints are separate indexes over one timeline.</figcaption></figure>
+      </section>
+
+      <section id="hybrid" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">05 / Hybrid Retrieval</span>
+          <div><h2>The query fans out, then collapses back to timestamped keyframes.</h2><p>The Flask search API accepts text queries, object filters, and audio/transcript constraints. Each path returns candidate keyframes. The system intersects result sets by `(video_id, keyframe_index)` and ranks by fused scores when visual retrieval participates.</p></div>
+        </div>
+        <figure class="case-diagram"><img src="../assets/diagrams/aic-hybrid-retrieval.svg" alt="AIC hybrid retrieval" loading="lazy" /><figcaption>Hybrid retrieval: Milvus handles visual semantics, MongoDB handles object constraints, Elasticsearch handles transcript evidence, and intersection returns shared keyframe hits.</figcaption></figure>
+        <figure class="case-diagram" style="margin-top: 1rem;"><img src="../assets/diagrams/aic-modality-matrix.svg" alt="AIC modality decision matrix" loading="lazy" /><figcaption>Decision matrix: each modality is selected because it answers a different class of user intent.</figcaption></figure>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">06 / Visual Fusion</span>
+          <div><h2>Visual retrieval uses two model perspectives instead of trusting one embedding space.</h2><p>CLIP and BEIT3 queries are encoded separately, searched against separate Milvus collections, normalized, merged by keyframe, and fused with equal weights. The result is a ranked list of candidate keyframes with `fused_score`.</p></div>
+        </div>
+        <figure class="case-diagram"><img src="../assets/diagrams/aic-score-fusion-dashboard.svg" alt="AIC score fusion dashboard" loading="lazy" /><figcaption>Score explanation view: a better product would show why a result ranked, not just return a thumbnail.</figcaption></figure>
+        <code class="tech-equation">fused_score = 0.5 * normalized_clip_score + 0.5 * normalized_beit3_score<br />key = (video_id, keyframe_index)</code>
+      </section>
+
+      <section id="temporal" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">07 / Temporal Search</span>
+          <div><h2>Some queries describe a sequence of events, not a scene.</h2><p>The `temporal_search` method runs each query independently, groups candidates by video, chooses an anchor query, then walks backward and forward to find neighboring keyframes inside `MAX_FRAME_GAP`. This turns separate top-k lists into a temporal chain.</p></div>
+        </div>
+        <figure class="case-diagram"><img src="../assets/diagrams/aic-temporal-filmstrip.svg" alt="AIC temporal filmstrip" loading="lazy" /><figcaption>Filmstrip view: temporal search assembles a mini-story from ordered keyframes, not a single best image.</figcaption></figure>
+      </section>
+
+      <section id="objects" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">08 / Object Constraints</span>
+          <div><h2>Object filters make retrieval concrete when language is too fuzzy.</h2><p>MongoDB stores object detections per keyframe. The object search path uses aggregation with `$filter`, `$size`, `$gte`, and `$lte` to enforce label, confidence, minimum instance, and maximum instance constraints.</p></div>
+        </div>
+        <figure class="case-diagram"><img src="../assets/diagrams/aic-object-search.svg" alt="AIC object search" loading="lazy" /><figcaption>Object search: structured detections become exact constraints that can be intersected with visual/text candidates.</figcaption></figure>
+      </section>
+
+      <section id="transcripts" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">09 / Transcript Retrieval</span>
+          <div><h2>Speech needs lexical search because exact words matter.</h2><p>Transcript CSV rows are cleaned, aligned to closest keyframes by FPS, and indexed in Elasticsearch with a custom analyzer. Querying combines fuzzy match and phrase match so spoken terms can retrieve timestamped frames.</p></div>
+        </div>
+        <figure class="case-diagram"><img src="../assets/diagrams/aic-transcript-index.svg" alt="AIC transcript indexing" loading="lazy" /><figcaption>Transcript retrieval: speech text becomes a searchable index tied back to keyframes.</figcaption></figure>
+      </section>
+
+      <section id="audio" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">10 / Audio Fingerprints</span>
+          <div><h2>Audio identity is different from speech meaning.</h2><p>The fingerprint path concatenates HLS `.ts` segments with FFmpeg, converts them to mono WAV, extracts audio hashes, and stores them in a fingerprint database. This supports matching sound patterns even when transcript text is unavailable or irrelevant.</p></div>
+        </div>
+        <figure class="case-diagram"><img src="../assets/diagrams/aic-audio-fingerprint.svg" alt="AIC audio fingerprint pipeline" loading="lazy" /><figcaption>Audio fingerprinting: HLS segments become WAV, then hashes keyed by video ID.</figcaption></figure>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">11 / Result Resolution</span>
+          <div><h2>Retrieval is only complete when the result becomes playable and submittable.</h2><p>The app maps each keyframe hit to FPS, shot boundaries, HLS playback data, and evaluation submission payload. This is where raw search hits become product results.</p></div>
+        </div>
+        <figure class="case-diagram"><img src="../assets/diagrams/aic-result-resolution.svg" alt="AIC result resolution" loading="lazy" /><figcaption>Result resolution: keyframe hits are converted into shot ranges, playback segments, and evaluation timestamps.</figcaption></figure>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">12 / Failure Modes</span>
+          <div><h2>Multimodal search fails when indexes drift or one modality dominates.</h2><p>Useful observability should track not just server health, but modality contribution, recall@K, stage latency, empty intersections, timestamp errors, and index freshness.</p></div>
+        </div>
+        <figure class="case-diagram"><img src="../assets/diagrams/aic-failure-observability.svg" alt="AIC failure and observability" loading="lazy" /><figcaption>Failure and observability: watch index drift, model bias, timestamp errors, empty intersections, recall, latency, and modality hits.</figcaption></figure>
+      </section>
+
+      <section id="demo" class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">13 / Demo Gallery</span>
+          <div><h2>The demo should prove that different query types hit the same timeline.</h2><p>Replace placeholders with app captures: semantic query, object-filter query, transcript query, temporal sequence query, HLS playback, and evaluation submit flow.</p></div>
+        </div>
+        <div class="case-gallery">
+          <figure class="case-shot"><img src="../assets/screenshots/placeholder.svg" alt="Placeholder for semantic video search" loading="lazy" /><figcaption>TODO: semantic keyframe search results.</figcaption></figure>
+          <figure class="case-shot"><img src="../assets/screenshots/placeholder.svg" alt="Placeholder for temporal search" loading="lazy" /><figcaption>TODO: temporal sequence result.</figcaption></figure>
+          <figure class="case-shot"><img src="../assets/screenshots/placeholder.svg" alt="Placeholder for playback and submit flow" loading="lazy" /><figcaption>TODO: playback + timestamp submission.</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">14 / Video</span>
+          <div><h2>The strongest video starts with an impossible search prompt and ends on the exact moment.</h2></div>
+        </div>
+        <div class="video-shell"><div class="video-placeholder"><strong>AIC demo video slot</strong><span>Record: natural-language scene query → add object constraint → add transcript/audio clue → inspect temporal sequence → play HLS segment → submit timestamp.</span></div></div>
+      </section>
+
+      <section class="case-section-block reveal">
+        <div class="case-section-heading">
+          <span class="case-section-number">15 / Lessons</span>
+          <div><h2>The main lesson: multimodal search is about alignment, not just embeddings.</h2></div>
+        </div>
+        <div class="case-grid-2">
+          <article class="case-card"><h3>What Worked</h3><p>Separating modalities made the system explainable. Visual semantics, object constraints, transcripts, and audio fingerprints can each answer a different class of user intent.</p></article>
+          <article class="case-card"><h3>What I Would Improve</h3><p>The next iteration should add reciprocal-rank fusion, modality contribution tracing, offline evaluation sets, ingestion versioning, and automatic fallback when intersections are over-constrained.</p></article>
+        </div>
+      </section>
+
+      <section class="cs-cta reveal">
+        <h3>Need search that understands more than text?</h3>
+        <p>I build retrieval systems that combine vectors, metadata, transcripts, objects, and temporal reasoning into usable product search.</p>
+        <a href="https://calendly.com/mythonggg/10-min-sync-with-startups-1" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Discuss your search bottleneck</a>
         <a href="mailto:mythonggg@gmail.com?subject=Company%20Name%20%7C%20Thong%20intro%20-%20Fullstack%20AI%20Engineer" class="btn btn-ghost" style="margin-left: 1rem;">mythonggg@gmail.com</a>
-      </div>
+      </section>
     </main>
 
-    <footer class="footer" style="border-top:none; padding-bottom: 4rem;">
-      <p>&copy; 2026 Thong Nguyen. Independent Full-Stack AI Engineer.</p>
-    </footer>
+    <footer class="footer"><p>&copy; 2026 Thong Nguyen. Independent Full-Stack AI Engineer.</p></footer>
     <script src="../script.js"></script>
   </body>
 </html>
